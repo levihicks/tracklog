@@ -7,22 +7,33 @@ body {
   min-width: 400px;
 	max-width: 960px;
 	width: 60%;
-	margin: 1% auto;
+  margin: auto;
 	font-family: 'helvetica';
+}
+
+header {
+	overflow: auto;
+	position: relative;
+	top: 10px;
 }
 
 h1 {
 	color: white;
-	font-family: 'Indie Flower', cursive;
+	font-family: 'Indie Flower', inherit;
 	border-style: dashed none;
 	border-color: #dac292;
 	border-width: 2px;
 	font-size: 2em;
 	float: left;
+	width: 25%;
+	text-align: center;
 }
 
 .searchbar {
 	float: right;
+	position: relative;
+	top: 15px;
+	
 }
 
 .searchbar button {
@@ -41,6 +52,19 @@ h1 {
   background: inherit;
 	border: none;
   border-bottom:  #dac292 1px dashed;
-  padding: 5% 0 0 0;
 	color: #e6e2d3;
+}
+
+.log {
+position: relative;
+	top: 15px;
+}
+
+.log p {
+	text-align: center;
+	
+	padding: 1%;
+	border-radius: 5px;
+	color: whitesmoke;
+	background-color: #dac292;
 }
