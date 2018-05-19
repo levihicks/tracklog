@@ -15,32 +15,34 @@ header {
 	overflow: auto;
 	position: relative;
 	top: 10px;
+	padding-bottom: 8.5px;
+	border-bottom:  #dac292 1px dashed;
 }
 
 h1 {
-	color: white;
-	font-family: 'Indie Flower', inherit;
-	border-style: dashed none;
-	border-color: #dac292;
-	border-width: 2px;
+	color: whitesmoke;
+	font-family: 'Indie Flower', arial;
 	font-size: 2em;
 	float: left;
-	width: 25%;
 	text-align: center;
+	
 }
 
 .searchbar {
 	float: right;
 	position: relative;
-	top: 15px;
+	top: 18px;
 	
 }
 
 .searchbar button {
-	font-family: inherit;
-  color: white;
+	position: relative;
+	bottom: 2px;
+	font-family: arial;
+  color: #b9936c;
 	background-color: #dac292;
 	border-radius: 50%;
+	width: 22px;
 	border: none;
 }
 
@@ -50,19 +52,21 @@ h1 {
 
 .searchbar input {
   background: inherit;
-	border: none;
-  border-bottom:  #dac292 1px dashed;
+	border: #dac292 1px dashed;
+	border-bottom: none;
 	color: #e6e2d3;
 }
 
 .log {
 position: relative;
 	top: 15px;
+	border-bottom:  #dac292 1px dashed;
 }
 
 .log p {
 	text-align: center;
-	
+	margin: 20px;
+	font-style: italic;
 	padding: 1%;
 	border-radius: 5px;
 	color: whitesmoke;
