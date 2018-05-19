@@ -1,0 +1,46 @@
+html {
+	background: #b9936c;
+	height: 100%;
+}
+
+body {
+  min-width: 400px;
+	max-width: 960px;
+	width: 60%;
+	margin: 1% auto;
+	font-family: 'helvetica';
+}
+
+h1 {
+	color: white;
+	font-family: 'Indie Flower', cursive;
+	border-style: dashed none;
+	border-color: #dac292;
+	border-width: 2px;
+	font-size: 2em;
+	float: left;
+}
+
+.searchbar {
+	float: right;
+}
+
+.searchbar button {
+	font-family: inherit;
+  color: white;
+	background-color: #dac292;
+	border-radius: 50%;
+	border: none;
+}
+
+.searchbar button:active{
+	background-color:  #e6e2d3;
+}
+
+.searchbar input {
+  background: inherit;
+	border: none;
+  border-bottom:  #dac292 1px dashed;
+  padding: 5% 0 0 0;
+	color: #e6e2d3;
+}
