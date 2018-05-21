@@ -1,43 +1,40 @@
 html {
-	background: #b9936c;
+	background: url(../images/background1.png), #b9936c;
+	background-size: 20%;
 	height: 100%;
 }
 
 body {
-  min-width: 400px;
+	background: #b9936c;
+  min-width: 500px;
 	max-width: 960px;
 	width: 60%;
   margin: auto;
+	height: 100%;
 	font-family: 'helvetica';
+	
 }
 
 header {
-	overflow: auto;
-	position: relative;
-	top: 10px;
-	padding-bottom: 8.5px;
 	border-bottom:  #dac292 1px dashed;
+	overflow: auto;
 }
 
 h1 {
 	color: whitesmoke;
 	font-family: 'Indie Flower', arial;
-	font-size: 2em;
-	float: left;
+	font-size: 3em;
 	text-align: center;
-	
+	margin: 15px 0;
 }
 
 .searchbar {
+  display: inline-block;
 	float: right;
-	position: relative;
-	top: 18px;
 	
 }
 
 .searchbar button {
-	position: relative;
-	bottom: 2px;
 	font-family: arial;
   color: #b9936c;
 	background-color: #dac292;
@@ -58,17 +55,53 @@ h1 {
 }
 
 .log {
-position: relative;
-	top: 15px;
 	border-bottom:  #dac292 1px dashed;
 }
 
-.log p {
+.log p, li {
 	text-align: center;
 	margin: 20px;
-	font-style: italic;
-	padding: 1%;
 	border-radius: 5px;
-	color: whitesmoke;
+	color: seashell;
 	background-color: #dac292;
+	min-height: 34px;
+	font-family: 'Roboto Mono', monospace;
+	font-size: .85em;
+	
 }
+
+.log p{
+	font-style: italic;
+	display: block;
+	padding-top: 17px;
+}
+.log li:nth-child(odd){
+	background-color: #d1b37b;
+}
+
+.log li {
+	text-align: left;
+	border: 1px solid slategrey;
+}
+
+.log li img, .albumInfo{
+  display: inline;
+	vertical-align: middle;
+}
+
+.log li img {
+	height: 34px;
+  margin-left: 5%;
+}
+
+.log li .albumInfo {
+	overflow: hidden;
+  margin-left: 10px;
+	max-width: 300px;
+
+}
+
+
+
+
+
