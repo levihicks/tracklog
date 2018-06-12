@@ -104,7 +104,7 @@ function searchDisplay() {
 		logDisplayed = false;
 		para.style.display = 'none';
 		var displayCount=index+10;
-		var requestURL = 'http://ws.audioscrobbler.com/2.0/?method=album.search&album=' + 
+		var requestURL = 'https://ws.audioscrobbler.com/2.0/?method=album.search&album=' + 
 						 searchText.value.replace(' ', '+') + 
 						 '&api_key=57ee3318536b23ee81d6b27e36997cde&limit='+displayCount+'&format=json';
       	var request = new XMLHttpRequest();
