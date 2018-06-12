@@ -22,10 +22,10 @@ header {
 
 h1 {
 	color: whitesmoke;
-	font-family: 'Indie Flower', arial;
-	font-size: 3em;
+	font-family: 'Roboto Mono', monospace;
+	font-size: 1.5em;
 	text-align: center;
-	margin: 15px 0;
+	margin: 30px 0;
 }
 
 .searchbar {
@@ -52,6 +52,7 @@ h1 {
 	border: #dac292 1px dashed;
 	border-bottom: none;
 	color: #e6e2d3;
+	font-family: 'Roboto Mono', monospace;
 }
 
 .log {
@@ -77,11 +78,12 @@ h1 {
 }
 .log li:nth-child(odd){
 	background-color: #d1b37b;
+	border: 1px solid darkgoldenrod;
 }
 
 .log li {
 	text-align: left;
-	border: 1px solid slategrey;
+	border: 1px solid bisque;
 }
 
 .log li img, .albumInfo{
@@ -90,15 +92,69 @@ h1 {
 }
 
 .log li img {
-	height: 34px;
-  margin-left: 5%;
+	height: 48px;
+
 }
 
 .log li .albumInfo {
 	overflow: hidden;
   margin-left: 10px;
-	max-width: 300px;
+	max-width: 400px;
 
+}
+
+.addButton {
+	display: inline;
+	
+}
+
+.addButton button {
+	vertical-align: middle;
+	display: inline-block;
+	width:34px;
+	height:34px;
+	background: inherit;
+	border: none;
+	
+}
+
+.backButton {
+	position: relative;
+}
+
+.backButton button {
+  background-color: inherit;
+	border: #dac292 1px dashed;
+	border-top: none;
+	color: bisque;
+	font-family: monospace;
+	display: inline-block;
+	position: absolute;
+	bottom: -5px;
+}
+
+.searchBackButton, .searchNextButton {
+	display: inline-block;
+}
+
+.searchNextButton {
+	position: relative;
+	float: right;
+}
+
+.searchBackButton button, .searchNextButton button {
+  background: inherit;
+	border: #dac292 1px dashed;
+	border-bottom: none;
+	color: bisque;
+}
+
+h2 {
+	color: bisque;
+	font-family: monospace;
+	text-align: center;
+
+  
 }
 
 
