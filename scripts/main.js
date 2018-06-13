@@ -47,7 +47,7 @@ function logDisplay(){
 	    addButtonDiv.appendChild(addButton);
 	    addButton.onclick=function(){
 	    	for (var k = 0; k < addedTest.length; k++){
-	        				if(addedTest[k]['info'] == this.parentNode.parentNode.lastChild.textContent){
+	        				if(addedTest[k]['info'] == this.parentNode.parentNode.lastChild.previousSibling.textContent){
 	        					
 	        					if (logDisplayed == true){
 	        						logList.removeChild(this.parentNode.parentNode);
@@ -76,6 +76,14 @@ function logDisplay(){
 	    albumInfoEl.setAttribute('class', 'albumInfo');
 	    albumInfoEl.appendChild(document.createTextNode(addedTest[i]['info']));
 	    el.appendChild(albumInfoEl);
+	    var orderDiv = document.createElement('div');
+	    orderDiv.setAttribute('class', 'orderDiv');
+	    var order = document.createElement('input');
+	    order.setAttribute('type', 'number');
+	    order.setAttribute('name', 'order')
+	    order.setAttribute('placeholder', i+1);
+	    orderDiv.appendChild(order);
+	    el.appendChild(orderDiv);
 	    logList.appendChild(el);
 	    log.appendChild(logList);
 	}

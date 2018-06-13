@@ -151,6 +151,16 @@ h2 {
 	text-align: center;
 }
 
+.orderDiv {
+	display: inline;
+}
 
+.orderDiv input[name='order'] {
+	width: 30px;
+	font-family: monospace;
+	background: inherit;
+	border: none;
+	border-bottom: 1px solid gray;
+}
 
 
