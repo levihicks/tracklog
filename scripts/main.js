@@ -50,7 +50,7 @@ function logDisplay(){
 	        				if(addedTest[k]['info'] == this.parentNode.parentNode.lastChild.textContent){
 	        					
 	        					if (logDisplayed == true){
-	        						logList.removeChild(this.parentNode.parentNode.parentNode);
+	        						logList.removeChild(this.parentNode.parentNode);
 	        						if(!(logList.hasChildNodes()))
 	        							para.style.display = 'block';
 	        					}
@@ -68,16 +68,14 @@ function logDisplay(){
 	    };
 		var imgEl = document.createElement('img');
 		imgEl.setAttribute('src', addedTest[i]['pic']);
-		var testDiv = document.createElement('div');
-	    testDiv.setAttribute('class', 'testDiv');
-	    testDiv.appendChild(addButtonDiv);
-	    testDiv.appendChild(imgEl);
+		var el = document.createElement('li');
+	    el.setAttribute('class', 'testDiv');
+	    el.appendChild(addButtonDiv);
+	    el.appendChild(imgEl);
 	    var albumInfoEl = document.createElement('div');
 	    albumInfoEl.setAttribute('class', 'albumInfo');
 	    albumInfoEl.appendChild(document.createTextNode(addedTest[i]['info']));
-	    testDiv.appendChild(albumInfoEl);
-	    var el = document.createElement('li');
-	    el.appendChild(testDiv)
+	    el.appendChild(albumInfoEl);
 	    logList.appendChild(el);
 	    log.appendChild(logList);
 	}
@@ -141,7 +139,7 @@ function searchDisplay() {
 	        				if(addedTest[k]['info'] == this.parentNode.parentNode.lastChild.textContent){
 	        					
 	        					if (logDisplayed == true){
-	        						logList.removeChild(this.parentNode.parentNode.parentNode);
+	        						logList.removeChild(this.parentNode.parentNode);
 	        						if(!(logList.hasChildNodes()))
 	        							para.style.display = 'block';
 	        					}
@@ -171,15 +169,12 @@ function searchDisplay() {
 	        	else
 	        		break;
 	        	var albumInfo = (searchResults[i]['name'] + ' // ' + searchResults[i]['artist']);
-	        	var testDiv = document.createElement('div');
-	        	testDiv.setAttribute('class', 'testDiv');
-	        	testDiv.appendChild(addButtonDiv);
-	        	testDiv.appendChild(imgEl);
+	        	els[i].appendChild(addButtonDiv);
+	        	els[i].appendChild(imgEl);
 	        	var albumInfoEl = document.createElement('div');
 	        	albumInfoEl.setAttribute('class', 'albumInfo');
 	        	albumInfoEl.appendChild(document.createTextNode(albumInfo));
-	        	testDiv.appendChild(albumInfoEl);
-	        	els[i].appendChild(testDiv);
+	        	els[i].appendChild(albumInfoEl);
 	        	logList.appendChild(els[i]);
 	        	log.appendChild(logList);
 	        }
