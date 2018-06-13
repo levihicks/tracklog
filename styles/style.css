@@ -68,7 +68,6 @@ h1 {
 	min-height: 34px;
 	font-family: 'Roboto Mono', monospace;
 	font-size: .85em;
-	
 }
 
 .log p{
@@ -84,28 +83,26 @@ h1 {
 .log li {
 	text-align: left;
 	border: 1px solid bisque;
+	position: relative;
 }
 
 .log li img, .albumInfo{
-  display: inline;
 	vertical-align: middle;
 }
 
 .log li img {
 	height: 48px;
-
+ display: inline-block;
 }
 
 .log li .albumInfo {
-	overflow: hidden;
+  display: inline-block;
   margin-left: 10px;
-	max-width: 400px;
-
+  width: 70%;
 }
 
 .addButton {
 	display: inline;
-	
 }
 
 .addButton button {
@@ -115,7 +112,6 @@ h1 {
 	height:34px;
 	background: inherit;
 	border: none;
-	
 }
 
 .backButton {
@@ -153,10 +149,7 @@ h2 {
 	color: bisque;
 	font-family: monospace;
 	text-align: center;
-
-  
 }
-
 
 
 
