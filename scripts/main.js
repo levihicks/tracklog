@@ -69,7 +69,7 @@ function logDisplay(){
 		var imgEl = document.createElement('img');
 		imgEl.setAttribute('src', addedTest[i]['pic']);
 		var el = document.createElement('li');
-	    el.setAttribute('class', 'testDiv');
+	    
 	    el.appendChild(addButtonDiv);
 	    el.appendChild(imgEl);
 	    var albumInfoEl = document.createElement('div');
@@ -78,11 +78,50 @@ function logDisplay(){
 	    el.appendChild(albumInfoEl);
 	    var orderDiv = document.createElement('div');
 	    orderDiv.setAttribute('class', 'orderDiv');
-	    var order = document.createElement('input');
-	    order.setAttribute('type', 'number');
-	    order.setAttribute('name', 'order')
-	    order.setAttribute('placeholder', i+1);
-	    orderDiv.appendChild(order);
+	    var moveUpButton = document.createElement('button');
+	    var moveUpButtonDiv = document.createElement('div');
+	    var moveDownButton = document.createElement('button');
+	    var moveDownButtonDiv = document.createElement('div');
+
+	    moveUpButtonDiv.setAttribute('class', 'moveUpButton');
+	    moveDownButtonDiv.setAttribute('class', 'moveDownButton');
+	    moveUpButton.appendChild(document.createTextNode('↑'));
+	    moveDownButton.appendChild(document.createTextNode('↓'));
+	    moveUpButtonDiv.appendChild(moveUpButton);
+	    moveDownButtonDiv.appendChild(moveDownButton);
+	    
+	    orderDiv.appendChild(moveDownButtonDiv);
+	    orderDiv.appendChild(moveUpButtonDiv);
+	    moveUpButton.onclick=function(){
+	    	if(addedTest.length > 1){
+	    		for(var j = 1; j < addedTest.length; j++){
+	    			if(addedTest[j]['info'] == this.parentNode.parentNode.parentNode.lastChild.previousSibling.textContent){
+
+	    				var tmp = addedTest[j];
+	    				addedTest[j] = addedTest[j-1];
+	    				addedTest[j-1] = tmp;
+	    				localStorage.setItem('addedArray', JSON.stringify(addedTest));
+	    				logList.insertBefore(this.parentNode.parentNode.parentNode, this.parentNode.parentNode.parentNode.previousSibling);
+	    			}
+	    		}
+	    		
+	    		
+	    	}
+	    };
+	    moveDownButton.onclick=function(){
+	    	if(addedTest.length > 1){
+	    		for(var l = 0; l < addedTest.length-1; l++){
+	    			if(addedTest[l]['info'] == this.parentNode.parentNode.parentNode.lastChild.previousSibling.textContent){
+	    				var tmp = addedTest[l];
+	    				addedTest[l] = addedTest[l+1];
+	    				addedTest[l+1] = tmp;
+	    				localStorage.setItem('addedArray', JSON.stringify(addedTest));
+	    				logList.insertBefore(this.parentNode.parentNode.parentNode.nextSibling, this.parentNode.parentNode.parentNode);
+	    				break;
+	    			}
+	    		}
+	    	}
+	    };
 	    el.appendChild(orderDiv);
 	    logList.appendChild(el);
 	    log.appendChild(logList);

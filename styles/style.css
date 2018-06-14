@@ -153,14 +153,25 @@ h2 {
 
 .orderDiv {
 	display: inline;
+	float: right;
 }
 
-.orderDiv input[name='order'] {
-	width: 30px;
-	font-family: monospace;
+.moveUpButton, .moveDownButton{
+  display: inline;
+}
+
+.moveUpButton {
+	margin-right: 5px;
+}
+
+.moveUpButton button, .moveDownButton button{
+  width: 20px;
+	height: 50px;
+	color: black;
 	background: inherit;
 	border: none;
-	border-bottom: 1px solid gray;
-}
+}	
+
+
 
 
