@@ -6,12 +6,12 @@ var searchText = document.querySelector('.searchbar input');
 var body = document.querySelector('body');
 
 searchButton.onclick = function(){
-	index=0;
+	index=1;
 	searchDisplay();
 };
 window.onkeydown = function(e) {
 		if(searchText.value)
-			index=0;
+			index=1;
 	    if (e.keyCode === 13){ // enter
 	      searchDisplay();
 	     }
@@ -29,7 +29,7 @@ var searchBackButtonDiv = document.createElement('div');
 var searchNextButton = document.createElement('button');
 var searchNextButtonDiv = document.createElement('div');
 var contextHeader = document.querySelector('h2');
-var index=0;
+var index=1;
 var resultCount;
 
 
@@ -129,14 +129,14 @@ function logDisplay(){
 }
 
 searchNextButton.onclick=function(){
-	index+=9;
+	index+=1;
 	clearDisplay();
 	searchDisplay();
 };
 
 searchBackButton.onclick=function(){
-	if((index-9)>=0){
-		index-=9;
+	if((index-1)>0){
+		index-=1;
 		clearDisplay();
 		searchDisplay();
 	}
@@ -148,10 +148,9 @@ function searchDisplay() {
 		contextHeader.textContent='Results for \''+searchText.value+'\':';
 		logDisplayed = false;
 		para.style.display = 'none';
-		var displayCount=index+10;
-		var requestURL = 'https://ws.audioscrobbler.com/2.0/?method=album.search&album=' + 
-						 searchText.value.replace(' ', '+') + 
-						 '&api_key=57ee3318536b23ee81d6b27e36997cde&limit='+displayCount+'&format=json';
+		var requestURL = 'https://api.discogs.com/database/search?q='+ 
+						 searchText.value + 
+						 '&type=release&key=vDlPrOQJMWWnHLxXNifp&secret=ZHunDCQtCTcijXBwMwyNGxhUMMoZFagF&page='+index+'&per_page=10';
       	var request = new XMLHttpRequest();
       	request.open('GET', requestURL);
       	request.responseType = 'json';
@@ -160,14 +159,14 @@ function searchDisplay() {
       	request.onload = function() {
       		
       		var els = [];
-        	var searchResults = request.response['results']['albummatches']['album'];
-        	for (var i = index; i < (index+9); i++){
+        	var searchResults = request.response['results'];
+        	for (var i = 0; i < 10; i++){
 	        	els[i] = document.createElement('li');
 	        	var addButton = document.createElement('button');
 	        	var addText = '+';
 	        	for(var j = 0; j < addedTest.length; j++){
 	        		if(searchResults[i]!=null){
-		        		if(addedTest[j]['info'] == (searchResults[i]['name'] + ' // ' + searchResults[i]['artist'])){
+		        		if(addedTest[j]['info'] == (searchResults[i]['title'])){
 		        			addText='-';
 		        		}
 	        		}
@@ -209,13 +208,13 @@ function searchDisplay() {
 	        	addButtonDiv.appendChild(addButton);
 	        	var imgEl = document.createElement('img');
 	        	if(searchResults[i]!=null){
-	        		var albumIcon = ((searchResults[i]['image'][1]['#text']) ? 
-	        			searchResults[i]['image'][1]['#text'] : "./images/defaultalbum.png");
+	        		var albumIcon = ((searchResults[i]['thumb']) ? 
+	        			searchResults[i]['thumb'] : "./images/defaultalbum.png");
 	        		imgEl.setAttribute('src', albumIcon);
 	        	}
 	        	else
 	        		break;
-	        	var albumInfo = (searchResults[i]['name'] + ' // ' + searchResults[i]['artist']);
+	        	var albumInfo = searchResults[i]['title'];
 	        	els[i].appendChild(addButtonDiv);
 	        	els[i].appendChild(imgEl);
 	        	var albumInfoEl = document.createElement('div');
