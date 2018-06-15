@@ -167,7 +167,7 @@ function searchDisplay() {
 	        	var addText = '+';
 	        	for(var j = 0; j < addedTest.length; j++){
 	        		if(searchResults[i]!=null){
-		        		if(addedTest[j]['info'] == (searchResults[i]['name'] + ' // ' + searchResults[i]['artist'])){
+		        		if(addedTest[j]['info'] == (searchResults[i]['name'] + ' - ' + searchResults[i]['artist'])){
 		        			addText='-';
 		        		}
 	        		}
@@ -215,7 +215,7 @@ function searchDisplay() {
 	        	}
 	        	else
 	        		break;
-	        	var albumInfo = (searchResults[i]['name'] + ' // ' + searchResults[i]['artist']);
+	        	var albumInfo = (searchResults[i]['name'] + ' - ' + searchResults[i]['artist']);
 	        	els[i].appendChild(addButtonDiv);
 	        	els[i].appendChild(imgEl);
 	        	var albumInfoEl = document.createElement('div');
