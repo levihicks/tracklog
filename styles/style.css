@@ -131,7 +131,7 @@ h1 {
 }
 
 .searchBackButton, .searchNextButton {
-	display: inline-block;
+	display: inline;
 }
 
 .searchNextButton {
