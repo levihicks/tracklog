@@ -201,28 +201,22 @@ function searchDisplay() {
 				      		var discogResults = this.response['results'];
 				      		for(var k = 0; k < 100; k++){
 				      			for (var i = 0; i < addedTest.length; i++){
-					      			if(discogResults[k]['title'] == addedTest[i]['info']){
-
+					      			if(discogResults[k]['title'].toLowerCase() == addedTest[i]['info'].toLowerCase()){
 					      				var requestURL2 = discogResults[k]['resource_url'];
-
 					      				var request2 = new XMLHttpRequest();
 					      				request2.open('GET', requestURL2);
 					      				request2.responseType = 'json';
 					      				request2.send();
 					      				request2.onload = function() {
 					      					var vidLink = request2.response['videos'][0]['uri'];
-					      					
+					      					console.log(vidLink);
 					      					for (var i = 0; i < addedTest.length; i++){
-
-					      						if((request2.response['artists'][0]['name']+' - '+request2.response['title']) == 
-					      							addedTest[i]['info']){
-					      							
+					      						if((request2.response['artists'][0]['name']+' - '+request2.response['title']).toLowerCase() == 
+					      							addedTest[i]['info'].toLowerCase()){
 					      							addedTest[i]['vid'] = vidLink;
 					      							localStorage.setItem('addedArray', JSON.stringify(addedTest));
-					      							
 					      							break;
 					      						}
-					 
 					      					}
 					      				};
 					      				test = true;
