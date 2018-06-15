@@ -31,12 +31,8 @@ var searchNextButtonDiv = document.createElement('div');
 var contextHeader = document.querySelector('h2');
 var index=0;
 var resultCount;
-var vidLink;
-var discogId;
-var requestURL2;
-var request2;
-var discogRequest;
-var discogRequestURL;
+
+var test = false;
 
 
 
@@ -54,7 +50,7 @@ function logDisplay(){
 	    addButtonDiv.appendChild(addButton);
 	    addButton.onclick=function(){
 	    	for (var k = 0; k < addedTest.length; k++){
-	        				if(addedTest[k]['info'] == this.parentNode.parentNode.lastChild.previousSibling.textContent){
+	        				if(addedTest[k]['info'] == this.parentNode.parentNode.lastChild.previousSibling.previousSibling.textContent){
 	        					
 	        					if (logDisplayed == true){
 	        						logList.removeChild(this.parentNode.parentNode);
@@ -84,35 +80,12 @@ function logDisplay(){
 	    albumInfoEl.appendChild(document.createTextNode(addedTest[i]['info']));
 	    el.appendChild(albumInfoEl);
 
-	    discogRequestURL = 'https://api.discogs.com/database/search?q=' + 
-						 addedTest[i]['info'] + 
-						 '&key=vDlPrOQJMWWnHLxXNifp&secret=ZHunDCQtCTcijXBwMwyNGxhUMMoZFagF&page=1&per_page=100';
-      	discogRequest = new XMLHttpRequest();
-      	discogRequest.open('GET', discogRequestURL);
-      	discogRequest.responseType = 'json';
-      	discogRequest.send();
-
-      	discogRequest.onload = function() {
-      		var discogResults = discogRequest.response['results'];
-      		//console.log(discogResults);
-      			for (var i = 0; i < addedTest.length; i++){
-	      			if(discogResults[0]['title'] == addedTest[i]['info']){
-	      				
-	      				requestURL2 = discogResults[0]['resource_url'];
-	      			
-	      				request2 = new XMLHttpRequest();
-	      				request2.open('GET', requestURL2);
-	      				request2.responseType = 'json';
-	      				request2.send();
-	      				request2.onload = function() {
-	      					vidLink = request2.response['videos'][0]['uri'];
-	      					console.log(vidLink);
-	      				};
-	      				break;
-	      			}
-      			}
-      			
-      	};
+  		var vidLinkEl=document.createElement('a');
+  		vidLinkEl.setAttribute('href', addedTest[i]['vid']);
+  		var vidImg = document.createElement('img');
+  		vidImg.setAttribute('src','./images/YouTube.png')
+  		vidLinkEl.appendChild(vidImg);
+  		el.appendChild(vidLinkEl);
 
 	    var orderDiv = document.createElement('div');
 	    orderDiv.setAttribute('class', 'orderDiv');
@@ -133,7 +106,7 @@ function logDisplay(){
 	    moveUpButton.onclick=function(){
 	    	if(addedTest.length > 1){
 	    		for(var j = 1; j < addedTest.length; j++){
-	    			if(addedTest[j]['info'] == this.parentNode.parentNode.parentNode.lastChild.previousSibling.textContent){
+	    			if(addedTest[j]['info'] == this.parentNode.parentNode.parentNode.lastChild.previousSibling.previousSibling.textContent){
 
 	    				var tmp = addedTest[j];
 	    				addedTest[j] = addedTest[j-1];
@@ -149,7 +122,7 @@ function logDisplay(){
 	    moveDownButton.onclick=function(){
 	    	if(addedTest.length > 1){
 	    		for(var l = 0; l < addedTest.length-1; l++){
-	    			if(addedTest[l]['info'] == this.parentNode.parentNode.parentNode.lastChild.previousSibling.textContent){
+	    			if(addedTest[l]['info'] == this.parentNode.parentNode.parentNode.lastChild.previousSibling.previousSibling.textContent){
 	    				var tmp = addedTest[l];
 	    				addedTest[l] = addedTest[l+1];
 	    				addedTest[l+1] = tmp;
@@ -214,6 +187,50 @@ function searchDisplay() {
 	        	addButton.onclick = function(){
 	        		this.innerHTML = (this.innerHTML == '-') ? '+' : '-';
 	        		if(this.innerHTML == '-'){
+
+	        			var requestURL1 = 'https://api.discogs.com/database/search?q=' + 
+										 this.parentNode.nextSibling.nextSibling.textContent + 
+										 '&key=vDlPrOQJMWWnHLxXNifp&secret=ZHunDCQtCTcijXBwMwyNGxhUMMoZFagF&page=1&per_page=100';
+				      	var request1 = new XMLHttpRequest();
+
+				      	request1.open('GET', requestURL1);
+				      	request1.responseType = 'json';
+				      	request1.send();
+
+				      	request1.onload = function() {
+				      		var discogResults = this.response['results'];
+				      		
+				      			for (var i = 0; i < addedTest.length; i++){
+					      			if(discogResults[0]['title'] == addedTest[i]['info']){
+
+					      				var requestURL2 = discogResults[0]['resource_url'];
+
+					      				var request2 = new XMLHttpRequest();
+					      				request2.open('GET', requestURL2);
+					      				request2.responseType = 'json';
+					      				request2.send();
+					      				request2.onload = function() {
+					      					var vidLink = request2.response['videos'][0]['uri'];
+					      					
+					      					for (var i = 0; i < addedTest.length; i++){
+
+					      						if((request2.response['artists'][0]['name']+' - '+request2.response['title']) == 
+					      							addedTest[i]['info']){
+					      							
+					      							addedTest[i]['vid'] = vidLink;
+					      							localStorage.setItem('addedArray', JSON.stringify(addedTest));
+					      							
+					      							break;
+					      						}
+					 
+					      					}
+					      				};
+					      				break;
+					      			}
+				      			}
+				      			
+				      	};
+				      
 	        			picLink = this.parentNode.nextSibling.src;
 	        			addedAlbumInfo = this.parentNode.nextSibling.nextSibling.textContent;
 	        			addedTest.push({pic: picLink, info: addedAlbumInfo});
