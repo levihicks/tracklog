@@ -83,7 +83,7 @@ function logDisplay(){
   		var vidLinkEl=document.createElement('a');
   		vidLinkEl.setAttribute('href', addedTest[i]['vid']);
   		var vidImg = document.createElement('img');
-  		vidImg.setAttribute('src','./images/YouTube.png')
+  		vidImg.setAttribute('src',"./images/YouTube.png")
   		vidLinkEl.appendChild(vidImg);
   		el.appendChild(vidLinkEl);
 
