@@ -31,6 +31,13 @@ var searchNextButtonDiv = document.createElement('div');
 var contextHeader = document.querySelector('h2');
 var index=0;
 var resultCount;
+var vidLink;
+var discogId;
+var requestURL2;
+var request2;
+var discogRequest;
+var discogRequestURL;
+
 
 
 function logDisplay(){
@@ -64,7 +71,7 @@ function logDisplay(){
 								}
 	        					break;
 	        				}
-	        			}
+	        }
 	    };
 		var imgEl = document.createElement('img');
 		imgEl.setAttribute('src', addedTest[i]['pic']);
@@ -76,6 +83,37 @@ function logDisplay(){
 	    albumInfoEl.setAttribute('class', 'albumInfo');
 	    albumInfoEl.appendChild(document.createTextNode(addedTest[i]['info']));
 	    el.appendChild(albumInfoEl);
+
+	    discogRequestURL = 'https://api.discogs.com/database/search?q=' + 
+						 addedTest[i]['info'] + 
+						 '&key=vDlPrOQJMWWnHLxXNifp&secret=ZHunDCQtCTcijXBwMwyNGxhUMMoZFagF&page=1&per_page=100';
+      	discogRequest = new XMLHttpRequest();
+      	discogRequest.open('GET', discogRequestURL);
+      	discogRequest.responseType = 'json';
+      	discogRequest.send();
+
+      	discogRequest.onload = function() {
+      		var discogResults = discogRequest.response['results'];
+      		//console.log(discogResults);
+      			for (var i = 0; i < addedTest.length; i++){
+	      			if(discogResults[0]['title'] == addedTest[i]['info']){
+	      				
+	      				requestURL2 = discogResults[0]['resource_url'];
+	      			
+	      				request2 = new XMLHttpRequest();
+	      				request2.open('GET', requestURL2);
+	      				request2.responseType = 'json';
+	      				request2.send();
+	      				request2.onload = function() {
+	      					vidLink = request2.response['videos'][0]['uri'];
+	      					console.log(vidLink);
+	      				};
+	      				break;
+	      			}
+      			}
+      			
+      	};
+
 	    var orderDiv = document.createElement('div');
 	    orderDiv.setAttribute('class', 'orderDiv');
 	    var moveUpButton = document.createElement('button');
@@ -167,7 +205,7 @@ function searchDisplay() {
 	        	var addText = '+';
 	        	for(var j = 0; j < addedTest.length; j++){
 	        		if(searchResults[i]!=null){
-		        		if(addedTest[j]['info'] == (searchResults[i]['name'] + ' - ' + searchResults[i]['artist'])){
+		        		if(addedTest[j]['info'] == (searchResults[i]['artist'] + ' - ' + searchResults[i]['name'])){
 		        			addText='-';
 		        		}
 	        		}
@@ -215,7 +253,7 @@ function searchDisplay() {
 	        	}
 	        	else
 	        		break;
-	        	var albumInfo = (searchResults[i]['name'] + ' - ' + searchResults[i]['artist']);
+	        	var albumInfo = (searchResults[i]['artist'] + ' - ' + searchResults[i]['name']);
 	        	els[i].appendChild(addButtonDiv);
 	        	els[i].appendChild(imgEl);
 	        	var albumInfoEl = document.createElement('div');
