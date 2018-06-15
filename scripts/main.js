@@ -199,11 +199,11 @@ function searchDisplay() {
 
 				      	request1.onload = function() {
 				      		var discogResults = this.response['results'];
-				      		
+				      		for(var k = 0; k < 100; k++){
 				      			for (var i = 0; i < addedTest.length; i++){
-					      			if(discogResults[0]['title'] == addedTest[i]['info']){
+					      			if(discogResults[k]['title'] == addedTest[i]['info']){
 
-					      				var requestURL2 = discogResults[0]['resource_url'];
+					      				var requestURL2 = discogResults[k]['resource_url'];
 
 					      				var request2 = new XMLHttpRequest();
 					      				request2.open('GET', requestURL2);
@@ -225,10 +225,15 @@ function searchDisplay() {
 					 
 					      					}
 					      				};
+					      				test = true;
 					      				break;
+					      				
 					      			}
 				      			}
-				      			
+					      		if (test == true)
+					      			break;
+					      		
+				      		}	
 				      	};
 				      
 	        			picLink = this.parentNode.nextSibling.src;

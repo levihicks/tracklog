@@ -98,7 +98,7 @@ h1 {
 .log li .albumInfo {
   display: inline-block;
   margin-left: 10px;
-  width: 70%;
+  width: 50%;
 }
 
 .addButton {
@@ -143,6 +143,11 @@ h1 {
 	border: #dac292 1px dashed;
 	border-bottom: none;
 	color: bisque;
+}
+
+a img {
+	position: absolute;
+	right: 50px;
 }
 
 h2 {
