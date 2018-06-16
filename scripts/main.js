@@ -81,9 +81,20 @@ function logDisplay(){
 	    el.appendChild(albumInfoEl);
 
   		var vidLinkEl=document.createElement('a');
-  		vidLinkEl.setAttribute('href', addedTest[i]['vid']);
+  		var vidLink = (addedTest[i]['vid']!=null)?addedTest[i]['vid']:'#';
+  		vidLinkEl.setAttribute('href', vidLink);
   		var vidImg = document.createElement('img');
-  		vidImg.setAttribute('src','./images/Youtube.png');
+  		vidImg.onmouseover=function(){
+  			if(this.getAttribute('src')=='./images/Youtube.png')
+  				this.setAttribute('src', './images/YoutubeHover.png');
+  		};
+  		vidImg.onmouseout=function(){
+  			if(this.getAttribute('src')=='./images/YoutubeHover.png')
+  				this.setAttribute('src', './images/Youtube.png')
+  		};
+  		
+  		var vidImgPath = (addedTest[i]['vid']!=null)?'./images/Youtube.png':'./images/YoutubeNotFound.png';
+  		vidImg.setAttribute('src',vidImgPath);
   		vidLinkEl.appendChild(vidImg);
   		el.appendChild(vidLinkEl);
 
@@ -232,7 +243,7 @@ function searchDisplay() {
 				      
 	        			picLink = this.parentNode.nextSibling.src;
 	        			addedAlbumInfo = this.parentNode.nextSibling.nextSibling.textContent;
-	        			addedTest.push({pic: picLink, info: addedAlbumInfo});
+	        			addedTest.push({pic: picLink, info: addedAlbumInfo, vid: null});
 	        			localStorage.setItem('addedArray', JSON.stringify(addedTest));
 	        		}
 	        		else{
