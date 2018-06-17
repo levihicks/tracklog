@@ -31,7 +31,7 @@ var searchNextButtonDiv = document.createElement('div');
 var contextHeader = document.querySelector('h2');
 var index=0;
 var resultCount;
-
+var vidLink;
 var test = false;
 
 
@@ -81,8 +81,8 @@ function logDisplay(){
 	    el.appendChild(albumInfoEl);
 
   		var vidLinkEl=document.createElement('a');
-  		var vidLink = (addedTest[i]['vid']!=null)?addedTest[i]['vid']:'#';
-  		vidLinkEl.setAttribute('href', vidLink);
+  		
+  		vidLinkEl.setAttribute('href', addedTest[i]['vid']);
   		var vidImg = document.createElement('img');
   		vidImg.onmouseover=function(){
   			if(this.getAttribute('src')=='./images/Youtube.png')
@@ -93,8 +93,8 @@ function logDisplay(){
   				this.setAttribute('src', './images/Youtube.png')
   		};
   		
-  		var vidImgPath = (addedTest[i]['vid']!=null)?'./images/Youtube.png':'./images/YoutubeNotFound.png';
-  		vidImg.setAttribute('src',vidImgPath);
+  		
+  		vidImg.setAttribute('src','./images/Youtube.png');
   		vidLinkEl.appendChild(vidImg);
   		el.appendChild(vidLinkEl);
 
@@ -198,52 +198,11 @@ function searchDisplay() {
 	        	addButton.onclick = function(){
 	        		this.innerHTML = (this.innerHTML == '-') ? '+' : '-';
 	        		if(this.innerHTML == '-'){
-
-	        			var requestURL1 = 'https://api.discogs.com/database/search?q=' + 
-										 this.parentNode.nextSibling.nextSibling.textContent + 
-										 '&key=vDlPrOQJMWWnHLxXNifp&secret=ZHunDCQtCTcijXBwMwyNGxhUMMoZFagF&page=1&per_page=100';
-				      	var request1 = new XMLHttpRequest();
-
-				      	request1.open('GET', requestURL1);
-				      	request1.responseType = 'json';
-				      	request1.send();
-
-				      	request1.onload = function() {
-				      		var discogResults = this.response['results'];
-				      		for(var k = 0; k < 100; k++){
-				      			for (var i = 0; i < addedTest.length; i++){
-					      			if(discogResults[k]['title'].toLowerCase() == addedTest[i]['info'].toLowerCase()){
-					      				var requestURL2 = discogResults[k]['resource_url'];
-					      				var request2 = new XMLHttpRequest();
-					      				request2.open('GET', requestURL2);
-					      				request2.responseType = 'json';
-					      				request2.send();
-					      				request2.onload = function() {
-					      					var vidLink = request2.response['videos'][0]['uri'];
-					      					console.log(vidLink);
-					      					for (var i = 0; i < addedTest.length; i++){
-					      						if((request2.response['artists'][0]['name']+' - '+request2.response['title']).toLowerCase() == 
-					      							addedTest[i]['info'].toLowerCase()){
-					      							addedTest[i]['vid'] = vidLink;
-					      							localStorage.setItem('addedArray', JSON.stringify(addedTest));
-					      							break;
-					      						}
-					      					}
-					      				};
-					      				test = true;
-					      				break;
-					      				
-					      			}
-				      			}
-					      		if (test == true)
-					      			break;
-					      		
-				      		}	
-				      	};
-				      
+						addedAlbumInfo = this.parentNode.nextSibling.nextSibling.textContent;
+	        			vidLink = 'https://www.youtube.com/results?search_query='+addedAlbumInfo.replace(' - ',' ');
+	        			vidLink=vidLink.replace(/ /g, '+');
 	        			picLink = this.parentNode.nextSibling.src;
-	        			addedAlbumInfo = this.parentNode.nextSibling.nextSibling.textContent;
-	        			addedTest.push({pic: picLink, info: addedAlbumInfo, vid: null});
+	        			addedTest.push({pic: picLink, info: addedAlbumInfo, vid: vidLink});
 	        			localStorage.setItem('addedArray', JSON.stringify(addedTest));
 	        		}
 	        		else{
