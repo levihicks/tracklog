@@ -94,8 +94,10 @@ function logDisplay(){
   		};
   		
   		
+
   		vidImg.setAttribute('src','./images/Youtube.png');
   		vidLinkEl.appendChild(vidImg);
+
   		el.appendChild(vidLinkEl);
 
 	    var orderDiv = document.createElement('div');
