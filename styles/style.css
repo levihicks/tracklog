@@ -145,14 +145,23 @@ h1 {
 	color: bisque;
 }
 
-
-
-.log li a img {
-	position: absolute;
-	right: 50px;
+.youtube, .bandcamp{
+  position: absolute;
+  right: 50px;
 	top: 9px;
 	height: 30px;
+	width: 30px;
 }
+
+.bandcamp{
+	right: 80px;
+}
+
+.log li a img {
+	height: 30px;
+	width: 30px;
+}
+
 
 h2 {
 	color: bisque;

@@ -32,6 +32,7 @@ var contextHeader = document.querySelector('h2');
 var index=0;
 var resultCount;
 var vidLink;
+var bandcampLink;
 var test = false;
 
 
@@ -50,7 +51,7 @@ function logDisplay(){
 	    addButtonDiv.appendChild(addButton);
 	    addButton.onclick=function(){
 	    	for (var k = 0; k < addedTest.length; k++){
-	        				if(addedTest[k]['info'] == this.parentNode.parentNode.lastChild.previousSibling.previousSibling.textContent){
+	        				if(addedTest[k]['info'] == this.parentNode.parentNode.lastChild.previousSibling.previousSibling.previousSibling.textContent){
 	        					
 	        					if (logDisplayed == true){
 	        						logList.removeChild(this.parentNode.parentNode);
@@ -80,8 +81,28 @@ function logDisplay(){
 	    albumInfoEl.appendChild(document.createTextNode(addedTest[i]['info']));
 	    el.appendChild(albumInfoEl);
 
+	    var bandcampEl=document.createElement('a');
+  		var bandcampElDiv = document.createElement('div');
+  		bandcampElDiv.setAttribute('class', 'bandcamp')
+  		bandcampEl.setAttribute('href', addedTest[i]['bandcamp']);
+  		var bandcampImg = document.createElement('img');
+  		bandcampImg.onmouseover=function(){
+  			if(this.getAttribute('src')=='./images/bandcamp.png')
+  				this.setAttribute('src', './images/bandcampHover.png');
+  		};
+  		bandcampImg.onmouseout=function(){
+  			if(this.getAttribute('src')=='./images/bandcampHover.png')
+  				this.setAttribute('src', './images/bandcamp.png')
+  		};
+
+  		bandcampImg.setAttribute('src','./images/bandcamp.png');
+  		bandcampEl.appendChild(bandcampImg);
+  		bandcampElDiv.appendChild(bandcampEl);
+  		el.appendChild(bandcampElDiv);
+
   		var vidLinkEl=document.createElement('a');
-  		
+  		var vidLinkElDiv = document.createElement('div');
+  		vidLinkElDiv.setAttribute('class', 'youtube');
   		vidLinkEl.setAttribute('href', addedTest[i]['vid']);
   		var vidImg = document.createElement('img');
   		vidImg.onmouseover=function(){
@@ -97,8 +118,8 @@ function logDisplay(){
 
   		vidImg.setAttribute('src','./images/Youtube.png');
   		vidLinkEl.appendChild(vidImg);
-
-  		el.appendChild(vidLinkEl);
+  		vidLinkElDiv.appendChild(vidLinkEl);
+  		el.appendChild(vidLinkElDiv);
 
 	    var orderDiv = document.createElement('div');
 	    orderDiv.setAttribute('class', 'orderDiv');
@@ -119,7 +140,7 @@ function logDisplay(){
 	    moveUpButton.onclick=function(){
 	    	if(addedTest.length > 1){
 	    		for(var j = 1; j < addedTest.length; j++){
-	    			if(addedTest[j]['info'] == this.parentNode.parentNode.parentNode.lastChild.previousSibling.previousSibling.textContent){
+	    			if(addedTest[j]['info'] == this.parentNode.parentNode.parentNode.lastChild.previousSibling.previousSibling.previousSibling.textContent){
 
 	    				var tmp = addedTest[j];
 	    				addedTest[j] = addedTest[j-1];
@@ -135,7 +156,7 @@ function logDisplay(){
 	    moveDownButton.onclick=function(){
 	    	if(addedTest.length > 1){
 	    		for(var l = 0; l < addedTest.length-1; l++){
-	    			if(addedTest[l]['info'] == this.parentNode.parentNode.parentNode.lastChild.previousSibling.previousSibling.textContent){
+	    			if(addedTest[l]['info'] == this.parentNode.parentNode.parentNode.lastChild.previousSibling.previousSibling.previousSibling.textContent){
 	    				var tmp = addedTest[l];
 	    				addedTest[l] = addedTest[l+1];
 	    				addedTest[l+1] = tmp;
@@ -201,10 +222,13 @@ function searchDisplay() {
 	        		this.innerHTML = (this.innerHTML == '-') ? '+' : '-';
 	        		if(this.innerHTML == '-'){
 						addedAlbumInfo = this.parentNode.nextSibling.nextSibling.textContent;
-	        			vidLink = 'https://www.youtube.com/results?search_query='+addedAlbumInfo.replace(' - ',' ');
-	        			vidLink=vidLink.replace(/ /g, '+');
+						var searchString = addedAlbumInfo.replace(' - ',' ');
+						searchString=searchString.replace(/ /g, '+');
+	        			vidLink = 'https://www.youtube.com/results?search_query=' + searchString;
+	        			bandcampLink = 'https://bandcamp.com/search?q=' + searchString;
+	        			
 	        			picLink = this.parentNode.nextSibling.src;
-	        			addedTest.push({pic: picLink, info: addedAlbumInfo, vid: vidLink});
+	        			addedTest.push({pic: picLink, info: addedAlbumInfo, vid: vidLink, bandcamp: bandcampLink});
 	        			localStorage.setItem('addedArray', JSON.stringify(addedTest));
 	        		}
 	        		else{
