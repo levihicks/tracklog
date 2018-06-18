@@ -90,9 +90,13 @@ h1 {
 	vertical-align: middle;
 }
 
-.log li img {
+.albumArt img {
 	height: 48px;
- display: inline-block;
+
+}
+
+.albumArt{
+	 display: inline-block;
 }
 
 .log li .albumInfo {
@@ -145,23 +149,31 @@ h1 {
 	color: bisque;
 }
 
-.youtube, .bandcamp{
+.youtube, .bandcamp, .searchIcon{
   position: absolute;
   right: 50px;
 	top: 9px;
-	height: 30px;
-	width: 30px;
+}
+.searchIcon{
+	right: 110px;
+	top: 16px;
+	margin-right: 5px;
+	color: black;
+	font-family: monospace;
 }
 
 .bandcamp{
 	right: 80px;
 }
 
-.log li a img {
+.log li a img{
 	height: 30px;
 	width: 30px;
 }
 
+.searchIcon img{
+	height: 15px;
+}
 
 h2 {
 	color: bisque;

@@ -71,15 +71,26 @@ function logDisplay(){
 	        }
 	    };
 		var imgEl = document.createElement('img');
+		var imgElDiv = document.createElement('div');
+		imgElDiv.setAttribute('class', 'albumArt');
 		imgEl.setAttribute('src', addedTest[i]['pic']);
+		imgElDiv.appendChild(imgEl);
 		var el = document.createElement('li');
 	    
 	    el.appendChild(addButtonDiv);
-	    el.appendChild(imgEl);
+	    el.appendChild(imgElDiv);
 	    var albumInfoEl = document.createElement('div');
 	    albumInfoEl.setAttribute('class', 'albumInfo');
 	    albumInfoEl.appendChild(document.createTextNode(addedTest[i]['info']));
 	    el.appendChild(albumInfoEl);
+
+	    var searchIconEl = document.createElement('img');
+	    var searchIconElDiv = document.createElement('div');
+	    searchIconElDiv.setAttribute('class', 'searchIcon');
+	    searchIconEl.setAttribute('src', './images/search.png');
+	    searchIconElDiv.appendChild(searchIconEl);
+	    searchIconElDiv.appendChild(document.createTextNode(':'));
+	    el.appendChild(searchIconElDiv);
 
 	    var bandcampEl=document.createElement('a');
   		var bandcampElDiv = document.createElement('div');
