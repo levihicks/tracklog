@@ -51,7 +51,7 @@ function logDisplay(){
 	    addButtonDiv.appendChild(addButton);
 	    addButton.onclick=function(){
 	    	for (var k = 0; k < addedTest.length; k++){
-	        				if(addedTest[k]['info'] == this.parentNode.parentNode.lastChild.previousSibling.previousSibling.previousSibling.textContent){
+	        				if(addedTest[k]['info'] == this.parentNode.parentNode.children[2].textContent){
 	        					
 	        					if (logDisplayed == true){
 	        						logList.removeChild(this.parentNode.parentNode);
@@ -151,7 +151,7 @@ function logDisplay(){
 	    moveUpButton.onclick=function(){
 	    	if(addedTest.length > 1){
 	    		for(var j = 1; j < addedTest.length; j++){
-	    			if(addedTest[j]['info'] == this.parentNode.parentNode.parentNode.lastChild.previousSibling.previousSibling.previousSibling.textContent){
+	    			if(addedTest[j]['info'] == this.parentNode.parentNode.parentNode.children[2].textContent){
 
 	    				var tmp = addedTest[j];
 	    				addedTest[j] = addedTest[j-1];
@@ -167,7 +167,7 @@ function logDisplay(){
 	    moveDownButton.onclick=function(){
 	    	if(addedTest.length > 1){
 	    		for(var l = 0; l < addedTest.length-1; l++){
-	    			if(addedTest[l]['info'] == this.parentNode.parentNode.parentNode.lastChild.previousSibling.previousSibling.previousSibling.textContent){
+	    			if(addedTest[l]['info'] == this.parentNode.parentNode.parentNode.children[2].textContent){
 	    				var tmp = addedTest[l];
 	    				addedTest[l] = addedTest[l+1];
 	    				addedTest[l+1] = tmp;
@@ -238,7 +238,7 @@ function searchDisplay() {
 	        			vidLink = 'https://www.youtube.com/results?search_query=' + searchString;
 	        			bandcampLink = 'https://bandcamp.com/search?q=' + searchString;
 	        			
-	        			picLink = this.parentNode.nextSibling.src;
+	        			picLink = this.parentNode.nextSibling.lastChild.src;
 	        			addedTest.push({pic: picLink, info: addedAlbumInfo, vid: vidLink, bandcamp: bandcampLink});
 	        			localStorage.setItem('addedArray', JSON.stringify(addedTest));
 	        		}
@@ -278,7 +278,10 @@ function searchDisplay() {
 	        		break;
 	        	var albumInfo = (searchResults[i]['artist'] + ' - ' + searchResults[i]['name']);
 	        	els[i].appendChild(addButtonDiv);
-	        	els[i].appendChild(imgEl);
+	        	var imgElDiv=document.createElement('div');
+	        	imgElDiv.setAttribute('class', 'albumArt');
+	        	imgElDiv.appendChild(imgEl);
+	        	els[i].appendChild(imgElDiv);
 	        	var albumInfoEl = document.createElement('div');
 	        	albumInfoEl.setAttribute('class', 'albumInfo');
 	        	albumInfoEl.appendChild(document.createTextNode(albumInfo));
