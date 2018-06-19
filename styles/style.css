@@ -92,7 +92,6 @@ h1 {
 
 .albumArt img {
 	height: 48px;
-
 }
 
 .albumArt{
@@ -149,21 +148,26 @@ h1 {
 	color: bisque;
 }
 
-.youtube, .bandcamp, .searchIcon{
-  position: absolute;
-  right: 50px;
-	top: 9px;
+.youtube, .bandcamp, .searchIcon, .orderDiv{
+  display: inline-block;
+	
+	vertical-align: middle;
+	
 }
 .searchIcon{
-	right: 110px;
-	top: 16px;
 	margin-right: 5px;
 	color: black;
 	font-family: monospace;
 }
 
-.bandcamp{
-	right: 80px;
+.rightHalfDiv{
+  display: inline-block;
+  position: absolute;
+	right: 0;
+	top: 50%;
+    transform: translateY(-50%);
+
+	vertical-align: middle;
 }
 
 .log li a img{
@@ -181,10 +185,7 @@ h2 {
 	text-align: center;
 }
 
-.orderDiv {
-	display: inline;
-	float: right;
-}
+
 
 .moveUpButton, .moveDownButton{
   display: inline;
@@ -196,7 +197,7 @@ h2 {
 
 .moveUpButton button, .moveDownButton button{
   width: 20px;
-	height: 50px;
+	
 	color: black;
 	background: inherit;
 	border: none;

@@ -44,6 +44,8 @@ function logDisplay(){
 	para.style.display = 'none';
 	logDisplayed = true;
 	for (var i = 0; i < addedTest.length; i++){
+		var rightHalfDiv=document.createElement('div');
+		rightHalfDiv.setAttribute('class', 'rightHalfDiv');
 		var addButton = document.createElement('button');
 		addButton.appendChild(document.createTextNode('-'));
 		var addButtonDiv = document.createElement('div');
@@ -90,7 +92,7 @@ function logDisplay(){
 	    searchIconEl.setAttribute('src', './images/search.png');
 	    searchIconElDiv.appendChild(searchIconEl);
 	    searchIconElDiv.appendChild(document.createTextNode(':'));
-	    el.appendChild(searchIconElDiv);
+	    rightHalfDiv.appendChild(searchIconElDiv);
 
 	    var bandcampEl=document.createElement('a');
   		var bandcampElDiv = document.createElement('div');
@@ -109,7 +111,7 @@ function logDisplay(){
   		bandcampImg.setAttribute('src','./images/bandcamp.png');
   		bandcampEl.appendChild(bandcampImg);
   		bandcampElDiv.appendChild(bandcampEl);
-  		el.appendChild(bandcampElDiv);
+  		rightHalfDiv.appendChild(bandcampElDiv);
 
   		var vidLinkEl=document.createElement('a');
   		var vidLinkElDiv = document.createElement('div');
@@ -130,7 +132,7 @@ function logDisplay(){
   		vidImg.setAttribute('src','./images/Youtube.png');
   		vidLinkEl.appendChild(vidImg);
   		vidLinkElDiv.appendChild(vidLinkEl);
-  		el.appendChild(vidLinkElDiv);
+  		rightHalfDiv.appendChild(vidLinkElDiv);
 
 	    var orderDiv = document.createElement('div');
 	    orderDiv.setAttribute('class', 'orderDiv');
@@ -151,13 +153,13 @@ function logDisplay(){
 	    moveUpButton.onclick=function(){
 	    	if(addedTest.length > 1){
 	    		for(var j = 1; j < addedTest.length; j++){
-	    			if(addedTest[j]['info'] == this.parentNode.parentNode.parentNode.children[2].textContent){
+	    			if(addedTest[j]['info'] == this.parentNode.parentNode.parentNode.parentNode.children[2].textContent){
 
 	    				var tmp = addedTest[j];
 	    				addedTest[j] = addedTest[j-1];
 	    				addedTest[j-1] = tmp;
 	    				localStorage.setItem('addedArray', JSON.stringify(addedTest));
-	    				logList.insertBefore(this.parentNode.parentNode.parentNode, this.parentNode.parentNode.parentNode.previousSibling);
+	    				logList.insertBefore(this.parentNode.parentNode.parentNode.parentNode, this.parentNode.parentNode.parentNode.parentNode.previousSibling);
 	    			}
 	    		}
 	    		
@@ -167,18 +169,19 @@ function logDisplay(){
 	    moveDownButton.onclick=function(){
 	    	if(addedTest.length > 1){
 	    		for(var l = 0; l < addedTest.length-1; l++){
-	    			if(addedTest[l]['info'] == this.parentNode.parentNode.parentNode.children[2].textContent){
+	    			if(addedTest[l]['info'] == this.parentNode.parentNode.parentNode.parentNode.children[2].textContent){
 	    				var tmp = addedTest[l];
 	    				addedTest[l] = addedTest[l+1];
 	    				addedTest[l+1] = tmp;
 	    				localStorage.setItem('addedArray', JSON.stringify(addedTest));
-	    				logList.insertBefore(this.parentNode.parentNode.parentNode.nextSibling, this.parentNode.parentNode.parentNode);
+	    				logList.insertBefore(this.parentNode.parentNode.parentNode.parentNode.nextSibling, this.parentNode.parentNode.parentNode.parentNode);
 	    				break;
 	    			}
 	    		}
 	    	}
 	    };
-	    el.appendChild(orderDiv);
+	    rightHalfDiv.appendChild(orderDiv);
+	    el.appendChild(rightHalfDiv);
 	    logList.appendChild(el);
 	    log.appendChild(logList);
 	}
