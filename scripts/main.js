@@ -273,8 +273,8 @@ function searchDisplay() {
 	        	addButtonDiv.appendChild(addButton);
 	        	var imgEl = document.createElement('img');
 	        	if(searchResults[i]!=null){
-	        		var albumIcon = ((searchResults[i]['image'][1]['#text']) ? 
-	        			searchResults[i]['image'][1]['#text'] : "./images/defaultalbum.png");
+	        		var albumIcon = ((searchResults[i]['image'][2]['#text']) ? 
+	        			searchResults[i]['image'][2]['#text'] : "./images/defaultalbum.png");
 	        		imgEl.setAttribute('src', albumIcon);
 	        	}
 	        	else
