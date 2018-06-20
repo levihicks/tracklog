@@ -4,6 +4,33 @@ var para = document.querySelector('.log p');
 var searchButton = document.querySelector('.searchbar button');
 var searchText = document.querySelector('.searchbar input');
 var body = document.querySelector('body');
+var smallButton = document.getElementById('small');
+smallButton.onclick = function(){
+	var albumArtEl = document.querySelectorAll('.albumArt img');
+	for(var i = 0; i<albumArtEl.length; i++){
+		albumArtEl[i].style.height = '32px';
+	}
+	
+};
+
+var medButton = document.getElementById("med");
+medButton.onclick = function(){
+	var albumArtEl = document.querySelectorAll('.albumArt img');
+	for(var i = 0; i<albumArtEl.length; i++){
+		albumArtEl[i].style.height = '48px';
+	}
+};
+
+var largeButton = document.getElementById("large");
+largeButton.onclick = function(){
+	var albumArtEl = document.querySelectorAll('.albumArt img');
+	for(var i = 0; i<albumArtEl.length; i++){
+		albumArtEl[i].style.height = '64px';
+	}
+};
+
+
+
 
 searchButton.onclick = function(){
 	index=0;
