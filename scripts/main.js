@@ -39,13 +39,11 @@ searchButton.onclick = function(){
 		searchDisplay();
 	}
 };
-window.onkeydown = function(e) {
-	if(searchText.value && e.keyCode === 13 && searchUnderway==false){
-		index=0;
-		currentSearch=searchText.value;
-  		searchDisplay();
-  	}
-};
+searchText.addEventListener("keyup", function(event) {
+	if (event.keyCode === 13) {
+        searchButton.click();
+    }
+});
 
 
 var addedTest = [];
