@@ -33,15 +33,18 @@ largeButton.onclick = function(){
 
 
 searchButton.onclick = function(){
-	index=0;
-	searchDisplay();
+	if(searchUnderway==false){
+		index=0;
+		currentSearch=searchText.value;
+		searchDisplay();
+	}
 };
 window.onkeydown = function(e) {
-		if(searchText.value)
-			index=0;
-	    if (e.keyCode === 13){ // enter
-	      searchDisplay();
-	     }
+	if(searchText.value && e.keyCode === 13 && searchUnderway==false){
+		index=0;
+		currentSearch=searchText.value;
+  		searchDisplay();
+  	}
 };
 
 
@@ -59,6 +62,8 @@ var contextHeader = document.querySelector('h2');
 var index=0;
 var resultCount;
 var vidLink;
+var searchUnderway = false;
+var currentSearch;
 var bandcampLink;
 var test = false;
 
@@ -215,13 +220,15 @@ function logDisplay(){
 }
 
 searchNextButton.onclick=function(){
+	if(searchUnderway==false){
 	index+=9;
 	clearDisplay();
 	searchDisplay();
+}
 };
 
 searchBackButton.onclick=function(){
-	if((index-9)>=0){
+	if((index-9)>=0 && searchUnderway==false){
 		index-=9;
 		clearDisplay();
 		searchDisplay();
@@ -230,13 +237,14 @@ searchBackButton.onclick=function(){
 
 
 function searchDisplay() {
-	if (searchText.value){
-		contextHeader.textContent='Results for \''+searchText.value+'\':';
+	if (currentSearch){
+		searchUnderway=true;
+		contextHeader.textContent='Results for \''+currentSearch+'\':';
 		logDisplayed = false;
 		para.style.display = 'none';
 		var displayCount=index+10;
 		var requestURL = 'https://ws.audioscrobbler.com/2.0/?method=album.search&album=' + 
-						 searchText.value.replace(' ', '+') + 
+						 currentSearch.replace(' ', '+') + 
 						 '&api_key=57ee3318536b23ee81d6b27e36997cde&limit='+displayCount+'&format=json';
       	var request = new XMLHttpRequest();
       	request.open('GET', requestURL);
@@ -318,6 +326,8 @@ function searchDisplay() {
 	        	els[i].appendChild(albumInfoEl);
 	        	logList.appendChild(els[i]);
 	        	log.appendChild(logList);
+	        	if(i==index+8)
+	        		searchUnderway=false;
 	        }
 	        
       
@@ -341,7 +351,7 @@ function searchDisplay() {
 }
 
 function goBack(){
-
+	currentSearch=null;
 	clearDisplay();
 	contextHeader.textContent='Your log:';
 	if (addedTest.length == 0 && (localStorage.getItem('addedArray'))==null){
