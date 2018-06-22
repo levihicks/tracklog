@@ -9,7 +9,9 @@ smallButton.onclick = function(){
 	var albumArtEl = document.querySelectorAll('.albumArt img');
 	for(var i = 0; i<albumArtEl.length; i++){
 		albumArtEl[i].style.height = '32px';
+		
 	}
+	localStorage.setItem('albumArtSize', '32px');
 	
 };
 
@@ -18,7 +20,9 @@ medButton.onclick = function(){
 	var albumArtEl = document.querySelectorAll('.albumArt img');
 	for(var i = 0; i<albumArtEl.length; i++){
 		albumArtEl[i].style.height = '48px';
+		
 	}
+	localStorage.setItem('albumArtSize', '48px');
 };
 
 var largeButton = document.getElementById("large");
@@ -26,7 +30,9 @@ largeButton.onclick = function(){
 	var albumArtEl = document.querySelectorAll('.albumArt img');
 	for(var i = 0; i<albumArtEl.length; i++){
 		albumArtEl[i].style.height = '64px';
+		
 	}
+	localStorage.setItem('albumArtSize', '64px');
 };
 
 
@@ -105,7 +111,12 @@ function logDisplay(){
 		var imgEl = document.createElement('img');
 		var imgElDiv = document.createElement('div');
 		imgElDiv.setAttribute('class', 'albumArt');
+		if(localStorage.getItem('albumArtSize'))
+			imgEl.style.height = localStorage.getItem('albumArtSize');
+		else
+			imgEl.style.height = '32px';
 		imgEl.setAttribute('src', addedTest[i]['pic']);
+
 		imgElDiv.appendChild(imgEl);
 		var el = document.createElement('li');
 	    
@@ -305,6 +316,10 @@ function searchDisplay() {
 	        	addButtonDiv.setAttribute('class', 'addButton');
 	        	addButtonDiv.appendChild(addButton);
 	        	var imgEl = document.createElement('img');
+	        	if(localStorage.getItem('albumArtSize'))
+					imgEl.style.height = localStorage.getItem('albumArtSize');
+				else
+					imgEl.style.height = '32px';
 	        	if(searchResults[i]!=null){
 	        		var albumIcon = ((searchResults[i]['image'][2]['#text']) ? 
 	        			searchResults[i]['image'][2]['#text'] : "./images/defaultalbum.png");
