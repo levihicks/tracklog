@@ -34,15 +34,16 @@ largeButton.onclick = function(){
 	}
 	localStorage.setItem('albumArtSize', '64px');
 };
-
-
-
-
 searchButton.onclick = function(){
 	if(searchUnderway==false){
-		index=0;
-		currentSearch=searchText.value;
-		searchDisplay();
+		
+		
+		if (searchText.value){
+			currentSearch=searchText.value;
+			index=0;
+			clearDisplay();
+			searchDisplay();
+		}
 	}
 };
 searchText.addEventListener("keyup", function(event) {
@@ -71,14 +72,13 @@ var currentSearch;
 var bandcampLink;
 var test = false;
 
-
-
 function logDisplay(){
 	if(localStorage.getItem('addedArray')){
 		addedTest = JSON.parse(localStorage.getItem('addedArray'));
 	}
 	para.style.display = 'none';
 	logDisplayed = true;
+
 	for (var i = 0; i < addedTest.length; i++){
 		var rightHalfDiv=document.createElement('div');
 		rightHalfDiv.setAttribute('class', 'rightHalfDiv');
@@ -89,23 +89,23 @@ function logDisplay(){
 	    addButtonDiv.appendChild(addButton);
 	    addButton.onclick=function(){
 	    	for (var k = 0; k < addedTest.length; k++){
-	        				if(addedTest[k]['info'] == this.parentNode.parentNode.children[2].textContent){
-	        					
-	        					if (logDisplayed == true){
-	        						logList.removeChild(this.parentNode.parentNode);
-	        						if(!(logList.hasChildNodes()))
-	        							para.style.display = 'block';
-	        					}
-								
-								addedTest.splice(k, 1);
-								if(addedTest.length==0){
-									localStorage.removeItem('addedArray');
-								}
-								else{
-									localStorage.setItem('addedArray', JSON.stringify(addedTest));
-								}
-	        					break;
-	        				}
+				if(addedTest[k]['info'] == this.parentNode.parentNode.children[2].textContent){
+					
+					if (logDisplayed == true){
+						logList.removeChild(this.parentNode.parentNode);
+						if(!(logList.hasChildNodes()))
+							para.style.display = 'block';
+					}
+					
+					addedTest.splice(k, 1);
+					if(addedTest.length==0){
+						localStorage.removeItem('addedArray');
+					}
+					else{
+						localStorage.setItem('addedArray', JSON.stringify(addedTest));
+					}
+					break;
+				}
 	        }
 	    };
 		var imgEl = document.createElement('img');
@@ -226,145 +226,158 @@ function logDisplay(){
 	    logList.appendChild(el);
 	    log.appendChild(logList);
 	}
+	searchBackButtonDiv.setAttribute('class', 'searchBackButton');
+	  	searchBackButton.appendChild(document.createTextNode('<-'));
+	  	searchNextButton.appendChild(document.createTextNode('->'));
+		searchBackButtonDiv.appendChild(searchBackButton);
+		searchNextButtonDiv.appendChild(searchNextButton);
+		searchNextButtonDiv.setAttribute('class', 'searchNextButton');
+		log.appendChild(searchBackButtonDiv);
+		log.appendChild(searchNextButtonDiv);
+	
 }
 
 searchNextButton.onclick=function(){
 	if(searchUnderway==false){
-	index+=9;
-	clearDisplay();
-	searchDisplay();
-}
+	
+		index+=9;
+		clearDisplay();
+
+	if(logDisplayed==false)
+		searchDisplay();
+	else
+		logDisplay();
+	}
 };
 
 searchBackButton.onclick=function(){
 	if((index-9)>=0 && searchUnderway==false){
 		index-=9;
 		clearDisplay();
+
+	if (logDisplayed==false)
 		searchDisplay();
+	else
+		logDisplay();
 	}
 }
 
 
-function searchDisplay() {
-	if (currentSearch){
-		searchUnderway=true;
-		contextHeader.textContent='Results for \''+currentSearch+'\':';
-		logDisplayed = false;
-		para.style.display = 'none';
-		var displayCount=index+10;
-		var requestURL = 'https://ws.audioscrobbler.com/2.0/?method=album.search&album=' + 
-						 currentSearch.replace(' ', '+') + 
-						 '&api_key=57ee3318536b23ee81d6b27e36997cde&limit='+displayCount+'&format=json';
-      	var request = new XMLHttpRequest();
-      	request.open('GET', requestURL);
-      	request.responseType = 'json';
-      	request.send();
-      	clearDisplay();
-      	request.onload = function() {
-      		
-      		var els = [];
-        	var searchResults = request.response['results']['albummatches']['album'];
-        	for (var i = index; i < (index+9); i++){
-	        	els[i] = document.createElement('li');
-	        	var addButton = document.createElement('button');
-	        	var addText = '+';
-	        	for(var j = 0; j < addedTest.length; j++){
-	        		if(searchResults[i]!=null){
-		        		if(addedTest[j]['info'] == (searchResults[i]['artist'] + ' - ' + searchResults[i]['name'])){
-		        			addText='-';
-		        		}
+function searchDisplay(){
+	searchUnderway=true;
+	contextHeader.textContent='Results for \''+currentSearch+'\':';
+	logDisplayed = false;
+	para.style.display = 'none';
+	var displayCount=index+10;
+	var requestURL = 'https://ws.audioscrobbler.com/2.0/?method=album.search&album=' + 
+	currentSearch.replace(' ', '+') + 
+	'&api_key=57ee3318536b23ee81d6b27e36997cde&limit='+displayCount+'&format=json';
+	var request = new XMLHttpRequest();
+	request.open('GET', requestURL);
+	request.responseType = 'json';
+	request.send();
+	clearDisplay();
+	request.onload = function(){
+		var els = [];
+		var searchResults = request.response['results']['albummatches']['album'];
+		for (var i = index; i < (index+9); i++){
+	    	els[i] = document.createElement('li');
+	    	var addButton = document.createElement('button');
+	    	var addText = '+';
+	    	for(var j = 0; j < addedTest.length; j++){
+	    		if(searchResults[i]!=null){
+	        		if(addedTest[j]['info'] == (searchResults[i]['artist'] + ' - ' + searchResults[i]['name'])){
+	        			addText='-';
 	        		}
-	        	}
-	        	addButton.appendChild(document.createTextNode(addText));
-	        	addButton.onclick = function(){
-	        		this.innerHTML = (this.innerHTML == '-') ? '+' : '-';
-	        		if(this.innerHTML == '-'){
-						addedAlbumInfo = this.parentNode.nextSibling.nextSibling.textContent;
-						var searchString = addedAlbumInfo.replace(' - ',' ');
-						searchString=searchString.replace(/ /g, '+');
-	        			vidLink = 'https://www.youtube.com/results?search_query=' + searchString;
-	        			bandcampLink = 'https://bandcamp.com/search?q=' + searchString;
-	        			
-	        			picLink = this.parentNode.nextSibling.lastChild.src;
-	        			addedTest.push({pic: picLink, info: addedAlbumInfo, vid: vidLink, bandcamp: bandcampLink});
-	        			localStorage.setItem('addedArray', JSON.stringify(addedTest));
-	        		}
-	        		else{
-	        			for (var k = 0; k < addedTest.length; k++){
-	        				if(addedTest[k]['info'] == this.parentNode.parentNode.lastChild.textContent){
-	        					
-	        					if (logDisplayed == true){
-	        						logList.removeChild(this.parentNode.parentNode);
-	        						if(!(logList.hasChildNodes()))
-	        							para.style.display = 'block';
-	        					}
-								addedTest.splice(k, 1);
-								if(addedTest.length==0){
-									localStorage.removeItem('addedArray');
-								}
-								else{
-									localStorage.setItem('addedArray', JSON.stringify(addedTest));
-								}
-	        					break;
-	        				}
-	        				if (k == addedTest.length-1)
-	        					console.log('element to display not found!');
-	        			}
-	        		}		
-	        	}
-	        	var addButtonDiv = document.createElement('div');
-	        	addButtonDiv.setAttribute('class', 'addButton');
-	        	addButtonDiv.appendChild(addButton);
-	        	var imgEl = document.createElement('img');
-	        	if(localStorage.getItem('albumArtSize'))
-					imgEl.style.height = localStorage.getItem('albumArtSize');
-				else
-					imgEl.style.height = '32px';
-	        	if(searchResults[i]!=null){
-	        		var albumIcon = ((searchResults[i]['image'][2]['#text']) ? 
-	        			searchResults[i]['image'][2]['#text'] : "./images/defaultalbum.png");
-	        		imgEl.setAttribute('src', albumIcon);
-	        	}
-	        	else
-	        		break;
-	        	var albumInfo = (searchResults[i]['artist'] + ' - ' + searchResults[i]['name']);
-	        	els[i].appendChild(addButtonDiv);
-	        	var imgElDiv=document.createElement('div');
-	        	imgElDiv.setAttribute('class', 'albumArt');
-	        	imgElDiv.appendChild(imgEl);
-	        	els[i].appendChild(imgElDiv);
-	        	var albumInfoEl = document.createElement('div');
-	        	albumInfoEl.setAttribute('class', 'albumInfo');
-	        	albumInfoEl.appendChild(document.createTextNode(albumInfo));
-	        	els[i].appendChild(albumInfoEl);
-	        	logList.appendChild(els[i]);
-	        	log.appendChild(logList);
-	        	if(i==index+8)
-	        		searchUnderway=false;
-	        }
-	        
-      
-     		searchBackButtonDiv.setAttribute('class', 'searchBackButton');
-      		searchBackButton.appendChild(document.createTextNode('<-'));
-      		searchNextButton.appendChild(document.createTextNode('->'));
-      		searchBackButtonDiv.appendChild(searchBackButton);
-      		searchNextButtonDiv.appendChild(searchNextButton);
-      		searchNextButtonDiv.setAttribute('class', 'searchNextButton');
-      		log.appendChild(searchBackButtonDiv);
-      		log.appendChild(searchNextButtonDiv);
-      };
-      backButton.appendChild(document.createTextNode('Back to log'));
-      backButton.onclick = goBack;
-      backButtonDiv.setAttribute('class', 'backButton');
-      backButtonDiv.appendChild(backButton);
-      log.appendChild(backButtonDiv);
+	    		}
+	    	}
+	    	addButton.appendChild(document.createTextNode(addText));
+	    	addButton.onclick = function(){
+	    		this.innerHTML = (this.innerHTML == '-') ? '+' : '-';
+	    		if(this.innerHTML == '-'){
+					addedAlbumInfo = this.parentNode.nextSibling.nextSibling.textContent;
+					var searchString = addedAlbumInfo.replace(' - ',' ');
+					searchString=searchString.replace(/ /g, '+');
+	    			vidLink = 'https://www.youtube.com/results?search_query=' + searchString;
+	    			bandcampLink = 'https://bandcamp.com/search?q=' + searchString;
+	    			
+	    			picLink = this.parentNode.nextSibling.lastChild.src;
+	    			addedTest.push({pic: picLink, info: addedAlbumInfo, vid: vidLink, bandcamp: bandcampLink});
+	    			localStorage.setItem('addedArray', JSON.stringify(addedTest));
+	    		}
+	    		else{
+	    			for (var k = 0; k < addedTest.length; k++){
+	    				if(addedTest[k]['info'] == this.parentNode.parentNode.lastChild.textContent){
+	    					
+	    					if (logDisplayed == true){
+	    						logList.removeChild(this.parentNode.parentNode);
+	    						if(!(logList.hasChildNodes()))
+	    							para.style.display = 'block';
+	    					}
+							addedTest.splice(k, 1);
+							if(addedTest.length==0){
+								localStorage.removeItem('addedArray');
+							}
+							else{
+								localStorage.setItem('addedArray', JSON.stringify(addedTest));
+							}
+	    					break;
+	    				}
+	    				if (k == addedTest.length-1)
+	    					console.log('element to display not found!');
+	    			}
+	    		}		
+	    	}
+	    	var addButtonDiv = document.createElement('div');
+	    	addButtonDiv.setAttribute('class', 'addButton');
+	    	addButtonDiv.appendChild(addButton);
+	    	var imgEl = document.createElement('img');
+	    	if(localStorage.getItem('albumArtSize'))
+				imgEl.style.height = localStorage.getItem('albumArtSize');
+			else
+				imgEl.style.height = '32px';
+	    	if(searchResults[i]!=null){
+	    		var albumIcon = ((searchResults[i]['image'][2]['#text']) ? 
+	    			searchResults[i]['image'][2]['#text'] : "./images/defaultalbum.png");
+	    		imgEl.setAttribute('src', albumIcon);
+	    	}
+	    	else
+	    		break;
+	    	var albumInfo = (searchResults[i]['artist'] + ' - ' + searchResults[i]['name']);
+	    	els[i].appendChild(addButtonDiv);
+	    	var imgElDiv=document.createElement('div');
+	    	imgElDiv.setAttribute('class', 'albumArt');
+	    	imgElDiv.appendChild(imgEl);
+	    	els[i].appendChild(imgElDiv);
+	    	var albumInfoEl = document.createElement('div');
+	    	albumInfoEl.setAttribute('class', 'albumInfo');
+	    	albumInfoEl.appendChild(document.createTextNode(albumInfo));
+	    	els[i].appendChild(albumInfoEl);
+	    	logList.appendChild(els[i]);
+	    	log.appendChild(logList);
+	    	if(i==index+8)
+	    		searchUnderway=false;
+	    }
+	 	searchBackButtonDiv.setAttribute('class', 'searchBackButton');
+	  	searchBackButton.appendChild(document.createTextNode('<-'));
+	  	searchNextButton.appendChild(document.createTextNode('->'));
+		searchBackButtonDiv.appendChild(searchBackButton);
+		searchNextButtonDiv.appendChild(searchNextButton);
+		searchNextButtonDiv.setAttribute('class', 'searchNextButton');
+		log.appendChild(searchBackButtonDiv);
+		log.appendChild(searchNextButtonDiv);
+	};
 
-	} 
-
+	backButton.appendChild(document.createTextNode('Back to log'));
+	backButton.onclick = goBack;
+	backButtonDiv.setAttribute('class', 'backButton');
+	backButtonDiv.appendChild(backButton);
+	log.appendChild(backButtonDiv);
 }
 
 function goBack(){
 	currentSearch=null;
+	index=0;
 	clearDisplay();
 	contextHeader.textContent='Your log:';
 	if (addedTest.length == 0 && (localStorage.getItem('addedArray'))==null){
@@ -376,19 +389,25 @@ function goBack(){
 }
 
 function clearDisplay(){
-	if(backButtonDiv.hasChildNodes() && searchBackButtonDiv.hasChildNodes() && searchNextButtonDiv.hasChildNodes()){
-		backButton.removeChild(backButton.lastChild);
+	if(searchBackButtonDiv.hasChildNodes() && searchNextButtonDiv.hasChildNodes()){
+		
 		searchBackButton.removeChild(searchBackButton.lastChild);
 		searchNextButton.removeChild(searchNextButton.lastChild);
-		backButton.innerHTML='';
+		
 		searchBackButton.innerHTML='';
 		searchNextButton.innerHTML='';
-		backButtonDiv.removeChild(backButton);
+		
 		searchBackButtonDiv.removeChild(searchBackButton);
 		searchNextButtonDiv.removeChild(searchNextButton);
-		log.removeChild(backButtonDiv);
+		
 		log.removeChild(searchBackButtonDiv);
 		log.removeChild(searchNextButtonDiv);
+	}
+	if(backButtonDiv.hasChildNodes()){
+	backButton.removeChild(backButton.lastChild);
+	backButton.innerHTML='';
+	backButtonDiv.removeChild(backButton);
+	log.removeChild(backButtonDiv);
 	}
 	while(logList.hasChildNodes()){
 			logList.removeChild(logList.lastChild);
