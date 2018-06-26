@@ -34,15 +34,14 @@ largeButton.onclick = function(){
 	}
 	localStorage.setItem('albumArtSize', '64px');
 };
-
-
-
-
 searchButton.onclick = function(){
 	if(searchUnderway==false){
-		index=0;
+		
 		currentSearch=searchText.value;
-		searchDisplay();
+		if (currentSearch!=""){
+			index=0;
+			searchDisplay();
+		}
 	}
 };
 searchText.addEventListener("keyup", function(event) {
@@ -71,8 +70,6 @@ var currentSearch;
 var bandcampLink;
 var test = false;
 
-
-
 function logDisplay(){
 	if(localStorage.getItem('addedArray')){
 		addedTest = JSON.parse(localStorage.getItem('addedArray'));
@@ -89,23 +86,23 @@ function logDisplay(){
 	    addButtonDiv.appendChild(addButton);
 	    addButton.onclick=function(){
 	    	for (var k = 0; k < addedTest.length; k++){
-	        				if(addedTest[k]['info'] == this.parentNode.parentNode.children[2].textContent){
-	        					
-	        					if (logDisplayed == true){
-	        						logList.removeChild(this.parentNode.parentNode);
-	        						if(!(logList.hasChildNodes()))
-	        							para.style.display = 'block';
-	        					}
-								
-								addedTest.splice(k, 1);
-								if(addedTest.length==0){
-									localStorage.removeItem('addedArray');
-								}
-								else{
-									localStorage.setItem('addedArray', JSON.stringify(addedTest));
-								}
-	        					break;
-	        				}
+				if(addedTest[k]['info'] == this.parentNode.parentNode.children[2].textContent){
+					
+					if (logDisplayed == true){
+						logList.removeChild(this.parentNode.parentNode);
+						if(!(logList.hasChildNodes()))
+							para.style.display = 'block';
+					}
+					
+					addedTest.splice(k, 1);
+					if(addedTest.length==0){
+						localStorage.removeItem('addedArray');
+					}
+					else{
+						localStorage.setItem('addedArray', JSON.stringify(addedTest));
+					}
+					break;
+				}
 	        }
 	    };
 		var imgEl = document.createElement('img');
@@ -230,22 +227,31 @@ function logDisplay(){
 
 searchNextButton.onclick=function(){
 	if(searchUnderway==false){
-	index+=9;
-	clearDisplay();
-	searchDisplay();
-}
+	
+		index+=9;
+		clearDisplay();
+
+	if(logDisplayed==false)
+		searchDisplay();
+	else
+		logDisplay();
+	}
 };
 
 searchBackButton.onclick=function(){
 	if((index-9)>=0 && searchUnderway==false){
 		index-=9;
 		clearDisplay();
+
+	if (logDisplayed==false)
 		searchDisplay();
+	else
+		logDisplay();
 	}
 }
 
 
-function searchDisplay() {
+function searchDisplay(){
 	if (currentSearch){
 		searchUnderway=true;
 		contextHeader.textContent='Results for \''+currentSearch+'\':';
@@ -260,7 +266,7 @@ function searchDisplay() {
       	request.responseType = 'json';
       	request.send();
       	clearDisplay();
-      	request.onload = function() {
+      	request.onload = function(){
       		
       		var els = [];
         	var searchResults = request.response['results']['albummatches']['album'];
@@ -342,29 +348,27 @@ function searchDisplay() {
 	        	if(i==index+8)
 	        		searchUnderway=false;
 	        }
-	        
-      
-     		searchBackButtonDiv.setAttribute('class', 'searchBackButton');
-      		searchBackButton.appendChild(document.createTextNode('<-'));
-      		searchNextButton.appendChild(document.createTextNode('->'));
-      		searchBackButtonDiv.appendChild(searchBackButton);
-      		searchNextButtonDiv.appendChild(searchNextButton);
-      		searchNextButtonDiv.setAttribute('class', 'searchNextButton');
-      		log.appendChild(searchBackButtonDiv);
-      		log.appendChild(searchNextButtonDiv);
-      };
-      backButton.appendChild(document.createTextNode('Back to log'));
-      backButton.onclick = goBack;
-      backButtonDiv.setAttribute('class', 'backButton');
-      backButtonDiv.appendChild(backButton);
-      log.appendChild(backButtonDiv);
-
-	} 
-
+		}
+	 	searchBackButtonDiv.setAttribute('class', 'searchBackButton');
+	  	searchBackButton.appendChild(document.createTextNode('<-'));
+	  	searchNextButton.appendChild(document.createTextNode('->'));
+		searchBackButtonDiv.appendChild(searchBackButton);
+		searchNextButtonDiv.appendChild(searchNextButton);
+		searchNextButtonDiv.setAttribute('class', 'searchNextButton');
+		log.appendChild(searchBackButtonDiv);
+		log.appendChild(searchNextButtonDiv);
+	      
+		backButton.appendChild(document.createTextNode('Back to log'));
+		backButton.onclick = goBack;
+		backButtonDiv.setAttribute('class', 'backButton');
+		backButtonDiv.appendChild(backButton);
+		log.appendChild(backButtonDiv);
+	}
 }
 
 function goBack(){
 	currentSearch=null;
+	index=0;
 	clearDisplay();
 	contextHeader.textContent='Your log:';
 	if (addedTest.length == 0 && (localStorage.getItem('addedArray'))==null){
