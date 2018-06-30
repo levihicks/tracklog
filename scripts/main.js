@@ -303,7 +303,6 @@ function createSearchNode(albumEl, searchResults){
 	albumEl.appendChild(albumInfoEl);
 	logList.appendChild(albumEl);
 	log.appendChild(logList);
-	
 }
 
 function showBackButton(){
