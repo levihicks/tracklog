@@ -28,6 +28,14 @@ largeButton.onclick = function(){
 	}
 	localStorage.setItem('albumArtSize', '64px');
 };
+var xtraLargeButton = document.getElementById("xtraLarge");
+xtraLargeButton.onclick = function(){
+	var albumArtEl = document.querySelectorAll('.albumArt img');
+	for(var i = 0; i<albumArtEl.length; i++){
+		albumArtEl[i].style.height = '128px';
+	}
+	localStorage.setItem('albumArtSize', '128px');
+};
 searchButton.onclick = function(){
 	if(searchUnderway==false){
 		if (searchText.value){
