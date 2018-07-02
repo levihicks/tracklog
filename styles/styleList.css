@@ -1,0 +1,54 @@
+.log p, li {
+	text-align: center;
+	margin: 20px;
+	border-radius: 5px;
+	color: seashell;
+	background-color: #dac292;
+	min-height: 34px;
+	font-family: 'Roboto Mono', monospace;
+	font-size: .85em;
+}
+
+.log li:nth-child(odd){
+	background-color: #d1b37b;
+	border: 1px solid darkgoldenrod;
+}
+
+.log li {
+	text-align: left;
+	border: 1px solid bisque;
+	position: relative;
+}
+
+.albumArt{
+	 display: inline-block;
+}
+
+.log li .albumInfo {
+  display: inline-block;
+  margin-left: 10px;
+  width: 50%;
+}
+
+.addButton {
+	display: inline;
+}
+
+.addButton button {
+	vertical-align: middle;
+	display: inline-block;
+	width:34px;
+	height:34px;
+	background: inherit;
+	border: none;
+}
+
+.rightHalfDiv{
+  display: inline-block;
+  position: absolute;
+	right: 0;
+	top: 50%;
+    transform: translateY(-50%);
+
+	vertical-align: middle;
+}

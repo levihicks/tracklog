@@ -65,32 +65,14 @@ h1 {
 	border-bottom:  #dac292 1px dashed;
 }
 
-.log p, li {
-	text-align: center;
-	margin: 20px;
-	border-radius: 5px;
-	color: seashell;
-	background-color: #dac292;
-	min-height: 34px;
-	font-family: 'Roboto Mono', monospace;
-	font-size: .85em;
-}
+
 
 .log p{
 	font-style: italic;
 	display: block;
 	padding-top: 17px;
 }
-.log li:nth-child(odd){
-	background-color: #d1b37b;
-	border: 1px solid darkgoldenrod;
-}
 
-.log li {
-	text-align: left;
-	border: 1px solid bisque;
-	position: relative;
-}
 
 .log li img, .albumInfo{
 	vertical-align: middle;
@@ -98,28 +80,7 @@ h1 {
 
 
 
-.albumArt{
-	 display: inline-block;
-}
 
-.log li .albumInfo {
-  display: inline-block;
-  margin-left: 10px;
-  width: 50%;
-}
-
-.addButton {
-	display: inline;
-}
-
-.addButton button {
-	vertical-align: middle;
-	display: inline-block;
-	width:34px;
-	height:34px;
-	background: inherit;
-	border: none;
-}
 
 .backButton {
 	position: relative;
@@ -164,15 +125,7 @@ h1 {
 	font-family: monospace;
 }
 
-.rightHalfDiv{
-  display: inline-block;
-  position: absolute;
-	right: 0;
-	top: 50%;
-    transform: translateY(-50%);
 
-	vertical-align: middle;
-}
 
 .log li a img{
 	height: 30px;

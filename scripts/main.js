@@ -50,6 +50,21 @@ searchText.addEventListener("keyup", function(event) {
 	if (event.keyCode === 13)
         searchButton.click();
 });
+
+var headEl = document.querySelector('head');
+
+var listViewButton = document.getElementById("list");
+listViewButton.onclick = function(){
+	headEl.children[3].href = "styles/styleList.css";
+	localStorage.setItem('viewStyle', "styles/styleList.css");
+};
+
+var tileViewButton = document.getElementById("tile");
+tileViewButton.onclick = function(){
+	headEl.children[3].href = "styles/styleGrid.css";
+	localStorage.setItem('viewStyle', "styles/styleGrid.css");
+};
+
 var addedTest = [];
 var addedAlbumInfo;
 var picLink;
@@ -388,6 +403,14 @@ function clearDisplay(){
 	if(logList.parentNode)
 		logList.parentNode.removeChild(logList);
 }
+function showViewStyle(){
+	if(localStorage.getItem('viewStyle')==null)
+		headEl.children[3].href="styles/styleList.css";
+	else
+		headEl.children[3].href=localStorage.getItem('viewStyle');
+}
+
+showViewStyle();
 
 goBack();
 

@@ -1,0 +1,53 @@
+ol{
+	display: flex;
+	flex-wrap: wrap;
+	
+}
+
+.log li{
+	flex: 1 130px;
+	align-items: left;
+}
+
+.log p, li {
+	text-align: center;
+	margin: 20px;
+	border-radius: 5px;
+	color: seashell;
+
+
+	font-family: 'Roboto Mono', monospace;
+	font-size: .85em;
+}
+
+.log li {
+	max-width: 160px;
+}
+
+.log li .albumInfo {
+  display: block;
+  margin-left: 10px;
+  margin-top:5px;
+	margin-bottom: 5px;
+}
+
+.addButton {
+  border: 1px dashed bisque;
+  position: relative;
+  height: 15px;
+	width: 15px;
+}
+
+.addButton button {
+	display: inline;
+	background: inherit;
+  margin: 0;
+	padding: 0;
+	border: none;
+}
+
+.rightHalfDiv{
+  display: inline-block;
+	margin: auto;
+	text-align: center;
+}
