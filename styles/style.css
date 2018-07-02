@@ -190,22 +190,27 @@ h2 {
 	font-style: italic;
 }
 
-.sizeChanger, #small, #med, #large, #xtraLarge{
+.sizeChanger, .viewChanger, #small, #med, #large, #xtraLarge,
+ #tile, #list{
   font-family: monospace;
 }
 
-.sizeChanger{
+.sizeChanger, .viewChanger{
 	text-align: center;
 	color: bisque;
 	font-style: italic;
 	margin-top: 2px;
 }
 
-#small, #med, #large, #xtraLarge{
+#small, #med, #large, #xtraLarge, #tile, #list{
 	background: inherit;
 	border: dashed #dac292 1px;
 	border-top: none;
 	color: whitesmoke;
+}
+
+#tile, #list{
+	border-top: dashed #dac292 1px;
 }
 
 .moveUpButton, .moveDownButton{
