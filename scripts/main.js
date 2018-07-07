@@ -397,11 +397,29 @@ function clearDisplay(){
 	if(logList.parentNode)
 		logList.parentNode.removeChild(logList);
 }
+
 function showViewStyle(){
 	if(localStorage.getItem('viewStyle')==null)
 		headEl.children[3].href="styles/styleList.css";
-	else
+	else{
 		headEl.children[3].href=localStorage.getItem('viewStyle');
+		if (localStorage.getItem('viewStyle')=="styles/styleList.css")
+			listViewButton.setAttribute('selected','');
+		else
+			tileViewButton.setAttribute('selected','');
+		switch(localStorage.getItem('albumArtSize')){
+			case '48px':
+				medButton.setAttribute('selected','');
+				break;
+			case '64px':
+				largeButton.setAttribute('selected','');
+				break;
+			case '128px':
+				xtraLargeButton.setAttribute('selected','');
+				break;
+		}
+		
+	}
 }
 
 showViewStyle();

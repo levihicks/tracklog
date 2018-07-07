@@ -23,24 +23,22 @@
 			<div class="contextHeader">
 				<h2>Your log:</h2>
 			</div>
-			
-
 			<p>No albums in the backlog. Search for an album to add it here.</p>
 		</div>
-		<div class="options">
-			<div class="sizeChanger">
-				Size: 
-				<button id="small">small</button>
-				<button id="med">med</button>
-				<button id="large">large</button>
-				<button id="xtraLarge">xtra-large</button>
-			</div>
-			<div class="viewChanger">
-				View:
-				<button id="list">list</button>
-				<button id="tile">tile</button>
-			</div>
-		</div>
+		<form class="options">
+			<label for="sizeChanger">size:</label>
+			<select name="sizeChanger">
+				<option id="small">small</option>
+				<option id="med">med</option>
+				<option id="large">large</option>
+				<option id="xtraLarge">xtra-large</option>
+			</select>
+			<label for="viewChanger">view:</label>
+			<select name="viewChanger">
+				<option id="list">list</option>
+				<option id="tile">tile</option>
+			</select>
+		</form>
 	</body>
 	<script src="scripts/main.js"></script>
 </html>
