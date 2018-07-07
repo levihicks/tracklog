@@ -4,38 +4,32 @@ var para = document.querySelector('.log p');
 var searchButton = document.querySelector('.searchbar button');
 var searchText = document.querySelector('.searchbar input');
 var body = document.querySelector('body');
-var smallButton = document.getElementById('small');
-smallButton.onclick = function(){
+
+function setAlbumArtSize(size){
 	var albumArtEl = document.querySelectorAll('.albumArt img');
 	for(var i = 0; i<albumArtEl.length; i++){
-		albumArtEl[i].style.height = '32px';
+		albumArtEl[i].style.height = size;
 	}
-	localStorage.setItem('albumArtSize', '32px');
+	localStorage.setItem('albumArtSize', size);
+}
+
+var smallButton = document.getElementById('small');
+smallButton.onclick = function(){
+	setAlbumArtSize('32px');
 };
 var medButton = document.getElementById("med");
 medButton.onclick = function(){
-	var albumArtEl = document.querySelectorAll('.albumArt img');
-	for(var i = 0; i<albumArtEl.length; i++){
-		albumArtEl[i].style.height = '48px';
-	}
-	localStorage.setItem('albumArtSize', '48px');
+	setAlbumArtSize('48px');
 };
 var largeButton = document.getElementById("large");
 largeButton.onclick = function(){
-	var albumArtEl = document.querySelectorAll('.albumArt img');
-	for(var i = 0; i<albumArtEl.length; i++){
-		albumArtEl[i].style.height = '64px';
-	}
-	localStorage.setItem('albumArtSize', '64px');
+	setAlbumArtSize('64px');
 };
 var xtraLargeButton = document.getElementById("xtraLarge");
 xtraLargeButton.onclick = function(){
-	var albumArtEl = document.querySelectorAll('.albumArt img');
-	for(var i = 0; i<albumArtEl.length; i++){
-		albumArtEl[i].style.height = '128px';
-	}
-	localStorage.setItem('albumArtSize', '128px');
+	setAlbumArtSize('128px');
 };
+
 searchButton.onclick = function(){
 	if(searchUnderway==false){
 		if (searchText.value){
