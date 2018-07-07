@@ -14,21 +14,27 @@ function setAlbumArtSize(size){
 }
 
 var smallButton = document.getElementById('small');
-smallButton.onclick = function(){
-	setAlbumArtSize('32px');
-};
 var medButton = document.getElementById("med");
-medButton.onclick = function(){
-	setAlbumArtSize('48px');
-};
 var largeButton = document.getElementById("large");
-largeButton.onclick = function(){
-	setAlbumArtSize('64px');
-};
 var xtraLargeButton = document.getElementById("xtraLarge");
-xtraLargeButton.onclick = function(){
-	setAlbumArtSize('128px');
-};
+var sizeChangeButton = document.querySelector('select[name=sizeChanger]');
+
+function sizeChange(value){
+	switch(value){
+		case 'small': 
+			setAlbumArtSize('32px');
+			break;
+		case 'med':
+			setAlbumArtSize('48px');
+			break;
+		case 'large':
+			setAlbumArtSize('64px');
+			break;
+		case 'xtraLarge':
+			setAlbumArtSize('128px');
+			break;
+	}
+}
 
 searchButton.onclick = function(){
 	if(searchUnderway==false){
@@ -46,18 +52,22 @@ searchText.addEventListener("keyup", function(event) {
 });
 
 var headEl = document.querySelector('head');
-
 var listViewButton = document.getElementById("list");
-listViewButton.onclick = function(){
-	headEl.children[3].href = "styles/styleList.css";
-	localStorage.setItem('viewStyle', "styles/styleList.css");
-};
-
 var tileViewButton = document.getElementById("tile");
-tileViewButton.onclick = function(){
-	headEl.children[3].href = "styles/styleGrid.css";
-	localStorage.setItem('viewStyle', "styles/styleGrid.css");
-};
+var viewChangeButton = document.querySelector('select[name=viewChanger]');
+
+function viewChange(value) {
+	switch(value){
+		case 'list':
+			headEl.children[3].href = "styles/styleList.css";
+			localStorage.setItem('viewStyle', "styles/styleList.css");
+			break;
+		case 'tile':
+			headEl.children[3].href = "styles/styleGrid.css";
+			localStorage.setItem('viewStyle', "styles/styleGrid.css");
+			break;
+	}
+}
 
 var addedTest = [];
 var addedAlbumInfo;

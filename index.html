@@ -27,16 +27,16 @@
 		</div>
 		<form class="options">
 			<label for="sizeChanger">size:</label>
-			<select name="sizeChanger">
-				<option id="small">small</option>
-				<option id="med">med</option>
-				<option id="large">large</option>
-				<option id="xtraLarge">xtra-large</option>
+			<select name="sizeChanger" onchange="sizeChange(value);">
+				<option id="small" value="small">small</option>
+				<option id="med" value="med">med</option>
+				<option id="large" value="large">large</option>
+				<option id="xtraLarge" value="xtraLarge">xtra-large</option>
 			</select>
 			<label for="viewChanger">view:</label>
-			<select name="viewChanger">
-				<option id="list">list</option>
-				<option id="tile">tile</option>
+			<select name="viewChanger" onchange="viewChange(value);">
+				<option id="list" value="list">list</option>
+				<option id="tile" value="tile">tile</option>
 			</select>
 		</form>
 	</body>
