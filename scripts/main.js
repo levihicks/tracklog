@@ -41,6 +41,7 @@ searchButton.onclick = function(){
 		if (searchText.value){
 			currentSearch=searchText.value;
 			index=1;
+			limitReached=false;
 			clearDisplay();
 			searchDisplay();
 		}
@@ -50,7 +51,8 @@ searchText.addEventListener("keyup", function(event) {
 	if (event.keyCode === 13)
         searchButton.click();
 });
-
+var noResultsPara = document.createElement('p');
+noResultsPara.appendChild(document.createTextNode('No Results Found!'));
 var headEl = document.querySelector('head');
 var listViewButton = document.getElementById("list");
 var tileViewButton = document.getElementById("tile");
@@ -80,7 +82,7 @@ var searchBackButtonDiv = document.createElement('div');
 var searchNextButton = document.createElement('button');
 var searchNextButtonDiv = document.createElement('div');
 var contextHeader = document.querySelector('h2');
-var index=0;
+var index=1;
 var resultCount;
 var vidLink;
 var searchUnderway = false;
@@ -249,8 +251,10 @@ function logDisplay(){
 	}
 }
 
+var limitReached=false;
+
 searchNextButton.onclick=function(){
-	if(searchUnderway==false){
+	if(searchUnderway==false && !limitReached){
 		index+=1;
 		clearDisplay();
 		searchDisplay();
@@ -258,7 +262,7 @@ searchNextButton.onclick=function(){
 };
 
 searchBackButton.onclick=function(){
-	if((index-1)>0 && searchUnderway==false){
+	if((index-1)>0 && searchUnderway==false && !limitReached){
 		index-=1;
 		clearDisplay();
 		searchDisplay();
@@ -358,19 +362,21 @@ function searchDisplay(){
 		showBackButton();
 		var els = [];
 		var searchResults = request.response['results']['albummatches']['album'];
-
 		for (var i = 0; i < 9; i++){
 			if(searchResults[i]!=null)
 	    		createSearchNode(els[i], searchResults[i]);
-	    	else
+	    	else{
+	    		if (index==1 && i==0)
+	    			log.appendChild(noResultsPara);
+	    		searchUnderway=false;
+	    		limitReached=true;
 	    		break;
-	    	
+	    	}
 	    	if(i==8)
 				searchUnderway=false;
 	    }
 	 	showPrevNextButtons();
 	};
-	
 }
 
 function goBack(){
@@ -408,6 +414,8 @@ function clearDisplay(){
 	}
 	if(logList.parentNode)
 		logList.parentNode.removeChild(logList);
+	if(log.contains(noResultsPara))
+		log.removeChild(noResultsPara);
 }
 
 function showViewStyle(){
