@@ -40,7 +40,7 @@ searchButton.onclick = function(){
 	if(searchUnderway==false){
 		if (searchText.value){
 			currentSearch=searchText.value;
-			index=0;
+			index=1;
 			clearDisplay();
 			searchDisplay();
 		}
@@ -251,15 +251,15 @@ function logDisplay(){
 
 searchNextButton.onclick=function(){
 	if(searchUnderway==false){
-		index+=9;
+		index+=1;
 		clearDisplay();
 		searchDisplay();
 	}
 };
 
 searchBackButton.onclick=function(){
-	if((index-9)>=0 && searchUnderway==false){
-		index-=9;
+	if((index-1)>0 && searchUnderway==false){
+		index-=1;
 		clearDisplay();
 		searchDisplay();
 	}
@@ -345,10 +345,10 @@ function searchDisplay(){
 	contextHeader.textContent='Results for \''+currentSearch+'\':';
 	logDisplayed = false;
 	para.style.display = 'none';
-	var displayCount=index+10;
 	var requestURL = 'https://ws.audioscrobbler.com/2.0/?method=album.search&album=' + 
 	currentSearch.replace(' ', '+') + 
-	'&api_key=57ee3318536b23ee81d6b27e36997cde&limit='+displayCount+'&format=json';
+	'&api_key=57ee3318536b23ee81d6b27e36997cde&limit=9&page='+index+'&format=json';
+	console.log(requestURL);
 	var request = new XMLHttpRequest();
 	request.open('GET', requestURL);
 	request.responseType = 'json';
@@ -358,12 +358,14 @@ function searchDisplay(){
 		showBackButton();
 		var els = [];
 		var searchResults = request.response['results']['albummatches']['album'];
-		for (var i = index; i < (index+9); i++){
+
+		for (var i = 0; i < 9; i++){
 			if(searchResults[i]!=null)
 	    		createSearchNode(els[i], searchResults[i]);
 	    	else
 	    		break;
-	    	if(i==index+8)
+	    	
+	    	if(i==8)
 				searchUnderway=false;
 	    }
 	 	showPrevNextButtons();
@@ -373,7 +375,7 @@ function searchDisplay(){
 
 function goBack(){
 	currentSearch=null;
-	index=0;
+	index=1;
 	clearDisplay();
 	contextHeader.textContent='Your log:';
 	if (addedTest.length == 0 && (localStorage.getItem('addedArray'))==null){
