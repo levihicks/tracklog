@@ -14,10 +14,14 @@ ol{
 	margin: 20px;
 	border-radius: 5px;
 	color: seashell;
-
-
+	
 	font-family: 'Roboto Mono', monospace;
 	font-size: .85em;
+}
+
+.log p{
+	background-color: #dac292;
+	min-height: 34px;
 }
 
 .log li {
