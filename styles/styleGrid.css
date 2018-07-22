@@ -55,3 +55,7 @@ ol{
 	margin: auto;
 	text-align: center;
 }
+
+.albumArt img {
+	height: 128px;
+}

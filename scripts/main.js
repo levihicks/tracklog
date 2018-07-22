@@ -4,38 +4,6 @@ var para = document.querySelector('.log p');
 var searchButton = document.querySelector('.searchbar button');
 var searchText = document.querySelector('.searchbar input');
 var body = document.querySelector('body');
-
-function setAlbumArtSize(size){
-	var albumArtEl = document.querySelectorAll('.albumArt img');
-	for(var i = 0; i<albumArtEl.length; i++){
-		albumArtEl[i].style.height = size;
-	}
-	localStorage.setItem('albumArtSize', size);
-}
-
-var smallButton = document.getElementById('small');
-var medButton = document.getElementById("med");
-var largeButton = document.getElementById("large");
-var xtraLargeButton = document.getElementById("xtraLarge");
-var sizeChangeButton = document.querySelector('select[name=sizeChanger]');
-
-function sizeChange(value){
-	switch(value){
-		case 'small': 
-			setAlbumArtSize('32px');
-			break;
-		case 'med':
-			setAlbumArtSize('48px');
-			break;
-		case 'large':
-			setAlbumArtSize('64px');
-			break;
-		case 'xtraLarge':
-			setAlbumArtSize('128px');
-			break;
-	}
-}
-
 searchButton.onclick = function(){
 	if(searchUnderway==false){
 		if (searchText.value){
@@ -154,10 +122,6 @@ function createLogNode(albumEl){
 	var imgEl = document.createElement('img');
 	var imgElDiv = document.createElement('div');
 	imgElDiv.setAttribute('class', 'albumArt');
-	if(localStorage.getItem('albumArtSize'))
-		imgEl.style.height = localStorage.getItem('albumArtSize');
-	else
-		imgEl.style.height = '32px';
 	imgEl.setAttribute('src', albumEl['pic']);
 
 	imgElDiv.appendChild(imgEl);
@@ -315,10 +279,6 @@ function createSearchNode(albumEl, searchResults){
 	addButtonDiv.setAttribute('class', 'addButton');
 	addButtonDiv.appendChild(addButton);
 	var imgEl = document.createElement('img');
-	if(localStorage.getItem('albumArtSize'))
-		imgEl.style.height = localStorage.getItem('albumArtSize');
-	else
-		imgEl.style.height = '32px';
 	var albumIcon = ((searchResults['image'][2]['#text']) ? 
 		searchResults['image'][2]['#text'] : "./images/defaultalbum.png");
 	imgEl.setAttribute('src', albumIcon);
@@ -427,18 +387,6 @@ function showViewStyle(){
 			listViewButton.setAttribute('selected','');
 		else
 			tileViewButton.setAttribute('selected','');
-		switch(localStorage.getItem('albumArtSize')){
-			case '48px':
-				medButton.setAttribute('selected','');
-				break;
-			case '64px':
-				largeButton.setAttribute('selected','');
-				break;
-			case '128px':
-				xtraLargeButton.setAttribute('selected','');
-				break;
-		}
-		
 	}
 }
 
