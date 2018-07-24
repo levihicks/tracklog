@@ -4,12 +4,16 @@ ol{
 }
 
 .log li{
-	align-items: left;
+	width: 128px;
+	height: 250px;
+	border: 1px solid green;
+	padding: 2px;
+	border-radius: 0px;
 }
 
 .log p, li {
 	text-align: center;
-	margin: 20px;
+	margin: 5px 20px;
 	border-radius: 5px;
 	color: green;
 	font-family: 'Roboto Mono', monospace;
@@ -22,15 +26,11 @@ ol{
 	color: green;
 }
 
-.log li {
-	max-width: 160px;
-}
-
 .log li .albumInfo {
   display: block;
-  margin-left: 10px;
-  margin-top:5px;
-	margin-bottom: 5px;
+	margin-top: 10px;
+  height: 80px;
+	overflow: hidden;
 }
 
 .addButton {
@@ -38,7 +38,7 @@ ol{
 	width: 15px;
 	overflow: visible;
   top: 16px;
-	left: 16px;
+	margin-top: -16px;
 	width: 15px;
 	background: black;
 	opacity: .75;
@@ -59,6 +59,7 @@ ol{
   display: inline-block;
 	margin: auto;
 	text-align: center;
+	height: 30px;
 }
 
 .albumArt img {
