@@ -27,10 +27,21 @@ ol{
 }
 
 .log li .albumInfo {
-  display: block;
-	margin-top: 10px;
-  height: 80px;
+
 	overflow: hidden;
+	margin-top: 5px;
+  height: 85px;	
+	position: relative;
+}
+
+.styleDiv1{
+	position: absolute;
+	display: inline-block;
+  max-height: 75px;
+	overflow: hidden;
+	right: 0;
+	top: 50%;
+	transform: translateY(-50%);
 }
 
 .addButton {
@@ -65,3 +76,6 @@ ol{
 .albumArt img {
 	height: 128px;
 }
+
+
+
