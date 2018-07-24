@@ -134,42 +134,35 @@ function createLogNode(albumEl){
     albumInfoEl.appendChild(document.createTextNode(albumEl['info']));
     el.appendChild(albumInfoEl);
 
-    var searchIconEl = document.createElement('img');
-    var searchIconElDiv = document.createElement('div');
-    searchIconElDiv.setAttribute('class', 'searchIcon');
-    searchIconEl.setAttribute('src', './images/search.png');
-    searchIconElDiv.appendChild(searchIconEl);
-    searchIconElDiv.appendChild(document.createTextNode(':'));
-    rightHalfDiv.appendChild(searchIconElDiv);
+    var lastfmEl=document.createElement('a');
+	var lastfmElDiv = document.createElement('div');
+	lastfmElDiv.setAttribute('class', 'lastfm')
+	if (albumEl['lastfm'])
+		lastfmEl.setAttribute('href', albumEl['lastfm']);
+	var lastfmImg = document.createElement('img');
+	//bandcampImg.onmouseover=function(){
+	//	this.setAttribute('src', './images/bandcampHover.png');
+	//};
+	//bandcampImg.onmouseout=function(){
+	//	this.setAttribute('src', './images/lastfm.png')
+	//};
 
-    var bandcampEl=document.createElement('a');
-	var bandcampElDiv = document.createElement('div');
-	bandcampElDiv.setAttribute('class', 'bandcamp')
-	bandcampEl.setAttribute('href', albumEl['bandcamp']);
-	var bandcampImg = document.createElement('img');
-	bandcampImg.onmouseover=function(){
-		this.setAttribute('src', './images/bandcampHover.png');
-	};
-	bandcampImg.onmouseout=function(){
-		this.setAttribute('src', './images/bandcamp.png')
-	};
-
-	bandcampImg.setAttribute('src','./images/bandcamp.png');
-	bandcampEl.appendChild(bandcampImg);
-	bandcampElDiv.appendChild(bandcampEl);
-	rightHalfDiv.appendChild(bandcampElDiv);
+	lastfmImg.setAttribute('src','./images/lastfm.png');
+	lastfmEl.appendChild(lastfmImg);
+	lastfmElDiv.appendChild(lastfmEl);
+	rightHalfDiv.appendChild(lastfmElDiv);
 
 	var vidLinkEl=document.createElement('a');
 	var vidLinkElDiv = document.createElement('div');
 	vidLinkElDiv.setAttribute('class', 'youtube');
 	vidLinkEl.setAttribute('href', albumEl['vid']);
 	var vidImg = document.createElement('img');
-	vidImg.onmouseover=function(){
-		this.setAttribute('src', './images/YoutubeHover.png');
-	};
-	vidImg.onmouseout=function(){
-		this.setAttribute('src', './images/Youtube.png')
-	};
+	//vidImg.onmouseover=function(){
+	//	this.setAttribute('src', './images/YoutubeHover.png');
+	//};
+	//vidImg.onmouseout=function(){
+	//	this.setAttribute('src', './images/Youtube.png')
+	//};
 	
 	vidImg.setAttribute('src','./images/Youtube.png');
 	vidLinkEl.appendChild(vidImg);
@@ -244,14 +237,14 @@ function showPrevNextButtons(){
 	log.appendChild(searchNextButtonDiv);
 }
 
-function addToLog(albumEl){
+function addToLog(albumEl, searchResults){
 	addedAlbumInfo = albumEl.nextSibling.textContent;
 	var searchString = addedAlbumInfo.replace(' - ',' ');
 	searchString=searchString.replace(/ /g, '+');
 	vidLink = 'https://www.youtube.com/results?search_query=' + searchString;
-	bandcampLink = 'https://bandcamp.com/search?q=' + searchString;
+	lastfmLink = searchResults['url'];
 	picLink = albumEl.lastChild.src;
-	addedTest.push({pic: picLink, info: addedAlbumInfo, vid: vidLink, bandcamp: bandcampLink});
+	addedTest.push({pic: picLink, info: addedAlbumInfo, vid: vidLink, lastfm: lastfmLink});
 	localStorage.setItem('addedArray', JSON.stringify(addedTest));
 }
 
@@ -270,7 +263,7 @@ function createSearchNode(albumEl, searchResults){
 	addButton.onclick = function(){
 		this.innerHTML = (this.innerHTML == '-') ? '+' : '-';
 		if(this.innerHTML == '-'){
-			addToLog(this.parentNode.nextSibling);
+			addToLog(this.parentNode.nextSibling, searchResults);
 		}
 		else
 			removeFromLog(this.parentNode.parentNode);
