@@ -140,12 +140,6 @@ function createLogNode(albumEl){
 	if (albumEl['lastfm'])
 		lastfmEl.setAttribute('href', albumEl['lastfm']);
 	var lastfmImg = document.createElement('img');
-	//bandcampImg.onmouseover=function(){
-	//	this.setAttribute('src', './images/bandcampHover.png');
-	//};
-	//bandcampImg.onmouseout=function(){
-	//	this.setAttribute('src', './images/lastfm.png')
-	//};
 
 	lastfmImg.setAttribute('src','./images/lastfm.png');
 	lastfmEl.appendChild(lastfmImg);
@@ -157,13 +151,7 @@ function createLogNode(albumEl){
 	vidLinkElDiv.setAttribute('class', 'youtube');
 	vidLinkEl.setAttribute('href', albumEl['vid']);
 	var vidImg = document.createElement('img');
-	//vidImg.onmouseover=function(){
-	//	this.setAttribute('src', './images/YoutubeHover.png');
-	//};
-	//vidImg.onmouseout=function(){
-	//	this.setAttribute('src', './images/Youtube.png')
-	//};
-	
+
 	vidImg.setAttribute('src','./images/Youtube.png');
 	vidLinkEl.appendChild(vidImg);
 	vidLinkElDiv.appendChild(vidLinkEl);
@@ -178,8 +166,8 @@ function createLogNode(albumEl){
 
     moveUpButtonDiv.setAttribute('class', 'moveUpButton');
     moveDownButtonDiv.setAttribute('class', 'moveDownButton');
-    moveUpButton.appendChild(document.createTextNode('↑'));
-    moveDownButton.appendChild(document.createTextNode('↓'));
+    moveUpButton.appendChild(document.createTextNode('▲'));
+    moveDownButton.appendChild(document.createTextNode('▼'));
     moveUpButtonDiv.appendChild(moveUpButton);
     moveDownButtonDiv.appendChild(moveDownButton);
     
@@ -305,7 +293,6 @@ function searchDisplay(){
 	var requestURL = 'https://ws.audioscrobbler.com/2.0/?method=album.search&album=' + 
 	currentSearch.replace(' ', '+') + 
 	'&api_key=57ee3318536b23ee81d6b27e36997cde&limit=9&page='+index+'&format=json';
-	console.log(requestURL);
 	var request = new XMLHttpRequest();
 	request.open('GET', requestURL);
 	request.responseType = 'json';

@@ -1,71 +1,66 @@
 html {
-	background: url(../images/background1.png), #b9936c;
+	background: black;
 	background-size: 20%;
 	height: 100%;
 }
 
 body {
-	background: #b9936c;
+	background: black;
   min-width: 500px;
 	max-width: 960px;
 	width: 60%;
   margin: auto;
 	height: 100%;
 	font-family: 'helvetica';
-	
 }
 
 header {
-	border-bottom:  #dac292 1px dashed;
+	border-bottom:  lightgreen 1px dashed;
 	overflow: auto;
 }
 
 h1 {
-	color: whitesmoke;
+	color: green;
 	font-family: 'Roboto Mono', monospace;
 	font-size: 1.5em;
 	text-align: center;
 	margin: 0 auto 30px auto;
 	padding: 10px 0;
-	border: dashed 2px bisque;
+	border: dashed 2px lightgreen;
 	border-top: 0;
 	border-radius: 5px;
 	max-width: 600px;
-	
 }
 
 .searchbar {
   display: inline-block;
 	float: right;
-	
 }
 
 .searchbar button {
 	font-family: arial;
-  color: #b9936c;
-	background-color: #dac292;
+  color: black;
+	background-color: green;
 	border-radius: 50%;
 	width: 22px;
 	border: none;
 }
 
 .searchbar button:active{
-	background-color:  #e6e2d3;
+	background-color:  darkgreen;
 }
 
 .searchbar input {
   background: inherit;
-	border: #dac292 1px dashed;
+	border: lightgreen 1px dashed;
 	border-bottom: none;
-	color: #e6e2d3;
+	color: green;
 	font-family: 'Roboto Mono', monospace;
 }
 
 .log {
-	border-bottom:  #dac292 1px dashed;
+	border-bottom: lightgreen 1px dashed;
 }
-
-
 
 .log p{
 	font-style: italic;
@@ -73,14 +68,9 @@ h1 {
 	padding-top: 17px;
 }
 
-
 .log li img, .albumInfo{
 	vertical-align: middle;
 }
-
-
-
-
 
 .backButton {
 	position: relative;
@@ -88,13 +78,13 @@ h1 {
 
 .backButton button {
   background-color: inherit;
-	border: #dac292 1px dashed;
+	border: lightgreen 1px dashed;
 	border-top: none;
-	color: bisque;
+	color: green;
 	font-family: monospace;
 	display: inline-block;
 	position: absolute;
-	bottom: -5px;
+	bottom: -1px;
 }
 
 .searchBackButton, .searchNextButton {
@@ -108,24 +98,21 @@ h1 {
 
 .searchBackButton button, .searchNextButton button {
   background: inherit;
-	border: #dac292 1px dashed;
+	border: lightgreen 1px dashed;
 	border-bottom: none;
-	color: bisque;
+	color: green;
 }
 
 .youtube, .lastfm, .searchIcon, .orderDiv{
   display: inline-block;
-	
-	vertical-align: middle;
-	
+	vertical-align: middle;	
 }
+
 .searchIcon{
 	margin-right: 5px;
-	color: black;
+	color: white;
 	font-family: monospace;
 }
-
-
 
 .log li a img{
 	height: 30px;
@@ -137,10 +124,11 @@ h1 {
 }
 
 h2 {
-	color: bisque;
+	color: green;
 	font-family: monospace;
 	text-align: center;
 	font-style: italic;
+  margin-top: 3px;
 }
 
 label, select{
@@ -148,12 +136,13 @@ label, select{
 }
 
 label{
-	color: bisque;
+	color: green;
 }
 
 select{
-	background: bisque;
-	border: 1px solid whitesmoke;
+	background: black;
+	border: 1px dotted lightgreen;
+	color: green;
 }
 
 .options{
@@ -174,11 +163,7 @@ label[for=viewChanger]{
 
 .moveUpButton button, .moveDownButton button{
   width: 20px;
-	color: black;
+	color: green;
 	background: inherit;
 	border: none;
 }	
-
-
-
-

@@ -1,23 +1,25 @@
 .log p, li {
 	text-align: center;
-	margin: 20px;
-	border-radius: 5px;
-	color: seashell;
-	background-color: #dac292;
+	margin: 10px 0;
+	color: green;
+	background-color: black;
 	min-height: 34px;
 	font-family: 'Roboto Mono', monospace;
 	font-size: .85em;
 }
 
-.log li:nth-child(odd){
-	background-color: #d1b37b;
-	border: 1px solid darkgoldenrod;
+.log p{
+	margin: 20px;
 }
 
 .log li {
 	text-align: left;
-	border: 1px solid bisque;
+	border-top: 1px dashed green;
 	position: relative;
+  padding-top: 10px;
+}
+.log li:first-child{
+	border-top: none;
 }
 
 .albumArt{
@@ -41,6 +43,7 @@
 	height:34px;
 	background: inherit;
 	border: none;
+	color: green;
 }
 
 .rightHalfDiv{

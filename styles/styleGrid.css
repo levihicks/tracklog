@@ -1,11 +1,9 @@
 ol{
 	display: flex;
 	flex-wrap: wrap;
-	
 }
 
 .log li{
-	flex: 1 130px;
 	align-items: left;
 }
 
@@ -13,15 +11,15 @@ ol{
 	text-align: center;
 	margin: 20px;
 	border-radius: 5px;
-	color: seashell;
-	
+	color: green;
 	font-family: 'Roboto Mono', monospace;
 	font-size: .85em;
 }
 
 .log p{
-	background-color: #dac292;
+	background-color: black;
 	min-height: 34px;
+	color: green;
 }
 
 .log li {
@@ -36,15 +34,19 @@ ol{
 }
 
 .addButton {
-  border: 1px dashed bisque;
+  border: 1.5px dashed lightgreen;
   position: relative;
   height: 15px;
 	width: 15px;
+	overflow: visible;
+  top: 17px;
+	left: 16px;
 }
 
 .addButton button {
 	display: inline;
 	background: inherit;
+	color: green;
   margin: 0;
 	padding: 0;
 	border: none;
