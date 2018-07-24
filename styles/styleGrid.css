@@ -34,13 +34,14 @@ ol{
 }
 
 .addButton {
-  border: 1.5px dashed lightgreen;
   position: relative;
-  height: 15px;
 	width: 15px;
 	overflow: visible;
-  top: 17px;
+  top: 16px;
 	left: 16px;
+	width: 15px;
+	background: black;
+	opacity: .75;
 }
 
 .addButton button {
@@ -49,6 +50,8 @@ ol{
 	color: green;
   margin: 0;
 	padding: 0;
+	width: 15px;
+	padding-right: 2px;
 	border: none;
 }
 
