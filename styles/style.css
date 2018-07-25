@@ -1,6 +1,5 @@
 html {
 	background: black;
-	background-size: 20%;
 	height: 100%;
 }
 
@@ -11,7 +10,6 @@ body {
 	width: 60%;
   margin: auto;
 	height: 100%;
-	font-family: 'helvetica';
 }
 
 header {
@@ -33,7 +31,6 @@ h1 {
 }
 
 .searchbar {
-  display: inline-block;
 	float: right;
 }
 
@@ -47,7 +44,7 @@ h1 {
 }
 
 .searchbar button:active{
-	background-color:  darkgreen;
+	background-color: darkgreen;
 }
 
 .searchbar input {
@@ -64,7 +61,6 @@ h1 {
 
 .log p{
 	font-style: italic;
-	display: block;
 	padding-top: 17px;
 }
 
@@ -82,7 +78,6 @@ h1 {
 	border-top: none;
 	color: green;
 	font-family: monospace;
-	display: inline-block;
 	position: absolute;
 	bottom: -1px;
 }
@@ -92,7 +87,6 @@ h1 {
 }
 
 .searchNextButton {
-	position: relative;
 	float: right;
 }
 
@@ -108,19 +102,9 @@ h1 {
 	vertical-align: middle;	
 }
 
-.searchIcon{
-	margin-right: 5px;
-	color: white;
-	font-family: monospace;
-}
-
 .log li a img{
 	height: 30px;
 	width: 30px;
-}
-
-.searchIcon img{
-	height: 15px;
 }
 
 h2 {
@@ -133,24 +117,16 @@ h2 {
 
 label, select{
   font-family: monospace;
-}
-
-label{
 	color: green;
 }
 
 select{
 	background: black;
 	border: 1px dotted lightgreen;
-	color: green;
 }
 
 .options{
 	margin-top: 5px;
-}
-
-label[for=viewChanger]{
-	margin-left: 5px;
 }
 
 .moveUpButton, .moveDownButton{

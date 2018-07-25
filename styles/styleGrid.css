@@ -7,13 +7,11 @@ ol{
 	width: 128px;
 	border: 1px solid green;
 	padding: 2px;
-	border-radius: 0px;
 }
 
 .log p, li {
 	text-align: center;
 	margin: 5px 20px;
-	border-radius: 5px;
 	color: green;
 	font-family: 'Roboto Mono', monospace;
 	font-size: .85em;
@@ -26,7 +24,6 @@ ol{
 }
 
 .log li .albumInfo {
-
 	overflow: hidden;
 	margin-top: 5px;
   height: 85px;	
@@ -35,8 +32,7 @@ ol{
 
 .styleDiv1{
 	position: absolute;
-	display: inline-block;
-  max-height: 75px;
+  max-height: 85px;
 	overflow: hidden;
 	right: 0;
 	top: 50%;
@@ -49,27 +45,16 @@ ol{
 	overflow: visible;
   top: 16px;
 	margin-top: -16px;
-	width: 15px;
-	background: black;
-	opacity: .75;
 }
 
 .addButton button {
-	display: inline;
-	background: inherit;
+	background: black;
+	opacity: .75;
 	color: green;
-  margin: 0;
 	padding: 0;
 	width: 15px;
 	padding-right: 2px;
 	border: none;
-}
-
-.rightHalfDiv{
-  display: inline-block;
-	margin: auto;
-	text-align: center;
-	height: 30px;
 }
 
 .albumArt img {

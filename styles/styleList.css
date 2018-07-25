@@ -3,7 +3,6 @@
 	margin: 10px 0;
 	color: green;
 	background-color: black;
-	min-height: 34px;
 	font-family: 'Roboto Mono', monospace;
 	font-size: .85em;
 }
@@ -18,6 +17,7 @@
 	position: relative;
   padding-top: 10px;
 }
+
 .log li:first-child{
 	border-top: none;
 }
@@ -38,7 +38,6 @@
 
 .addButton button {
 	vertical-align: middle;
-	display: inline-block;
 	width:34px;
 	height:34px;
 	background: inherit;
@@ -47,13 +46,10 @@
 }
 
 .rightHalfDiv{
-  display: inline-block;
   position: absolute;
 	right: 0;
 	top: 50%;
-    transform: translateY(-50%);
-
-	vertical-align: middle;
+  transform: translateY(-50%);
 }
 
 .albumArt img {
