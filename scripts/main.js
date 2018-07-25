@@ -277,12 +277,9 @@ function createSearchNode(albumEl, searchResults){
 	var styleDiv1 = document.createElement('div');
 	styleDiv1.setAttribute('class', 'styleDiv1');
 	styleDiv1.appendChild(document.createTextNode(albumInfo));
-
 	albumInfoEl.appendChild(styleDiv1);
-	albumInfoEl.style.height='82px';
 	albumInfoEl.style.marginTop = '0';
 	albumEl.appendChild(albumInfoEl);
-	albumEl.style.height = '206px';
 	logList.appendChild(albumEl);
 	log.appendChild(logList);
 }
