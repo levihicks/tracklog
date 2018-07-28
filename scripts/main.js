@@ -1,6 +1,7 @@
 var logList = document.createElement('ol');
 var log = document.querySelector('.log');
-var para = document.querySelector('.log p');
+var logEmptyPara = document.createElement('p');
+logEmptyPara.appendChild(document.createTextNode('No albums in the backlog. Search for an album to add it here.'));
 var searchButton = document.querySelector('.searchbar button');
 var searchText = document.querySelector('.searchbar input');
 var body = document.querySelector('body');
@@ -10,7 +11,7 @@ searchButton.onclick = function(){
 			currentSearch=searchText.value;
 			index=1;
 			limitReached=false;
-			clearDisplay();
+			clearDisplay(log);
 			searchDisplay();
 		}
 	}
@@ -50,6 +51,7 @@ var searchBackButtonDiv = document.createElement('div');
 var searchNextButton = document.createElement('button');
 var searchNextButtonDiv = document.createElement('div');
 var contextHeader = document.querySelector('h2');
+var contextHeaderContainer = document.querySelector('.contextHeader');
 var index=1;
 var resultCount;
 var vidLink;
@@ -64,7 +66,7 @@ function removeFromLog(albumEl){
 			if (logDisplayed == true){
 				logList.removeChild(albumEl);
 				if(!(logList.hasChildNodes()))
-					para.style.display = 'block';
+					log.appendChild(logEmptyPara);
 			}
 			addedTest.splice(k, 1);
 			if(addedTest.length==0){
@@ -109,6 +111,16 @@ function swapDown(albumEl){
 	}
 }
 
+function displayInfo(){
+	clearDisplay(log);
+	showBackButton();
+	var infoContainer = document.createElement('div');
+	infoContainer.setAttribute('class', 'moreInfo');
+
+	log.appendChild(infoContainer);
+
+}
+
 function createLogNode(albumEl){
 	var rightHalfDiv=document.createElement('div');
 	rightHalfDiv.setAttribute('class', 'rightHalfDiv');
@@ -140,7 +152,8 @@ function createLogNode(albumEl){
     var moreInfoLink = document.createElement('a');
     moreInfoLink.appendChild(document.createTextNode('[More Info]'));
     moreInfoLink.setAttribute('href', '#');
-    moreInfoLink.setAttribute('class', 'moreInfo');
+    moreInfoLink.setAttribute('class', 'moreInfoLink');
+    moreInfoLink.setAttribute('onclick', 'displayInfo();');
     rightHalfDiv.appendChild(moreInfoLink);
 
 
@@ -199,7 +212,7 @@ function logDisplay(){
 	if(localStorage.getItem('addedArray')){
 		addedTest = JSON.parse(localStorage.getItem('addedArray'));
 	}
-	para.style.display = 'none';
+	clearDisplay(log);
 	logDisplayed = true;
 	for (var i = 0; i < addedTest.length; i++){
 		createLogNode(addedTest[i]);
@@ -211,7 +224,7 @@ var limitReached=false;
 searchNextButton.onclick=function(){
 	if(searchUnderway==false && !limitReached){
 		index+=1;
-		clearDisplay();
+		clearDisplay(log);
 		searchDisplay();
 	}
 };
@@ -219,15 +232,15 @@ searchNextButton.onclick=function(){
 searchBackButton.onclick=function(){
 	if((index-1)>0 && searchUnderway==false && !limitReached){
 		index-=1;
-		clearDisplay();
+		clearDisplay(log);
 		searchDisplay();
 	}
 };
 
 function showPrevNextButtons(){
 	searchBackButtonDiv.setAttribute('class', 'searchBackButton');
-  	searchBackButton.appendChild(document.createTextNode('<-'));
-  	searchNextButton.appendChild(document.createTextNode('->'));
+  	searchBackButton.innerHTML='<-';
+  	searchNextButton.innerHTML='->';
 	searchBackButtonDiv.appendChild(searchBackButton);
 	searchNextButtonDiv.appendChild(searchNextButton);
 	searchNextButtonDiv.setAttribute('class', 'searchNextButton');
@@ -292,7 +305,7 @@ function createSearchNode(albumEl, searchResults){
 }
 
 function showBackButton(){
-	backButton.appendChild(document.createTextNode('Back to log'));
+	backButton.innerHTML='Back to log';
 	backButton.onclick = goBack;
 	backButtonDiv.setAttribute('class', 'backButton');
 	backButtonDiv.appendChild(backButton);
@@ -303,7 +316,6 @@ function searchDisplay(){
 	searchUnderway=true;
 	contextHeader.textContent='Results for \''+currentSearch+'\':';
 	logDisplayed = false;
-	para.style.display = 'none';
 	var requestURL = 'https://ws.audioscrobbler.com/2.0/?method=album.search&album=' + 
 	currentSearch.replace(' ', '+') + 
 	'&api_key=57ee3318536b23ee81d6b27e36997cde&limit=9&page='+index+'&format=json';
@@ -311,7 +323,7 @@ function searchDisplay(){
 	request.open('GET', requestURL);
 	request.responseType = 'json';
 	request.send();
-	clearDisplay();
+	clearDisplay(log);
 	request.onload = function(){
 		showBackButton();
 		var els = [];
@@ -336,41 +348,27 @@ function searchDisplay(){
 function goBack(){
 	currentSearch=null;
 	index=1;
-	clearDisplay();
+	clearDisplay(log);
 	contextHeader.textContent='Your log:';
 	if (addedTest.length == 0 && (localStorage.getItem('addedArray'))==null){
-		para.style.display = 'block';
+		log.appendChild(logEmptyPara);
 	}
 	else{
 		logDisplay();
 	}
 }
 
-function clearDisplay(){
-	if(searchBackButtonDiv.hasChildNodes() && searchNextButtonDiv.hasChildNodes()){
-		searchBackButton.removeChild(searchBackButton.lastChild);
-		searchNextButton.removeChild(searchNextButton.lastChild);
-		searchBackButton.innerHTML='';
-		searchNextButton.innerHTML='';
-		searchBackButtonDiv.removeChild(searchBackButton);
-		searchNextButtonDiv.removeChild(searchNextButton);
-		log.removeChild(searchBackButtonDiv);
-		log.removeChild(searchNextButtonDiv);
+function clearDisplay(n){
+	for (var i = n.children.length-1; i >= 0; i--){
+		if (n.children[i]!=contextHeaderContainer){
+			if (n.children[i].hasChildNodes())
+				clearDisplay(n.children[i]);
+			n.removeChild(n.children[i]);
+		}
 	}
-	if(backButtonDiv.hasChildNodes()){
-		backButton.removeChild(backButton.lastChild);
-		backButton.innerHTML='';
-		backButtonDiv.removeChild(backButton);
-		log.removeChild(backButtonDiv);
-	}
-	while(logList.hasChildNodes()){
-			logList.removeChild(logList.lastChild);
-	}
-	if(logList.parentNode)
-		logList.parentNode.removeChild(logList);
-	if(log.contains(noResultsPara))
-		log.removeChild(noResultsPara);
+
 }
+
 
 function showViewStyle(){
 	if(localStorage.getItem('viewStyle')==null)
