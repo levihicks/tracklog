@@ -137,7 +137,14 @@ function createLogNode(albumEl){
     albumInfoEl.appendChild(styleDiv1);
     el.appendChild(albumInfoEl);
 
-    var lastfmEl=document.createElement('a');
+    var moreInfoLink = document.createElement('a');
+    moreInfoLink.appendChild(document.createTextNode('[More Info]'));
+    moreInfoLink.setAttribute('href', '#');
+    moreInfoLink.setAttribute('class', 'moreInfo');
+    rightHalfDiv.appendChild(moreInfoLink);
+
+
+    /*var lastfmEl=document.createElement('a');
 	var lastfmElDiv = document.createElement('div');
 	lastfmElDiv.setAttribute('class', 'lastfm')
 	if (albumEl['lastfm'])
@@ -158,7 +165,7 @@ function createLogNode(albumEl){
 	vidImg.setAttribute('src','./images/Youtube.png');
 	vidLinkEl.appendChild(vidImg);
 	vidLinkElDiv.appendChild(vidLinkEl);
-	rightHalfDiv.appendChild(vidLinkElDiv);
+	rightHalfDiv.appendChild(vidLinkElDiv);*/
 
     var orderDiv = document.createElement('div');
     orderDiv.setAttribute('class', 'orderDiv');
