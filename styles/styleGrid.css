@@ -5,8 +5,9 @@ ol{
 
 .log li{
 	width: 128px;
-	border: 1px solid green;
-	padding: 2px;
+	background: #1a1a1a;
+	padding: 3px;
+	border-radius: 5px;
 }
 
 .log p, li {
