@@ -59,6 +59,8 @@ var searchUnderway = false;
 var currentSearch;
 var bandcampLink;
 var test = false;
+var infoContainer = document.createElement('div');
+	infoContainer.setAttribute('class', 'moreInfo');
 
 function removeFromLog(albumEl){
 	for (var k = 0; k < addedTest.length; k++){
@@ -111,12 +113,65 @@ function swapDown(albumEl){
 	}
 }
 
-function displayInfo(){
+function displayInfo(n){
+	var logIndex;
+	for (var i = 0; i < logList.children.length; i++){
+    		if (logList.children[i] == n)
+    			logIndex = i;
+    }
+    var requestURL = 'https://ws.audioscrobbler.com/2.0/?method=album.getinfo&api_key=57ee3318536b23ee81d6b27e36997cde&artist='+
+    				addedTest[logIndex]['artist']+'&album='+addedTest[logIndex]['name']+'&format=json';
+    var request = new XMLHttpRequest();
+	request.open('GET', requestURL);
+	request.responseType = 'json';
+	request.send();
 	clearDisplay(log);
 	showBackButton();
-	var infoContainer = document.createElement('div');
-	infoContainer.setAttribute('class', 'moreInfo');
+	
 
+	request.onload=function(){
+		var results = request.response['album'];
+		var albumArt = results['image'][3]['#text'];
+		var albumArtEl = document.createElement('img');
+		albumArtEl.setAttribute('src', albumArt);
+		var albumArtContainer = document.createElement('div');
+		albumArtContainer.setAttribute('class', 'infoAlbumArt');
+		albumArtContainer.appendChild(albumArtEl);
+
+		var artist = document.createElement('div');
+		artist.setAttribute('class', 'artist');
+		artist.appendChild(document.createTextNode(results['artist']));
+		var album = document.createElement('div');
+		album.setAttribute('class', 'album');
+		album.appendChild(document.createTextNode(results['name']));
+		var titleArtistContainer = document.createElement('div');
+		titleArtistContainer.setAttribute('class', 'nameAndArtist');
+		titleArtistContainer.appendChild(album);
+		titleArtistContainer.appendChild(artist);
+		var artNameArtistContainer = document.createElement('div');
+		artNameArtistContainer.setAttribute('class', 'artNameArtist');
+		artNameArtistContainer.appendChild(albumArtContainer);
+		artNameArtistContainer.appendChild(titleArtistContainer);
+		infoContainer.appendChild(artNameArtistContainer);
+
+		
+		var requestURL2 = 'https://ws.audioscrobbler.com/2.0/?method=artist.getinfo&api_key=57ee3318536b23ee81d6b27e36997cde&artist='+
+    				results['artist']+'&format=json';
+    	var request2 = new XMLHttpRequest();
+    	request2.open('GET', requestURL2);
+		request2.responseType = 'json';
+		request2.send();
+		request2.onload=function(){
+			var results2 = request2.response['artist'];
+			var artistImage = results2['image'][3]['#text'];
+			var artistImageEl = document.createElement('img');
+			artistImageEl.setAttribute('src', artistImage);
+			var artistImageContainer = document.createElement('div');
+			artistImageContainer.setAttribute('class', 'artistImage');
+			artistImageContainer.appendChild(artistImageEl);
+			(infoContainer.children[0])?infoContainer.insertBefore(artistImageContainer, infoContainer.children[0]):infoContainer.appendChild(artistImageContainer);
+		};
+	};
 	log.appendChild(infoContainer);
 
 }
@@ -153,7 +208,8 @@ function createLogNode(albumEl){
     moreInfoLink.appendChild(document.createTextNode('[More Info]'));
     moreInfoLink.setAttribute('href', '#');
     moreInfoLink.setAttribute('class', 'moreInfoLink');
-    moreInfoLink.setAttribute('onclick', 'displayInfo();');
+    moreInfoLink.setAttribute('onclick', 'displayInfo(this.parentNode.parentNode);');
+    
     rightHalfDiv.appendChild(moreInfoLink);
 
 
@@ -250,12 +306,14 @@ function showPrevNextButtons(){
 
 function addToLog(albumEl, searchResults){
 	addedAlbumInfo = albumEl.nextSibling.textContent;
+	addedAlbumName = searchResults['name'];
+	addedAlbumArtist = searchResults['artist'];
 	var searchString = addedAlbumInfo.replace(' - ',' ');
 	searchString=searchString.replace(/ /g, '+');
 	vidLink = 'https://www.youtube.com/results?search_query=' + searchString;
 	lastfmLink = searchResults['url'];
 	picLink = albumEl.lastChild.src;
-	addedTest.push({pic: picLink, info: addedAlbumInfo, vid: vidLink, lastfm: lastfmLink});
+	addedTest.push({pic: picLink, info: addedAlbumInfo, name: addedAlbumName, artist: addedAlbumArtist, vid: vidLink, lastfm: lastfmLink});
 	localStorage.setItem('addedArray', JSON.stringify(addedTest));
 }
 

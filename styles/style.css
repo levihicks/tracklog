@@ -5,7 +5,7 @@ html {
 
 body {
 	background: black;
-  min-width: 500px;
+  min-width: 600px;
 	max-width: 960px;
 	width: 60%;
   margin: auto;
@@ -143,3 +143,58 @@ select{
 	background: inherit;
 	border: none;
 }	
+
+.moreInfoLink{
+	font-size: x-small;
+}
+
+.moreInfo{
+	display: block;
+  width: 600px;
+	height: 600px;
+	margin: 0 auto;
+	position: relative;
+}
+
+.artistImage, .artistImage img {
+	width: 600px;
+	height: 160px;
+	object-fit: cover;
+}
+
+
+
+.infoAlbumArt, .infoAlbumArt img {
+	width: 300px;
+	height: 300px;
+}
+
+.infoAlbumArt{
+	display: inline-block;
+}
+
+.artNameArtist, .artistImage{
+	display: inline-block;
+	margin-top: 5px;
+}
+
+.artNameArtist{
+	height: 300px;
+	width: 600px;
+  
+}
+
+.nameAndArtist{
+	display: inline-block;
+	width: 300px;
+  max-height: 200px;
+	color: white;
+	font-family: monospace;
+	color:green;
+  vertical-align: top;
+	text-align: center;
+}
+
+.album{
+	font-style: italic;
+}
