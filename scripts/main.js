@@ -163,7 +163,7 @@ function displayInfo(n){
 		request2.send();
 		request2.onload=function(){
 			var results2 = request2.response['artist'];
-			var artistImage = results2['image'][3]['#text'];
+			var artistImage = results2['image'][4]['#text'];
 			var artistImageEl = document.createElement('img');
 			artistImageEl.setAttribute('src', artistImage);
 			var artistImageContainer = document.createElement('div');

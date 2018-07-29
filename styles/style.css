@@ -1,10 +1,10 @@
 html {
-	background: black;
+	background: #0d0d0d;
 	height: 100%;
 }
 
 body {
-	background: black;
+	background: transparent;
   min-width: 600px;
 	max-width: 960px;
 	width: 60%;
@@ -149,52 +149,62 @@ select{
 }
 
 .moreInfo{
-	display: block;
   width: 600px;
-	height: 600px;
+	height: 620px;
 	margin: 0 auto;
+
 	position: relative;
 }
 
-.artistImage, .artistImage img {
+.artistImage img {
+	position: absolute;
+	top: 0;
 	width: 600px;
-	height: 160px;
+  height: 600px;
 	object-fit: cover;
+	filter: blur(1px);
+	border-radius: 20px;
+	z-index: -1;
+	margin: 10px 0;
 }
-
-
 
 .infoAlbumArt, .infoAlbumArt img {
-	width: 300px;
-	height: 300px;
+	width: 200px;
+	height: 200px;
+	
 }
 
-.infoAlbumArt{
-	display: inline-block;
+.infoAlbumArt img {
+	border: 1px solid green;
 }
 
-.artNameArtist, .artistImage{
+.infoAlbumArt, .artNameArtist,.artistImage{
 	display: inline-block;
-	margin-top: 5px;
 }
 
 .artNameArtist{
-	height: 300px;
-	width: 600px;
-  
+	width: 580px;
+	margin: 0;
+	margin-top: 20px;
+	padding: 10px;
 }
 
 .nameAndArtist{
 	display: inline-block;
-	width: 300px;
-  max-height: 200px;
+	width: 350px;
+  max-height: 100px;
 	color: white;
 	font-family: monospace;
-	color:green;
+	font-size: 1.1em;
+	color: lightgreen;
   vertical-align: top;
 	text-align: center;
 }
 
 .album{
 	font-style: italic;
+}
+
+.artist{
+	font-weight: bold;
 }
