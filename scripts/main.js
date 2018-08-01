@@ -121,6 +121,7 @@ function displayInfo(n){
     }
     var requestURL = 'https://ws.audioscrobbler.com/2.0/?method=album.getinfo&api_key=57ee3318536b23ee81d6b27e36997cde&artist='+
     				addedTest[logIndex]['artist']+'&album='+addedTest[logIndex]['name']+'&format=json';
+    console.log(requestURL);
     var request = new XMLHttpRequest();
 	request.open('GET', requestURL);
 	request.responseType = 'json';
@@ -144,15 +145,24 @@ function displayInfo(n){
 		var album = document.createElement('div');
 		album.setAttribute('class', 'album');
 		album.appendChild(document.createTextNode(results['name']));
-		var titleArtistContainer = document.createElement('div');
-		titleArtistContainer.setAttribute('class', 'nameAndArtist');
-		titleArtistContainer.appendChild(album);
-		titleArtistContainer.appendChild(artist);
-		var artNameArtistContainer = document.createElement('div');
-		artNameArtistContainer.setAttribute('class', 'artNameArtist');
-		artNameArtistContainer.appendChild(albumArtContainer);
-		artNameArtistContainer.appendChild(titleArtistContainer);
-		infoContainer.appendChild(artNameArtistContainer);
+		var summary = document.createElement('div');
+		summary.setAttribute('class','summary');
+		var summaryText=(results['wiki'])?results['wiki']['summary']:'(No album summary available)';
+		summary.appendChild(document.createTextNode(summaryText));
+
+		var nameArtistBioContainer = document.createElement('div');
+		nameArtistBioContainer.setAttribute('class', 'nameArtistBio');
+		
+		nameArtistBioContainer.appendChild(album);
+		nameArtistBioContainer.appendChild(artist);
+		nameArtistBioContainer.appendChild(summary);
+		var artAndInfoContainer = document.createElement('div');
+		artAndInfoContainer.setAttribute('class', 'artAndInfo');
+
+		artAndInfoContainer.appendChild(albumArtContainer);
+		artAndInfoContainer.appendChild(nameArtistBioContainer);
+		
+		infoContainer.appendChild(artAndInfoContainer);
 
 		
 		var requestURL2 = 'https://ws.audioscrobbler.com/2.0/?method=artist.getinfo&api_key=57ee3318536b23ee81d6b27e36997cde&artist='+
@@ -164,12 +174,14 @@ function displayInfo(n){
 		request2.onload=function(){
 			var results2 = request2.response['artist'];
 			var artistImage = results2['image'][4]['#text'];
-			var artistImageEl = document.createElement('img');
-			artistImageEl.setAttribute('src', artistImage);
-			var artistImageContainer = document.createElement('div');
-			artistImageContainer.setAttribute('class', 'artistImage');
-			artistImageContainer.appendChild(artistImageEl);
-			(infoContainer.children[0])?infoContainer.insertBefore(artistImageContainer, infoContainer.children[0]):infoContainer.appendChild(artistImageContainer);
+			if (artistImage){
+				var artistImageEl = document.createElement('img');
+				artistImageEl.setAttribute('src', artistImage);
+				var artistImageContainer = document.createElement('div');
+				artistImageContainer.setAttribute('class', 'artistImage');
+				artistImageContainer.appendChild(artistImageEl);
+				(infoContainer.children[0])?infoContainer.insertBefore(artistImageContainer, infoContainer.children[0]):infoContainer.appendChild(artistImageContainer);
+			}
 		};
 	};
 	log.appendChild(infoContainer);
