@@ -148,7 +148,7 @@ function displayInfo(n){
 		var summary = document.createElement('div');
 		summary.setAttribute('class','summary');
 		var summaryText=(results['wiki'])?results['wiki']['summary']:'(No album summary available)';
-		summary.appendChild(document.createTextNode(summaryText));
+		summary.innerHTML=summaryText;
 
 		var nameArtistBioContainer = document.createElement('div');
 		nameArtistBioContainer.setAttribute('class', 'nameArtistBio');
@@ -163,7 +163,25 @@ function displayInfo(n){
 		artAndInfoContainer.appendChild(nameArtistBioContainer);
 		
 		infoContainer.appendChild(artAndInfoContainer);
-
+		var tracklist = document.createElement('ol');
+		tracklist.setAttribute('id', 'tracklist');
+		var tracksData = results['tracks']['track'];
+		for (var i = 0; i < tracksData.length; i++){
+			var track = document.createElement('li');
+			var trackTitle = tracksData[i]['name'];
+			var seconds = ((tracksData[i]['duration']%60)<10)?'0'+(tracksData[i]['duration']%60):(tracksData[i]['duration']%60);
+			var trackDuration = Math.floor(tracksData[i]['duration']/60)+':'+seconds;
+			var trackTitleContainer = document.createElement('div');
+			trackTitleContainer.setAttribute('class', 'trackTitle');
+			trackTitleContainer.innerText=trackTitle;
+			var trackDurationContainer = document.createElement('div');
+			trackDurationContainer.setAttribute('class', 'trackDuration');
+			trackDurationContainer.innerText=trackDuration;
+			track.appendChild(trackTitleContainer);
+			track.appendChild(trackDurationContainer);
+			tracklist.appendChild(track);
+		}
+		infoContainer.appendChild(tracklist);
 		
 		var requestURL2 = 'https://ws.audioscrobbler.com/2.0/?method=artist.getinfo&api_key=57ee3318536b23ee81d6b27e36997cde&artist='+
     				results['artist']+'&format=json';
