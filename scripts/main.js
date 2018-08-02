@@ -339,10 +339,10 @@ function addToLog(albumEl, searchResults){
 	addedAlbumArtist = searchResults['artist'];
 	var searchString = addedAlbumInfo.replace(' - ',' ');
 	searchString=searchString.replace(/ /g, '+');
-	vidLink = 'https://www.youtube.com/results?search_query=' + searchString;
-	lastfmLink = searchResults['url'];
+	/*vidLink = 'https://www.youtube.com/results?search_query=' + searchString;
+	lastfmLink = searchResults['url'];*/
 	picLink = albumEl.lastChild.src;
-	addedTest.push({pic: picLink, info: addedAlbumInfo, name: addedAlbumName, artist: addedAlbumArtist, vid: vidLink, lastfm: lastfmLink});
+	addedTest.push({pic: picLink, info: addedAlbumInfo, name: addedAlbumName, artist: addedAlbumArtist});
 	localStorage.setItem('addedArray', JSON.stringify(addedTest));
 }
 

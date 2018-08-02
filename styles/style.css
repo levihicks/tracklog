@@ -231,9 +231,9 @@ select{
 	padding: 0;
 	border: 0;
 	margin: 0;
+	display: block;
 	padding: 15px 0;
 	width: auto;
-	position: relative;
 	border-radius: 0;
 	text-align: left;
 	border-top: 1px dashed green;
@@ -255,6 +255,7 @@ select{
 .trackTitle{
   position: relative;
 	left: 30px;
+	max-width: 360px;
 }
 
 
