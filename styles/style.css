@@ -222,6 +222,7 @@ select{
 	margin: auto;
 	margin-top: 20px;
 	overflow: auto;
+	display: block;
 }
 
 .moreInfo li{
@@ -231,7 +232,15 @@ select{
 	border: 0;
 	margin: 0;
 	padding: 15px 0;
+	width: auto;
+	position: relative;
+	border-radius: 0;
+	text-align: left;
 	border-top: 1px dashed green;
+
+}
+.moreInfo li:first-child{
+	border-top: none;
 }
 
 .trackDuration, .trackTitle{

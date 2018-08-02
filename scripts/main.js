@@ -121,7 +121,6 @@ function displayInfo(n){
     }
     var requestURL = 'https://ws.audioscrobbler.com/2.0/?method=album.getinfo&api_key=57ee3318536b23ee81d6b27e36997cde&artist='+
     				addedTest[logIndex]['artist']+'&album='+addedTest[logIndex]['name']+'&format=json';
-    console.log(requestURL);
     var request = new XMLHttpRequest();
 	request.open('GET', requestURL);
 	request.responseType = 'json';
@@ -147,7 +146,7 @@ function displayInfo(n){
 		album.appendChild(document.createTextNode(results['name']));
 		var summary = document.createElement('div');
 		summary.setAttribute('class','summary');
-		var summaryText=(results['wiki'])?results['wiki']['summary']:'(No album summary available)';
+		var summaryText=(results['wiki'])?results['wiki']['content']:'(No album summary available)';
 		summary.innerHTML=summaryText;
 
 		var nameArtistBioContainer = document.createElement('div');
