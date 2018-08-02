@@ -237,7 +237,7 @@ select{
 	border-radius: 0;
 	text-align: left;
 	border-top: 1px dashed green;
-
+  position: relative;
 }
 .moreInfo li:first-child{
 	border-top: none;
