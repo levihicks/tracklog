@@ -1,4 +1,5 @@
 var logList = document.createElement('ol');
+var listMode;
 var log = document.querySelector('.log');
 var logEmptyPara = document.createElement('p');
 logEmptyPara.appendChild(document.createTextNode('No albums in the backlog. Search for an album to add it here.'));
@@ -28,16 +29,9 @@ var tileViewButton = document.getElementById("tile");
 var viewChangeButton = document.querySelector('select[name=viewChanger]');
 
 function viewChange(value) {
-	switch(value){
-		case 'list':
-			headEl.children[3].href = "styles/styleList.css";
-			localStorage.setItem('viewStyle', "styles/styleList.css");
-			break;
-		case 'tile':
-			headEl.children[3].href = "styles/styleGrid.css";
-			localStorage.setItem('viewStyle', "styles/styleGrid.css");
-			break;
-	}
+	listMode=(value=='list')?'list':'grid';
+	logList.setAttribute('id', listMode);
+	localStorage.setItem('viewStyle', listMode);
 }
 
 var addedTest = [];
@@ -282,7 +276,7 @@ function createLogNode(albumEl){
     rightHalfDiv.appendChild(orderDiv);
     el.appendChild(rightHalfDiv);
     logList.appendChild(el);
-    log.appendChild(logList);
+    
 }
 
 function logDisplay(){
@@ -294,6 +288,7 @@ function logDisplay(){
 	for (var i = 0; i < addedTest.length; i++){
 		createLogNode(addedTest[i]);
 	}
+	log.appendChild(logList);
 }
 
 var limitReached=false;
@@ -461,11 +456,14 @@ function clearDisplay(n){
 
 
 function showViewStyle(){
-	if(localStorage.getItem('viewStyle')==null)
-		headEl.children[3].href="styles/styleList.css";
+	if(localStorage.getItem('viewStyle')==null){
+		listMode = 'list';
+		logList.setAttribute('id', listMode);
+	}
 	else{
-		headEl.children[3].href=localStorage.getItem('viewStyle');
-		if (localStorage.getItem('viewStyle')=="styles/styleList.css")
+		listMode=(localStorage.getItem('viewStyle')=="list")?'list':'grid';
+		logList.setAttribute('id', listMode)
+		if (localStorage.getItem('viewStyle')=="list")
 			listViewButton.setAttribute('selected','');
 		else
 			tileViewButton.setAttribute('selected','');
