@@ -279,14 +279,41 @@ function createLogNode(albumEl){
     
 }
 
-function logDisplay(){
-	if(localStorage.getItem('addedArray')){
-		addedTest = JSON.parse(localStorage.getItem('addedArray'));
+
+function clearLog(){
+	if(addedTest.length){
+		while(logList.hasChildNodes()){
+			logList.removeChild(logList.lastChild);
+		}
+		while(addedTest.length!=0){
+			addedTest.pop();
+		}
+		localStorage.removeItem('addedArray');
+		log.appendChild(logEmptyPara);
 	}
+}
+
+function logDisplay(){
 	clearDisplay(log);
 	logDisplayed = true;
-	for (var i = 0; i < addedTest.length; i++){
-		createLogNode(addedTest[i]);
+	var clearLogButton = document.createElement('button');
+	clearLogButton.setAttribute('id', 'clearLogButton');
+	clearLogButton.innerText = 'Clear Log';
+	var clearLogButtonContainer = document.createElement('div');
+	clearLogButtonContainer.setAttribute('class', 'clearLog');
+	clearLogButtonContainer.appendChild(clearLogButton);
+
+	clearLogButton.onclick = clearLog;
+
+	log.appendChild(clearLogButtonContainer);
+	if(localStorage.getItem('addedArray')){
+		addedTest = JSON.parse(localStorage.getItem('addedArray'));
+		for (var i = 0; i < addedTest.length; i++){
+			createLogNode(addedTest[i]);
+		}
+	}
+	else{
+		log.appendChild(logEmptyPara)
 	}
 	log.appendChild(logList);
 }
@@ -435,12 +462,10 @@ function goBack(){
 	index=1;
 	clearDisplay(log);
 	contextHeader.textContent='Your log:';
-	if (addedTest.length == 0 && (localStorage.getItem('addedArray'))==null){
-		log.appendChild(logEmptyPara);
-	}
-	else{
+	
+	
 		logDisplay();
-	}
+	
 }
 
 function clearDisplay(n){

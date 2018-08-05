@@ -197,11 +197,11 @@ h1 {
 	vertical-align: middle;
 }
 
-.backButton {
+.backButton, .clearLog {
 	position: relative;
 }
 
-.backButton button {
+.backButton button, #clearLogButton {
   background-color: inherit;
 	border: lightgreen 1px dashed;
 	border-top: none;
@@ -386,6 +386,7 @@ select{
 	left: 30px;
 	max-width: 360px;
 }
+
 
 
 
