@@ -1,18 +1,5 @@
 /*begin list style*/
 
-.log p, li {
-	text-align: center;
-	margin: 10px 0;
-	color: green;
-	background-color: #0d0d0d;
-	font-family: 'Roboto Mono', monospace;
-	font-size: small;
-}
-
-.log p{
-	margin: 20px;
-}
-
 .log #list li {
 	text-align: left;
 	border-top: 1px dashed green;
@@ -80,14 +67,6 @@
 	background: #1a1a1a;
 	padding: 3px;
 	border-radius: 5px;
-}
-
-.log p,  li {
-	text-align: center;
-	margin: 5px 20px;
-	color: green;
-	font-family: "Roboto Mono";
-	font-size: small;
 }
 
 .log p{
@@ -212,7 +191,14 @@ h1 {
 .log {
 	border-bottom: lightgreen 1px dashed;
 }
-
+.log p,  li {
+	text-align: center;
+	margin: 5px 20px;
+	color: green;
+	background-color: #0d0d0d;
+	font-family: "Roboto Mono";
+	font-size: small;
+}
 .log p{
 	font-style: italic;
 	padding-top: 17px;

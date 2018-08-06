@@ -71,7 +71,8 @@ var infoContainer = document.createElement('div');
 
 function removeFromLog(albumEl){
 	for (var k = 0; k < addedTest.length; k++){
-		if(addedTest[k]['info'] == albumEl.children[2].textContent){
+		if(addedTest[k]['name'] == albumEl.children[2].querySelector('.listAlbum').textContent &&
+			addedTest[k]['artist'] == albumEl.children[2].querySelector('.listArtist').textContent){
 			if (logDisplayed == true){
 				logList.removeChild(albumEl);
 				if(!(logList.hasChildNodes()))
@@ -94,7 +95,8 @@ function removeFromLog(albumEl){
 function swapUp(albumEl){
 	if(addedTest.length > 1){
 	    for(var j = 1; j < addedTest.length; j++){
-	    	if(addedTest[j]['info'] == albumEl.children[2].textContent){
+	    	if(addedTest[j]['name'] == albumEl.children[2].querySelector('.listAlbum').textContent &&
+			addedTest[j]['artist'] == albumEl.children[2].querySelector('.listArtist').textContent){
 	    		var tmp = addedTest[j];
 	    		addedTest[j] = addedTest[j-1];
 	    		addedTest[j-1] = tmp;
@@ -108,7 +110,8 @@ function swapUp(albumEl){
 function swapDown(albumEl){
 	if(addedTest.length > 1){
 	    for(var l = 0; l < addedTest.length-1; l++){
-	    	if(addedTest[l]['info'] == albumEl.children[2].textContent){
+	    	if(addedTest[l]['name'] == albumEl.children[2].querySelector('.listAlbum').textContent &&
+			addedTest[l]['artist'] == albumEl.children[2].querySelector('.listArtist').textContent){
 	    		var tmp = addedTest[l];
 	    		addedTest[l] = addedTest[l+1];
 	    		addedTest[l+1] = tmp;
