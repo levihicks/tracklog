@@ -412,7 +412,9 @@ select{
 	max-width: 360px;
 }
 
-
+.albumInfoDivider{
+	display: inline;
+}
 
 
 

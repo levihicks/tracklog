@@ -32,7 +32,20 @@ function viewChange(value) {
 	listMode=(value=='list')?'list':'grid';
 	logList.setAttribute('id', listMode);
 	localStorage.setItem('viewStyle', listMode);
+	for (var i = 0; i < logList.children.length; i++){
+		var listEl = logList.children[i].children[2].children[0];
+		if(listEl.children.length == 2){
+			var divider = document.createElement('div');
+			divider.setAttribute('class', 'albumInfoDivider');
+			divider.innerText = ' // ';
+			listEl.insertBefore(divider, listEl.children[1]);
+		}
+		else if (listEl.children.length == 3)
+			listEl.removeChild(listEl.children[1]);
+	}
 }
+
+
 
 var addedTest = [];
 var addedAlbumInfo;
@@ -247,7 +260,12 @@ function createLogNode(albumEl){
     artistContainer.setAttribute('class', 'listArtist');
     artistContainer.innerText=albumEl['artist'];
     styleDiv1.appendChild(albumNameContainer);
-	styleDiv1.appendChild(document.createTextNode(' // '));
+    if (logList.getAttribute("id") == "list"){
+    	var divider = document.createElement('div');
+		divider.setAttribute('class', 'albumInfoDivider');
+		divider.innerText = ' // ';
+		styleDiv1.appendChild(divider);
+    }
     styleDiv1.appendChild(artistContainer);
     albumInfoEl.appendChild(styleDiv1);
     el.appendChild(albumInfoEl);
@@ -410,7 +428,12 @@ function createSearchNode(albumEl, searchResults){
     artistContainer.setAttribute('class', 'listArtist');
     artistContainer.innerText=searchResults['artist'];
     styleDiv1.appendChild(albumNameContainer);
-    styleDiv1.appendChild(document.createTextNode(' // '));
+    if (logList.getAttribute("id") == "list"){
+    	var divider = document.createElement('div');
+		divider.setAttribute('class', 'albumInfoDivider');
+		divider.innerText = ' // ';
+		styleDiv1.appendChild(divider);
+    }
     styleDiv1.appendChild(artistContainer);
 	albumInfoEl.appendChild(styleDiv1);
 	albumInfoEl.style.marginTop = '0';
