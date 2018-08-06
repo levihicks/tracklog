@@ -17,7 +17,7 @@
 	text-align: left;
 	border-top: 1px dashed green;
 	position: relative;
-  padding-top: 10px;
+  padding-top: 5px;
 }
 
 .log #list li:first-child{
@@ -32,6 +32,15 @@
   display: inline-block;
   margin-left: 10px;
   width: 50%;
+}
+
+#list .listAlbum{
+	font-style: italic;
+	display: inline-block;
+}
+
+#list .listArtist{
+	display: inline-block;
 }
 
 #list .addButton {
@@ -77,7 +86,7 @@
 	text-align: center;
 	margin: 5px 20px;
 	color: green;
-	font-family: 'Roboto Mono', monospace;
+	font-family: "Roboto Mono";
 	font-size: small;
 }
 
@@ -95,12 +104,28 @@
 }
 
  #grid  .styleDiv1{
-	position: absolute;
   max-height: 85px;
-	overflow: hidden;
-	right: 0;
+	 position: absolute;
 	top: 50%;
-	transform: translateY(-50%);
+	 right: 0;
+  transform: translateY(-50%);
+}
+
+#grid .listAlbum, #grid .listArtist {
+		text-align: center;
+	overflow: hidden;
+	width: 128px;
+}
+
+#grid .listAlbum{
+	font-style: italic;
+	max-height: 40px;
+	
+}
+
+#grid .listArtist{
+	font-weight: bold;
+	max-height: 45px;
 }
 
  #grid .addButton {

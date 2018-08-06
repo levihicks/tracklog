@@ -240,7 +240,15 @@ function createLogNode(albumEl){
     albumInfoEl.setAttribute('class', 'albumInfo');
     var styleDiv1 = document.createElement('div');
     styleDiv1.setAttribute('class', 'styleDiv1');
-    styleDiv1.appendChild(document.createTextNode(albumEl['info']));
+    var albumNameContainer = document.createElement('div');
+    albumNameContainer.setAttribute('class', 'listAlbum');
+    albumNameContainer.innerText = albumEl['name'];
+    var artistContainer = document.createElement('div');
+    artistContainer.setAttribute('class', 'listArtist');
+    artistContainer.innerText=albumEl['artist'];
+    styleDiv1.appendChild(albumNameContainer);
+	styleDiv1.appendChild(document.createTextNode(' // '));
+    styleDiv1.appendChild(artistContainer);
     albumInfoEl.appendChild(styleDiv1);
     el.appendChild(albumInfoEl);
 
@@ -348,14 +356,13 @@ function showPrevNextButtons(){
 }
 
 function addToLog(albumEl, searchResults){
-	addedAlbumInfo = albumEl.nextSibling.textContent;
 	addedAlbumName = searchResults['name'];
 	addedAlbumArtist = searchResults['artist'];
-	var searchString = addedAlbumInfo.replace(' - ',' ');
+	var searchString = addedAlbumName + ' ' + addedAlbumArtist;
 	searchString=searchString.replace(/ /g, '+');
 	var albummbid = searchResults['mbid'];
 	picLink = albumEl.lastChild.src;
-	addedTest.push({pic: picLink, info: addedAlbumInfo, name: addedAlbumName, artist: addedAlbumArtist, mbid: albummbid});
+	addedTest.push({pic: picLink, name: addedAlbumName, artist: addedAlbumArtist, mbid: albummbid});
 	localStorage.setItem('addedArray', JSON.stringify(addedTest));
 }
 
@@ -365,7 +372,7 @@ function createSearchNode(albumEl, searchResults){
 	var addText = '+';
 	for(var j = 0; j < addedTest.length; j++){
 		if(searchResults!=null){
-    		if(addedTest[j]['info'] == (searchResults['artist'] + ' - ' + searchResults['name'])){
+    		if(addedTest[j]['artist'] == searchResults['artist'] && addedTest[j]['name'] == searchResults['name']){
     			addText='-';
     		}
 		}
@@ -396,7 +403,15 @@ function createSearchNode(albumEl, searchResults){
 	albumInfoEl.setAttribute('class', 'albumInfo');
 	var styleDiv1 = document.createElement('div');
 	styleDiv1.setAttribute('class', 'styleDiv1');
-	styleDiv1.appendChild(document.createTextNode(albumInfo));
+	var albumNameContainer = document.createElement('div');
+    albumNameContainer.setAttribute('class', 'listAlbum');
+    albumNameContainer.innerText = searchResults['name'];
+    var artistContainer = document.createElement('div');
+    artistContainer.setAttribute('class', 'listArtist');
+    artistContainer.innerText=searchResults['artist'];
+    styleDiv1.appendChild(albumNameContainer);
+    styleDiv1.appendChild(document.createTextNode(' // '));
+    styleDiv1.appendChild(artistContainer);
 	albumInfoEl.appendChild(styleDiv1);
 	albumInfoEl.style.marginTop = '0';
 	albumEl.appendChild(albumInfoEl);
