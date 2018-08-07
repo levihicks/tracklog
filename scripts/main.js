@@ -464,7 +464,7 @@ function searchDisplay(){
 	logDisplayed = false;
 	var requestURL = 'https://ws.audioscrobbler.com/2.0/?method=album.search&album=' + 
 	currentSearch.replace('&', '%26') + 
-	'&api_key=57ee3318536b23ee81d6b27e36997cde&limit=9&page='+index+'&format=json';
+	'&api_key=57ee3318536b23ee81d6b27e36997cde&limit=12&page='+index+'&format=json';
 	console.log(requestURL);
 	var request = new XMLHttpRequest();
 	request.open('GET', requestURL);
@@ -485,7 +485,7 @@ function searchDisplay(){
 		}
 		else{
 			var searchResults = request.response['results']['albummatches']['album'];
-			for (var i = 0; i < 9; i++){
+			for (var i = 0; i < 12; i++){
 				if(searchResults[i]!=null)
 		    		createSearchNode(els[i], searchResults[i]);
 		    	else{
@@ -495,7 +495,7 @@ function searchDisplay(){
 		    		limitReached=true;
 		    		break;
 		    	}
-		    	if(i==8)
+		    	if(i==11)
 					searchUnderway=false;
 		    }
 		 	showPrevNextButtons();
