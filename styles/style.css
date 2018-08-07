@@ -63,7 +63,7 @@
 }
 
 .log #grid li{
-	width: 128px;
+	width: 174px;
 	background: #1a1a1a;
 	padding: 3px;
 	border-radius: 5px;
@@ -78,12 +78,11 @@
 .log  #grid li .albumInfo {
 	overflow: hidden;
 	margin-top: 5px;
-  height: 85px;	
+  height: 45px;	
 	position: relative;
 }
 
  #grid  .styleDiv1{
-  max-height: 85px;
 	 position: absolute;
 	top: 50%;
 	 right: 0;
@@ -91,20 +90,27 @@
 }
 
 #grid .listAlbum, #grid .listArtist {
-		text-align: center;
+	text-align: center;
 	overflow: hidden;
-	width: 128px;
+	width: 174px;
+	
 }
 
 #grid .listAlbum{
 	font-style: italic;
-	max-height: 40px;
-	
+	padding-bottom: 2px;
+	width: 174px;
+	white-space: nowrap;
+  overflow: hidden;
+	text-overflow: ellipsis;
 }
 
 #grid .listArtist{
 	font-weight: bold;
-	max-height: 45px;
+	padding-bottom: 2px;
+	white-space: nowrap;
+  overflow: hidden;
+	text-overflow: ellipsis;
 }
 
  #grid .addButton {
@@ -126,7 +132,7 @@
 }
 
  #grid .albumArt img {
-	height: 128px;
+	height: 174px;
 }
 
 /*end grid style*/
@@ -196,8 +202,8 @@ h1 {
 	margin: 5px 20px;
 	color: green;
 	background-color: #0d0d0d;
-	font-family: "Roboto Mono";
-	font-size: small;
+	font-family: "segoe ui";
+	font-size: 13px;
 }
 .log p{
 	font-style: italic;
@@ -401,7 +407,3 @@ select{
 .albumInfoDivider{
 	display: inline;
 }
-
-
-
-
