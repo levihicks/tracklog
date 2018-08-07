@@ -67,8 +67,9 @@ var currentSearch;
 var bandcampLink;
 var test = false;
 var infoContainer = document.createElement('div');
-	infoContainer.setAttribute('class', 'moreInfo');
-
+infoContainer.setAttribute('class', 'moreInfo');
+var loadingPara = document.createElement('p');
+loadingPara.innerText='Loading...';
 function removeFromLog(albumEl){
 	for (var k = 0; k < addedTest.length; k++){
 		if(addedTest[k]['name'] == albumEl.children[2].querySelector('.listAlbum').textContent &&
@@ -144,10 +145,11 @@ function displayInfo(n){
 	request.responseType = 'json';
 	request.send();
 	clearDisplay(log);
-	showBackButton();
-	
-
+	log.appendChild(loadingPara);
 	request.onload=function(){
+		log.removeChild(loadingPara);
+		showBackButton();
+
 		var results = request.response['album'];
 		if(!results){
 			if (request.response['error']){
@@ -469,8 +471,11 @@ function searchDisplay(){
 	request.responseType = 'json';
 	request.send();
 	clearDisplay(log);
+	log.appendChild(loadingPara);
 	request.onload = function(){
+		log.removeChild(loadingPara);
 		showBackButton();
+
 		var els = [];
 		if (!request.response['results'] || request.response['error']){
 			errorPara.innerText=(request.response['error'])?request.response['message']:'Unknown error occurred';

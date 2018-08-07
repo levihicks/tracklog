@@ -71,7 +71,6 @@
 
 .log p{
 	background-color:  #0d0d0d;
-	min-height: 34px;
 	color: green;
 }
 
@@ -202,12 +201,17 @@ h1 {
 	margin: 5px 20px;
 	color: green;
 	background-color: #0d0d0d;
-	font-family: "segoe ui";
+	font-family: "helvetica";
 	font-size: 13px;
 }
 .log p{
 	font-style: italic;
-	padding-top: 17px;
+  padding: 15px;
+	width: 300px;
+	background: #222222;
+	border-radius: 20px;
+	margin: 10px auto;
+  height: auto;
 }
 
 .log li img, .albumInfo{
