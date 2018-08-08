@@ -341,6 +341,7 @@ select{
 	padding: 10px;
 	background-color:rgba(0, 0, 0, 0.5);
 	border-radius: 15px;
+	
 }
 
 .nameArtistBio{
@@ -348,13 +349,14 @@ select{
 	width: 350px;
   max-height: 200px;
 	color: white;
-	font-family: monospace;
-	font-size: 1.1em;
+	font-size: 13px;
+	line-height: 1.25;
 	color: lightgreen;
   vertical-align: top;
 	text-align: center;
 	margin-left: 5px;
 	overflow: auto;
+	font-family: 'Roboto', sans-serif;
 }
 
 .album{
