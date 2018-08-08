@@ -250,9 +250,11 @@ function createLogNode(albumEl){
     var albumNameContainer = document.createElement('div');
     albumNameContainer.setAttribute('class', 'listAlbum');
     albumNameContainer.innerText = albumEl['name'];
+    albumNameContainer.setAttribute('title', albumEl['name']);
     var artistContainer = document.createElement('div');
     artistContainer.setAttribute('class', 'listArtist');
     artistContainer.innerText=albumEl['artist'];
+    artistContainer.setAttribute('title', albumEl['artist']);
     styleDiv1.appendChild(albumNameContainer);
     styleDiv1.appendChild(artistContainer);
     albumInfoEl.appendChild(styleDiv1);
@@ -412,9 +414,11 @@ function createSearchNode(albumEl, searchResults){
 	var albumNameContainer = document.createElement('div');
     albumNameContainer.setAttribute('class', 'listAlbum');
     albumNameContainer.innerText = searchResults['name'];
+    albumNameContainer.setAttribute('title', searchResults['name']);
     var artistContainer = document.createElement('div');
     artistContainer.setAttribute('class', 'listArtist');
     artistContainer.innerText=searchResults['artist'];
+    artistContainer.setAttribute('title', searchResults['artist']);
     styleDiv1.appendChild(albumNameContainer);
     styleDiv1.appendChild(artistContainer);
 	albumInfoEl.appendChild(styleDiv1);
