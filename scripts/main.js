@@ -223,51 +223,26 @@ function displayInfo(n){
 
 }
 
-function createLogNode(albumEl){
-	var rightHalfDiv=document.createElement('div');
-	rightHalfDiv.setAttribute('class', 'rightHalfDiv');
+function addAddButton(parent){
 	var addButton = document.createElement('button');
 	addButton.appendChild(document.createTextNode('-'));
 	var addButtonDiv = document.createElement('div');
     addButtonDiv.setAttribute('class', 'addButton');
     addButtonDiv.appendChild(addButton);
-    
-    addButton.onclick=function(){removeFromLog(this.parentNode.parentNode)};
-	var imgEl = document.createElement('img');
-	var imgElDiv = document.createElement('div');
-	imgElDiv.setAttribute('class', 'albumArt');
-	imgEl.setAttribute('src', albumEl['pic']);
+    parent.appendChild(addButtonDiv);
+}
 
-	imgElDiv.appendChild(imgEl);
-	var el = document.createElement('li');
-    
-    el.appendChild(addButtonDiv);
-    el.appendChild(imgElDiv);
-    var albumInfoEl = document.createElement('div');
-    albumInfoEl.setAttribute('class', 'albumInfo');
-    var styleDiv1 = document.createElement('div');
-    styleDiv1.setAttribute('class', 'styleDiv1');
-    var albumNameContainer = document.createElement('div');
-    albumNameContainer.setAttribute('class', 'listAlbum');
-    albumNameContainer.innerText = albumEl['name'];
-    albumNameContainer.setAttribute('title', albumEl['name']);
-    var artistContainer = document.createElement('div');
-    artistContainer.setAttribute('class', 'listArtist');
-    artistContainer.innerText=albumEl['artist'];
-    artistContainer.setAttribute('title', albumEl['artist']);
-    styleDiv1.appendChild(albumNameContainer);
-    styleDiv1.appendChild(artistContainer);
-    albumInfoEl.appendChild(styleDiv1);
-    el.appendChild(albumInfoEl);
-
-    var moreInfoLink = document.createElement('a');
+function addMoreInfoLink(parent){
+	var moreInfoLink = document.createElement('a');
     moreInfoLink.appendChild(document.createTextNode('[More Info]'));
     moreInfoLink.setAttribute('href', '#');
     moreInfoLink.setAttribute('class', 'moreInfoLink');
     moreInfoLink.setAttribute('onclick', 'displayInfo(this.parentNode.parentNode);');    
-    rightHalfDiv.appendChild(moreInfoLink);
+    parent.appendChild(moreInfoLink);
+}
 
-    var orderDiv = document.createElement('div');
+function addOrderDiv(parent){
+	var orderDiv = document.createElement('div');
     orderDiv.setAttribute('class', 'orderDiv');
     var moveUpButton = document.createElement('button');
     var moveUpButtonDiv = document.createElement('div');
@@ -289,10 +264,21 @@ function createLogNode(albumEl){
     moveDownButton.onclick=function(){
     	swapDown(this.parentNode.parentNode.parentNode.parentNode);
     };
-    rightHalfDiv.appendChild(orderDiv);
+    parent.appendChild(orderDiv);
+}
+
+function createLogNode(albumEl){
+	var rightHalfDiv=document.createElement('div');
+	rightHalfDiv.setAttribute('class', 'rightHalfDiv');
+    addButton.onclick=function(){removeFromLog(this.parentNode.parentNode)};
+	var el = document.createElement('li');
+    addListImage(el, albumEl['pic']);
+    addAddButton(parent);
+    addListInfoContainer(el);
+    addMoreInfoLink(rightHalfDiv);
+    addOrderDiv(rightHalfDiv);
     el.appendChild(rightHalfDiv);
     logList.appendChild(el);
-    
 }
 
 
@@ -318,9 +304,7 @@ function logDisplay(){
 	var clearLogButtonContainer = document.createElement('div');
 	clearLogButtonContainer.setAttribute('class', 'clearLog');
 	clearLogButtonContainer.appendChild(clearLogButton);
-
 	clearLogButton.onclick = clearLog;
-
 	log.appendChild(clearLogButtonContainer);
 	if(localStorage.getItem('addedArray')){
 		addedTest = JSON.parse(localStorage.getItem('addedArray'));
@@ -397,35 +381,45 @@ function createSearchNode(albumEl, searchResults){
 	var addButtonDiv = document.createElement('div');
 	addButtonDiv.setAttribute('class', 'addButton');
 	addButtonDiv.appendChild(addButton);
-	var imgEl = document.createElement('img');
+	albumEl.appendChild(addButtonDiv);
 	var albumIcon = ((searchResults['image'][2]['#text']) ? 
 		searchResults['image'][2]['#text'] : "./images/defaultalbum.png");
-	imgEl.setAttribute('src', albumIcon);
-	var albumInfo = (searchResults['artist'] + ' - ' + searchResults['name']);
-	albumEl.appendChild(addButtonDiv);
+	addListImage(albumEl, albumIcon);
+	addListInfoContainer(albumEl);
+	logList.appendChild(albumEl);
+	log.appendChild(logList);
+}
+
+function addListImage(parent, source){
+	var imgEl = document.createElement('img');
+	imgEl.setAttribute('src', source);	
 	var imgElDiv=document.createElement('div');
 	imgElDiv.setAttribute('class', 'albumArt');
 	imgElDiv.appendChild(imgEl);
-	albumEl.appendChild(imgElDiv);
+	parent.appendChild(imgElDiv);
+}
+
+function addListInfo(parent, infoSource){
+	var albumNameContainer = document.createElement('div');
+    albumNameContainer.setAttribute('class', 'listAlbum');
+    albumNameContainer.innerText = infoSource['name'];
+    albumNameContainer.setAttribute('title', infoSource['name']);
+    var artistContainer = document.createElement('div');
+    artistContainer.setAttribute('class', 'listArtist');
+    artistContainer.innerText=infoSource['artist'];
+    artistContainer.setAttribute('title', infoSource['artist']);
+    parent.appendChild(albumNameContainer);
+    parent.appendChild(artistContainer);
+}
+
+function addListInfoContainer(parent){
 	var albumInfoEl = document.createElement('div');
 	albumInfoEl.setAttribute('class', 'albumInfo');
 	var styleDiv1 = document.createElement('div');
 	styleDiv1.setAttribute('class', 'styleDiv1');
-	var albumNameContainer = document.createElement('div');
-    albumNameContainer.setAttribute('class', 'listAlbum');
-    albumNameContainer.innerText = searchResults['name'];
-    albumNameContainer.setAttribute('title', searchResults['name']);
-    var artistContainer = document.createElement('div');
-    artistContainer.setAttribute('class', 'listArtist');
-    artistContainer.innerText=searchResults['artist'];
-    artistContainer.setAttribute('title', searchResults['artist']);
-    styleDiv1.appendChild(albumNameContainer);
-    styleDiv1.appendChild(artistContainer);
+	addListInfo(styleDiv1, searchResults);
 	albumInfoEl.appendChild(styleDiv1);
-	albumInfoEl.style.marginTop = '0';
-	albumEl.appendChild(albumInfoEl);
-	logList.appendChild(albumEl);
-	log.appendChild(logList);
+	parent.appendChild(albumInfoEl);
 }
 
 function showBackButton(){
@@ -489,9 +483,7 @@ function goBack(){
 	index=1;
 	clearDisplay(log);
 	contextHeader.textContent='Your log:';
-	
-	
-		logDisplay();
+	logDisplay();
 	
 }
 
@@ -503,7 +495,6 @@ function clearDisplay(n){
 			n.removeChild(n.children[i]);
 		}
 	}
-
 }
 
 
