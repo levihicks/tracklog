@@ -36,7 +36,7 @@ function viewChange(value) {
 
 
 
-var addedTest = [];
+var added = [];
 var addedAlbumInfo;
 var picLink;
 var logDisplayed;
@@ -60,37 +60,37 @@ infoContainer.setAttribute('class', 'moreInfo');
 var loadingPara = document.createElement('p');
 loadingPara.innerText='Loading...';
 function removeFromLog(albumEl){
-	for (var k = 0; k < addedTest.length; k++){
-		if(addedTest[k]['name'] == albumEl.children[2].querySelector('.album').textContent &&
-			addedTest[k]['artist'] == albumEl.children[2].querySelector('.artist').textContent){
+	for (var k = 0; k < added.length; k++){
+		if(added[k]['name'] == albumEl.children[2].querySelector('.album').textContent &&
+			added[k]['artist'] == albumEl.children[2].querySelector('.artist').textContent){
 			if (logDisplayed == true){
 				logList.removeChild(albumEl);
 				if(!(logList.hasChildNodes()))
 					log.appendChild(logEmptyPara);
 			}
-			addedTest.splice(k, 1);
-			if(addedTest.length==0){
+			added.splice(k, 1);
+			if(added.length==0){
 				localStorage.removeItem('addedArray');
 			}
 			else{
-				localStorage.setItem('addedArray', JSON.stringify(addedTest));
+				localStorage.setItem('addedArray', JSON.stringify(added));
 			}
 			break;
 		}
-		if (k == addedTest.length-1)
+		if (k == added.length-1)
 	    	console.log('element to display not found!');
     }
 }
 
 function swapUp(albumEl){
-	if(addedTest.length > 1){
-	    for(var j = 1; j < addedTest.length; j++){
-	    	if(addedTest[j]['name'] == albumEl.children[2].querySelector('.listAlbum').textContent &&
-			addedTest[j]['artist'] == albumEl.children[2].querySelector('.listArtist').textContent){
-	    		var tmp = addedTest[j];
-	    		addedTest[j] = addedTest[j-1];
-	    		addedTest[j-1] = tmp;
-	    		localStorage.setItem('addedArray', JSON.stringify(addedTest));
+	if(added.length > 1){
+	    for(var j = 1; j < added.length; j++){
+	    	if(added[j]['name'] == albumEl.children[2].querySelector('.listAlbum').textContent &&
+			added[j]['artist'] == albumEl.children[2].querySelector('.listArtist').textContent){
+	    		var tmp = added[j];
+	    		added[j] = added[j-1];
+	    		added[j-1] = tmp;
+	    		localStorage.setItem('addedArray', JSON.stringify(added));
 	    		logList.insertBefore(albumEl, albumEl.previousSibling);
 	    	}
 	    }
@@ -98,14 +98,14 @@ function swapUp(albumEl){
 }
 
 function swapDown(albumEl){
-	if(addedTest.length > 1){
-	    for(var l = 0; l < addedTest.length-1; l++){
-	    	if(addedTest[l]['name'] == albumEl.children[2].querySelector('.listAlbum').textContent &&
-			addedTest[l]['artist'] == albumEl.children[2].querySelector('.listArtist').textContent){
-	    		var tmp = addedTest[l];
-	    		addedTest[l] = addedTest[l+1];
-	    		addedTest[l+1] = tmp;
-	    		localStorage.setItem('addedArray', JSON.stringify(addedTest));
+	if(added.length > 1){
+	    for(var l = 0; l < added.length-1; l++){
+	    	if(added[l]['name'] == albumEl.children[2].querySelector('.listAlbum').textContent &&
+			added[l]['artist'] == albumEl.children[2].querySelector('.listArtist').textContent){
+	    		var tmp = added[l];
+	    		added[l] = added[l+1];
+	    		added[l+1] = tmp;
+	    		localStorage.setItem('addedArray', JSON.stringify(added));
 	    		logList.insertBefore(albumEl.nextSibling, albumEl);
 	    		break;
 	    	}
@@ -211,9 +211,9 @@ function loadInfo(n){
     		if (logList.children[i] == n)
     			logIndex = i;
     }
-    var artist=replaceChars(addedTest[logIndex]['artist']);
-    var album=replaceChars(addedTest[logIndex]['name']);
-    requestIdString = (addedTest[logIndex]['mbid'])?'&mbid='+addedTest[logIndex]['mbid']:'&artist='+
+    var artist=replaceChars(added[logIndex]['artist']);
+    var album=replaceChars(added[logIndex]['name']);
+    requestIdString = (added[logIndex]['mbid'])?'&mbid='+added[logIndex]['mbid']:'&artist='+
     				artist+'&album='+album;
     var requestURL = 'https://ws.audioscrobbler.com/2.0/?method=album.getinfo&'+
     				 'api_key=57ee3318536b23ee81d6b27e36997cde'+requestIdString+'&format=json';
@@ -237,9 +237,9 @@ function addAddButton(parent, searchResults){
 	if (searchResults==false)
 		addText = '-';
 	else{
-		for(var j = 0; j < addedTest.length; j++){
+		for(var j = 0; j < added.length; j++){
 			if(searchResults!=null){
-	    		if(addedTest[j]['artist'] == searchResults['artist'] && addedTest[j]['name'] == searchResults['name']){
+	    		if(added[j]['artist'] == searchResults['artist'] && added[j]['name'] == searchResults['name']){
 	    			addText='-';
 	    		}
 			}
@@ -313,12 +313,12 @@ function createLogNode(albumEl){
 
 
 function clearLog(){
-	if(addedTest.length){
+	if(added.length){
 		while(logList.hasChildNodes()){
 			logList.removeChild(logList.lastChild);
 		}
-		while(addedTest.length!=0){
-			addedTest.pop();
+		while(added.length!=0){
+			added.pop();
 		}
 		localStorage.removeItem('addedArray');
 		log.appendChild(logEmptyPara);
@@ -337,9 +337,9 @@ function logDisplay(){
 	clearLogButton.onclick = clearLog;
 	log.appendChild(clearLogButtonContainer);
 	if(localStorage.getItem('addedArray')){
-		addedTest = JSON.parse(localStorage.getItem('addedArray'));
-		for (var i = 0; i < addedTest.length; i++){
-			createLogNode(addedTest[i]);
+		added = JSON.parse(localStorage.getItem('addedArray'));
+		for (var i = 0; i < added.length; i++){
+			createLogNode(added[i]);
 		}
 	}
 	else{
@@ -384,8 +384,8 @@ function addToLog(albumEl, searchResults){
 	searchString=searchString.replace(/ /g, '+');
 	var albummbid = searchResults['mbid'];
 	picLink = albumEl.lastChild.src;
-	addedTest.push({pic: picLink, name: addedAlbumName, artist: addedAlbumArtist, mbid: albummbid});
-	localStorage.setItem('addedArray', JSON.stringify(addedTest));
+	added.push({pic: picLink, name: addedAlbumName, artist: addedAlbumArtist, mbid: albummbid});
+	localStorage.setItem('addedArray', JSON.stringify(added));
 }
 
 function createSearchNode(albumEl, searchResults){
