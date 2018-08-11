@@ -61,8 +61,8 @@ var loadingPara = document.createElement('p');
 loadingPara.innerText='Loading...';
 function removeFromLog(albumEl){
 	for (var k = 0; k < addedTest.length; k++){
-		if(addedTest[k]['name'] == albumEl.children[2].querySelector('.listAlbum').textContent &&
-			addedTest[k]['artist'] == albumEl.children[2].querySelector('.listArtist').textContent){
+		if(addedTest[k]['name'] == albumEl.children[2].querySelector('.album').textContent &&
+			addedTest[k]['artist'] == albumEl.children[2].querySelector('.artist').textContent){
 			if (logDisplayed == true){
 				logList.removeChild(albumEl);
 				if(!(logList.hasChildNodes()))
@@ -215,7 +215,8 @@ function loadInfo(n){
     var album=replaceChars(addedTest[logIndex]['name']);
     requestIdString = (addedTest[logIndex]['mbid'])?'&mbid='+addedTest[logIndex]['mbid']:'&artist='+
     				artist+'&album='+album;
-    var requestURL = 'https://ws.audioscrobbler.com/2.0/?method=album.getinfo&api_key=57ee3318536b23ee81d6b27e36997cde'+requestIdString+'&format=json';
+    var requestURL = 'https://ws.audioscrobbler.com/2.0/?method=album.getinfo&'+
+    				 'api_key=57ee3318536b23ee81d6b27e36997cde'+requestIdString+'&format=json';
     console.log(requestURL);
     var request = new XMLHttpRequest();
 	request.open('GET', requestURL);
@@ -230,14 +231,33 @@ function loadInfo(n){
 
 }
 
-function addAddButton(parent){
-	var addButton = document.createElement('button');
-	addButton.appendChild(document.createTextNode('-'));
-	addButton.onclick=function(){removeFromLog(this.parentNode.parentNode)};
+function addAddButton(parent, searchResults){
+    var addButton = document.createElement('button');
+	var addText = '+';
+	if (searchResults==false)
+		addText = '-';
+	else{
+		for(var j = 0; j < addedTest.length; j++){
+			if(searchResults!=null){
+	    		if(addedTest[j]['artist'] == searchResults['artist'] && addedTest[j]['name'] == searchResults['name']){
+	    			addText='-';
+	    		}
+			}
+		}
+	}
+	addButton.innerText = addText;
+	addButton.onclick = function(){
+		this.innerHTML = (this.innerHTML == '-') ? '+' : '-';
+		if(this.innerHTML == '-'){
+			addToLog(this.parentNode.nextSibling, searchResults);
+		}
+		else
+			removeFromLog(this.parentNode.parentNode);
+	};
 	var addButtonDiv = document.createElement('div');
-    addButtonDiv.setAttribute('class', 'addButton');
-    addButtonDiv.appendChild(addButton);
-    parent.appendChild(addButtonDiv);
+	addButtonDiv.setAttribute('class', 'addButton');
+	addButtonDiv.appendChild(addButton);
+	parent.appendChild(addButtonDiv);
 }
 
 function addMoreInfoLink(parent){
@@ -280,7 +300,7 @@ function createLogNode(albumEl){
 	rightHalfDiv.setAttribute('class', 'rightHalfDiv');
     
 	var el = document.createElement('li');
-	addAddButton(el);
+	addAddButton(el, false);
     addListImage(el, albumEl['pic']);
     
     
@@ -370,28 +390,7 @@ function addToLog(albumEl, searchResults){
 
 function createSearchNode(albumEl, searchResults){
 	albumEl = document.createElement('li');
-	var addButton = document.createElement('button');
-	var addText = '+';
-	for(var j = 0; j < addedTest.length; j++){
-		if(searchResults!=null){
-    		if(addedTest[j]['artist'] == searchResults['artist'] && addedTest[j]['name'] == searchResults['name']){
-    			addText='-';
-    		}
-		}
-	}
-	addButton.appendChild(document.createTextNode(addText));
-	addButton.onclick = function(){
-		this.innerHTML = (this.innerHTML == '-') ? '+' : '-';
-		if(this.innerHTML == '-'){
-			addToLog(this.parentNode.nextSibling, searchResults);
-		}
-		else
-			removeFromLog(this.parentNode.parentNode);
-	};
-	var addButtonDiv = document.createElement('div');
-	addButtonDiv.setAttribute('class', 'addButton');
-	addButtonDiv.appendChild(addButton);
-	albumEl.appendChild(addButtonDiv);
+	addAddButton(albumEl, searchResults);
 	var albumIcon = ((searchResults['image'][2]['#text']) ? 
 		searchResults['image'][2]['#text'] : "./images/defaultalbum.png");
 	addListImage(albumEl, albumIcon);
