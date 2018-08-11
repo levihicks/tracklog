@@ -85,8 +85,8 @@ function removeFromLog(albumEl){
 function swapUp(albumEl){
 	if(added.length > 1){
 	    for(var j = 1; j < added.length; j++){
-	    	if(added[j]['name'] == albumEl.children[2].querySelector('.listAlbum').textContent &&
-			added[j]['artist'] == albumEl.children[2].querySelector('.listArtist').textContent){
+	    	if(added[j]['name'] == albumEl.children[2].querySelector('.album').textContent &&
+			added[j]['artist'] == albumEl.children[2].querySelector('.artist').textContent){
 	    		var tmp = added[j];
 	    		added[j] = added[j-1];
 	    		added[j-1] = tmp;
@@ -100,8 +100,8 @@ function swapUp(albumEl){
 function swapDown(albumEl){
 	if(added.length > 1){
 	    for(var l = 0; l < added.length-1; l++){
-	    	if(added[l]['name'] == albumEl.children[2].querySelector('.listAlbum').textContent &&
-			added[l]['artist'] == albumEl.children[2].querySelector('.listArtist').textContent){
+	    	if(added[l]['name'] == albumEl.children[2].querySelector('.album').textContent &&
+			added[l]['artist'] == albumEl.children[2].querySelector('.artist').textContent){
 	    		var tmp = added[l];
 	    		added[l] = added[l+1];
 	    		added[l+1] = tmp;
