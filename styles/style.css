@@ -21,13 +21,13 @@
   width: 60%;
 }
 
-#list .listAlbum{
+#list .album{
 	display: inline-block;
 	border-right: 1px solid #4d4d4d;
 	padding-right: 5px;
 }
 
-#list .listArtist{
+#list .artist{
 	display: inline-block;
 	margin-left: 5px;
 }
@@ -90,14 +90,14 @@
   transform: translateY(-50%);
 }
 
-#grid .listAlbum, #grid .listArtist {
+#grid .album, #grid .artist {
 	text-align: center;
 	overflow: hidden;
 	width: 174px;
 	
 }
 
-#grid .listAlbum{
+#grid .album{
   border-bottom: 1px solid #4d4d4d;
 	padding-bottom: 2px;
 	width: 174px;
@@ -106,7 +106,7 @@
 	text-overflow: ellipsis;
 }
 
-#grid .listArtist{
+#grid .artist{
 	padding: 2px 0;
 	white-space: nowrap;
   overflow: hidden;
@@ -131,7 +131,7 @@
 	border: none;
 }
 
- #grid .albumArt img {
+ #grid .art img {
 	height: 174px;
 }
 
@@ -319,18 +319,18 @@ select{
 	margin: 10px 0;
 }
 
-.infoAlbumArt, .infoAlbumArt img {
+.moreInfo .albumArt, .moreInfo .albumArt img {
 	width: 200px;
 	height: 200px;
 	
 }
 
-.infoAlbumArt img {
+.moreInfo .albumArt img {
 	border: 1px solid green;
 	
 }
 
-.infoAlbumArt, .artAndInfo,.artistImage{
+.moreInfo .albumArt, .artAndInfo,.artistImage{
 	display: inline-block;
 }
 
@@ -359,11 +359,11 @@ select{
 	font-family: 'Roboto', sans-serif;
 }
 
-.album{
+.moreInfo .album{
 	font-style: italic;
 }
 
-.artist{
+.moreInfo .artist{
 	font-weight: bold;
 	border-bottom: 1px dashed green;
 }
