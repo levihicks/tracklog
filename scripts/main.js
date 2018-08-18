@@ -206,15 +206,9 @@ function displayInfo(request){
 
 
 function loadInfo(n){
-	var logIndex;
-	for (var i = 0; i < logList.children.length; i++){
-    		if (logList.children[i] == n)
-    			logIndex = i;
-    }
-    var artist=replaceChars(added[logIndex]['artist']);
-    var album=replaceChars(added[logIndex]['name']);
-    requestIdString = (added[logIndex]['mbid'])?'&mbid='+added[logIndex]['mbid']:'&artist='+
-    				artist+'&album='+album;
+    var artist=replaceChars(n.children[2].firstChild.children[1].textContent);
+    var album=replaceChars(n.children[2].firstChild.children[0].textContent);
+    requestIdString = '&artist='+artist+'&album='+album;
     var requestURL = 'https://ws.audioscrobbler.com/2.0/?method=album.getinfo&'+
     				 'api_key=57ee3318536b23ee81d6b27e36997cde'+requestIdString+'&format=json';
     console.log(requestURL);
@@ -265,7 +259,8 @@ function addMoreInfoLink(parent){
     moreInfoLink.appendChild(document.createTextNode('[More Info]'));
     moreInfoLink.setAttribute('href', '#');
     moreInfoLink.setAttribute('class', 'moreInfoLink');
-    moreInfoLink.setAttribute('onclick', 'loadInfo(this.parentNode.parentNode);');    
+	moreInfoLink.setAttribute('onclick', 'loadInfo(this.parentNode'+
+								((logDisplayed)?'.parentNode':'')+');');    
     parent.appendChild(moreInfoLink);
 }
 
@@ -395,6 +390,7 @@ function createSearchNode(albumEl, searchResults){
 		searchResults['image'][2]['#text'] : "./images/defaultalbum.png");
 	addListImage(albumEl, albumIcon);
 	addListInfoContainer(albumEl, searchResults);
+	addMoreInfoLink(albumEl);
 	logList.appendChild(albumEl);
 	log.appendChild(logList);
 }
