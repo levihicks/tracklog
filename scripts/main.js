@@ -167,10 +167,13 @@ function addArtistImage(request){
 	}
 }
 
+
+var moreInfoDisplayed = false;
+
 function displayInfo(request){
 	log.removeChild(loadingPara);
 	showBackButton();
-
+	moreInfoDisplayed = true;
 	var results = request.response['album'];
 	if(!results){
 		if (request.response['error']){
@@ -428,7 +431,7 @@ function addListInfoContainer(parent, infoSource){
 }
 
 function showBackButton(){
-	backButton.innerHTML='Back to log';
+	backButton.innerHTML='Go Back';
 	backButton.onclick = goBack;
 	backButtonDiv.setAttribute('class', 'backButton');
 	backButtonDiv.appendChild(backButton);
@@ -484,11 +487,19 @@ function searchDisplay(){
 }
 
 function goBack(){
-	currentSearch=null;
-	index=1;
-	clearDisplay(log);
-	contextHeader.textContent='Your log:';
-	logDisplay();
+	if(moreInfoDisplayed && !logDisplayed){
+		moreInfoDisplayed=false;
+		clearDisplay(log);
+		searchDisplay();
+
+	}
+	else{
+		currentSearch=null;
+		index=1;
+		clearDisplay(log);
+		contextHeader.textContent='Your log:';
+		logDisplay();
+	}
 	
 }
 
