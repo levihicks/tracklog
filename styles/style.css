@@ -45,11 +45,16 @@
 	color: green;
 }
 
-#list .rightHalfDiv{
+
+#list .rightHalfDiv, #list .moreInfoLink{
   position: absolute;
 	right: 0;
 	top: 50%;
   transform: translateY(-50%);
+}
+
+#list .rightHalfDiv .moreInfoLink{
+	position: relative;
 }
 
 #list .albumArt img {
