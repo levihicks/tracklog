@@ -155,24 +155,35 @@ function createTrack(parent, data){
 
 function addArtistImage(request){
 	var results = request.response['artist'];
-	var artistImage = results['image'][4]['#text'];
-	if (artistImage){
-		var artistImageEl = document.createElement('img');
-		artistImageEl.setAttribute('src', artistImage);
-		var artistImageContainer = document.createElement('div');
-		artistImageContainer.setAttribute('class', 'artistImage');
-		artistImageContainer.appendChild(artistImageEl);
-		(infoContainer.children[0])?infoContainer.insertBefore(artistImageContainer, 
-			infoContainer.children[0]):infoContainer.appendChild(artistImageContainer);
+	if(results['image'][4]['#text']){
+		var artistImage = new Image();
+		artistImage.src = results['image'][4]['#text'];
+		artistImage.onload=function(){
+			if (artistImage){
+				var artistImageContainer = document.createElement('div');
+				artistImageContainer.setAttribute('class', 'artistImage');
+				artistImageContainer.appendChild(artistImage);
+				(infoContainer.children[0])?infoContainer.insertBefore(artistImageContainer, 
+					infoContainer.children[0]):infoContainer.appendChild(artistImageContainer);
+			}
+			log.removeChild(loadingPara);
+			showBackButton();
+			log.appendChild(infoContainer);
+		};
 	}
+	else{
+		log.removeChild(loadingPara);
+		showBackButton();
+		log.appendChild(infoContainer);
+	}
+	
 }
 
 
 var moreInfoDisplayed = false;
 
 function displayInfo(request){
-	log.removeChild(loadingPara);
-	showBackButton();
+	
 	moreInfoDisplayed = true;
 	var results = request.response['album'];
 	if(!results){
@@ -203,7 +214,7 @@ function displayInfo(request){
 		request2.onload=function(){
 			addArtistImage(request2);
 		};
-		log.appendChild(infoContainer);
+		
 	}
 }
 
@@ -339,11 +350,11 @@ function logDisplay(){
 		for (var i = 0; i < added.length; i++){
 			createLogNode(added[i]);
 		}
+		log.appendChild(logList);
 	}
 	else{
 		log.appendChild(logEmptyPara)
 	}
-	log.appendChild(logList);
 }
 
 var limitReached=false;
@@ -357,7 +368,8 @@ searchNextButton.onclick=function(){
 };
 
 searchBackButton.onclick=function(){
-	if((index-1)>0 && searchUnderway==false && !limitReached){
+	if((index-1)>0 && searchUnderway==false){
+		limitReached=false;
 		index-=1;
 		clearDisplay(log);
 		searchDisplay();
@@ -395,12 +407,12 @@ function createSearchNode(albumEl, searchResults){
 	addListInfoContainer(albumEl, searchResults);
 	addMoreInfoLink(albumEl);
 	logList.appendChild(albumEl);
-	log.appendChild(logList);
+	
 }
 
 function addListImage(parent, source){
-	var imgEl = document.createElement('img');
-	imgEl.setAttribute('src', source);	
+	var imgEl = new Image();
+	imgEl.src = source;	
 	var imgElDiv=document.createElement('div');
 	imgElDiv.setAttribute('class', 'albumArt');
 	imgElDiv.appendChild(imgEl);
@@ -440,7 +452,6 @@ function showBackButton(){
 
 var errorPara = document.createElement('p');
 
-
 function searchDisplay(){
 	searchUnderway=true;
 	contextHeader.textContent='Results for \''+currentSearch+'\':';
@@ -456,9 +467,6 @@ function searchDisplay(){
 	clearDisplay(log);
 	log.appendChild(loadingPara);
 	request.onload = function(){
-		log.removeChild(loadingPara);
-		showBackButton();
-
 		var els = [];
 		if (!request.response['results'] || request.response['error']){
 			errorPara.innerText=(request.response['error'])?request.response['message']:'Unknown error occurred';
@@ -468,20 +476,20 @@ function searchDisplay(){
 		}
 		else{
 			var searchResults = request.response['results']['albummatches']['album'];
-			for (var i = 0; i < 12; i++){
-				if(searchResults[i]!=null)
-		    		createSearchNode(els[i], searchResults[i]);
-		    	else{
-		    		if (index==1 && i==0)
-		    			log.appendChild(noResultsPara);
-		    		searchUnderway=false;
-		    		limitReached=true;
-		    		break;
-		    	}
-		    	if(i==11)
-					searchUnderway=false;
+			if (searchResults.length==0){
+				log.appendChild(noResultsPara);
+		    	searchUnderway=false;
+		    	limitReached=true;
+			}
+			for (var i = 0; i < searchResults.length; i++){
+		    		createSearchNode(els[i], searchResults[i])
+					
 		    }
-		 	showPrevNextButtons();
+		    showBackButton();
+		    log.removeChild(loadingPara);
+		    searchUnderway=false;
+		    log.appendChild(logList);
+		    showPrevNextButtons();
 		 }
 	};
 }
@@ -512,7 +520,6 @@ function clearDisplay(n){
 		}
 	}
 }
-
 
 function showViewStyle(){
 	if(localStorage.getItem('viewStyle')==null){
