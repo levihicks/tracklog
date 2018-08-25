@@ -202,6 +202,7 @@ h1 {
 
 .log {
 	border-bottom: lightgreen 1px dashed;
+
 }
 .log p,  li {
 	text-align: center;
@@ -284,6 +285,7 @@ select{
 
 .options{
 	margin-top: 5px;
+	margin-bottom: 25px;
 }
 
 .moveUpButton, .moveDownButton{
