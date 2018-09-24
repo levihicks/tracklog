@@ -155,6 +155,7 @@ body {
 	width: 60%;
   margin: auto;
 	height: 100%;
+	font-size: 100%;
 }
 
 header {
@@ -165,7 +166,7 @@ header {
 h1 {
 	color: green;
 	font-family: 'Roboto Mono', monospace;
-	font-size: 1.5em;
+	font-size: 2em;
 	text-align: center;
 	margin: 0 auto 30px auto;
 	padding: 10px 0;
@@ -210,8 +211,9 @@ h1 {
 	color: green;
 	background-color: #0d0d0d;
 	font-family: 'Roboto', sans-serif;
-	font-size: 13px;
+	font-size: .8em;
 }
+
 .log p{
 	font-style: italic;
  	padding: 15px;
@@ -255,14 +257,9 @@ h1 {
 	color: green;
 }
 
-.youtube, .lastfm, .searchIcon, .orderDiv{
+.orderDiv{
   display: inline-block;
 	vertical-align: middle;	
-}
-
-.log li a img{
-	height: 30px;
-	width: 30px;
 }
 
 h2 {
@@ -304,7 +301,7 @@ select{
 }	
 
 .moreInfoLink{
-	font-size: x-small;
+	font-size: .75em;
 }
 
 .moreInfo{
