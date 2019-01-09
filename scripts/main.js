@@ -132,13 +132,16 @@ function addTrackList(parent, infoSource){
 	tracklist.setAttribute('id', 'tracklist');
 	var tracksData = infoSource['tracks']['track'];
 	for (var i = 0; i < tracksData.length; i++){
-		createTrack(tracklist, tracksData[i]);
+		createTrack(i+1, tracklist, tracksData[i]);
 	}
 	parent.appendChild(tracklist);
 }
 
-function createTrack(parent, data){
+function createTrack(count, parent, data){
 	var track = document.createElement('li');
+	var countContainer = document.createElement('div');
+	countContainer.setAttribute('class', 'count');
+	countContainer.innerText = count+".";
 	var trackTitle = data['name'];
 	var seconds = ((data['duration']%60)<10)?'0'+(data['duration']%60):(data['duration']%60);
 	var trackDuration = Math.floor(data['duration']/60)+':'+seconds;
@@ -148,6 +151,7 @@ function createTrack(parent, data){
 	var trackDurationContainer = document.createElement('div');
 	trackDurationContainer.setAttribute('class', 'trackDuration');
 	trackDurationContainer.innerText=trackDuration;
+	track.appendChild(countContainer);
 	track.appendChild(trackTitleContainer);
 	track.appendChild(trackDurationContainer);
 	parent.appendChild(track);
@@ -307,12 +311,9 @@ function addOrderDiv(parent){
 function createLogNode(albumEl){
 	var rightHalfDiv=document.createElement('div');
 	rightHalfDiv.setAttribute('class', 'rightHalfDiv');
-    
 	var el = document.createElement('li');
 	addAddButton(el, false);
     addListImage(el, albumEl['pic']);
-    
-    
     addListInfoContainer(el, albumEl);
     addMoreInfoLink(rightHalfDiv);
     addOrderDiv(rightHalfDiv);
@@ -535,6 +536,8 @@ function showViewStyle(){
 			tileViewButton.setAttribute('selected','');
 	}
 }
+
+
 
 showViewStyle();
 
