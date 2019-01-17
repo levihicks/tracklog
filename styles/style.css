@@ -204,6 +204,7 @@ h1 {
 .log {
 	border-bottom: lightgreen 1px dashed;
 
+	position: relative;
 }
 .log p,  li {
 	text-align: center;
@@ -229,7 +230,7 @@ h1 {
 }
 
 .backButton, .clearLog {
-	position: relative;
+ display: inline-block;
 }
 
 .backButton button, #clearLogButton {
@@ -238,8 +239,20 @@ h1 {
 	border-top: none;
 	color: green;
 	font-family: monospace;
+	display: inline;
+}
+
+.contextHeader{
+	display: inline-block;
 	position: absolute;
-	bottom: -1px;
+  left: 50%;
+  transform: translateX(-50%);
+	vertical-align: middle;
+}
+
+.contextHeader h2{
+	display: inline-block;
+	
 }
 
 .searchBackButton, .searchNextButton {

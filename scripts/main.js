@@ -345,7 +345,7 @@ function logDisplay(){
 	clearLogButtonContainer.setAttribute('class', 'clearLog');
 	clearLogButtonContainer.appendChild(clearLogButton);
 	clearLogButton.onclick = clearLog;
-	log.appendChild(clearLogButtonContainer);
+	log.prepend(clearLogButtonContainer);
 	if(localStorage.getItem('addedArray')){
 		added = JSON.parse(localStorage.getItem('addedArray'));
 		for (var i = 0; i < added.length; i++){
@@ -448,7 +448,7 @@ function showBackButton(){
 	backButton.onclick = goBack;
 	backButtonDiv.setAttribute('class', 'backButton');
 	backButtonDiv.appendChild(backButton);
-	log.appendChild(backButtonDiv);
+	log.prepend(backButtonDiv);
 }
 
 var errorPara = document.createElement('p');
