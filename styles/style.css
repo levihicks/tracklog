@@ -230,7 +230,7 @@ h1 {
 }
 
 .backButton, .clearLog {
- display: inline-block;
+ display: inline;
 }
 
 .backButton button, #clearLogButton {
@@ -244,15 +244,15 @@ h1 {
 
 .contextHeader{
 	display: inline-block;
-	position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-	vertical-align: middle;
+	margin-top: -20px;
+  height: 16px;
 }
 
 .contextHeader h2{
-	display: inline-block;
-	
+	position: absolute;
+	top: 0;
+	left: 50%;
+	transform: translateX(-50%);
 }
 
 .searchBackButton, .searchNextButton {
