@@ -72,7 +72,7 @@
 
 .log #grid li{
 	width: 174px;
-	background: #1a1a1a;
+	background: #262626;
 	padding: 3px;
 	border-radius: 5px;
 }
@@ -128,7 +128,8 @@
 }
 
  #grid .addButton button {
-	background: black;
+	background: #262626;
+	border-radius: 0px 0px 3px 0px;
 	opacity: .75;
 	color: green;
 	padding: 0;
@@ -144,7 +145,12 @@
 /*end grid style*/
 
 html {
-	background: #0d0d0d;
+	background: #1a1a1a;
+	background-image: url("../images/bg.png"), url("../images/bg.png");
+	background-position: left, right;
+	background-repeat: repeat-y;
+  background-attachment: fixed;
+	background-size: 87px 180px;
 	height: 100%;
 }
 
@@ -210,7 +216,7 @@ h1 {
 	text-align: center;
 	margin: 5px 20px;
 	color: green;
-	background-color: #0d0d0d;
+	background-color: #1a1a1a;
 	font-family: 'Roboto', sans-serif;
 	font-size: .8em;
 }
@@ -289,7 +295,7 @@ label, select{
 }
 
 select{
-	background: black;
+	background: #1a1a1a;
 	border: 1px dotted lightgreen;
 }
 
