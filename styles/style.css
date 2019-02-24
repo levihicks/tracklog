@@ -155,12 +155,14 @@ html {
 }
 
 body {
+	position: relative;
 	background: transparent;
   min-width: 600px;
 	max-width: 960px;
 	width: 60%;
   margin: auto;
 	height: 100%;
+	min-height: 620px;
 	font-size: 100%;
 }
 
@@ -209,7 +211,6 @@ h1 {
 
 .log {
 	border-bottom: lightgreen 1px dashed;
-
 	position: relative;
 }
 .log p,  li {
@@ -327,8 +328,11 @@ select{
   width: 600px;
 	height: 620px;
 	margin: 0 auto;
-
-	position: relative;
+	position: absolute;
+	bottom: 50%;
+	left: 50%;
+	transform: translate(-50%,50%);
+  overflow-y: auto;
 }
 
 .artistImage img {
@@ -341,6 +345,21 @@ select{
 	border-radius: 20px;
 	z-index: -1;
 	margin: 10px 0;
+}
+
+.exitInfo{
+	background: salmon;
+	color: whitesmoke;
+	width: 25px;
+	height: 20px;
+  border: none;
+	border-radius: 10px 0 10px 0;
+	position: absolute;
+  top: 10px;
+}
+
+.exitInfo:active{
+	background: #fba69d;
 }
 
 .moreInfo .albumArt, .moreInfo .albumArt img {
@@ -365,7 +384,6 @@ select{
 	padding: 10px;
 	background-color:rgba(0, 0, 0, 0.5);
 	border-radius: 15px;
-	
 }
 
 .nameArtistBio{
@@ -443,3 +461,12 @@ select{
 .albumInfoDivider{
 	display: inline;
 }
+.background{
+	position: fixed;
+	background-color:  rgba(10, 10, 10, 0.5);
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+}
+

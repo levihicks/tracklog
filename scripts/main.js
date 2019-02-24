@@ -170,9 +170,15 @@ function addArtistImage(request){
 				(infoContainer.children[0])?infoContainer.insertBefore(artistImageContainer, 
 					infoContainer.children[0]):infoContainer.appendChild(artistImageContainer);
 			}
-			log.removeChild(loadingPara);
-			showBackButton();
-			log.appendChild(infoContainer);
+			//log.removeChild(loadingPara);
+			//showBackButton();
+			var background = document.createElement('div');
+			background.setAttribute('class', 'background');
+			background.setAttribute("width",window.innerHeight);
+			background.setAttribute("height",window.innerWidth);
+			var doc = document.querySelector('body');
+			doc.appendChild(background);
+			doc.appendChild(infoContainer);
 		};
 	}
 	else{
@@ -187,9 +193,9 @@ function addArtistImage(request){
 var moreInfoDisplayed = false;
 
 function displayInfo(request){
-	
 	moreInfoDisplayed = true;
 	var results = request.response['album'];
+
 	if(!results){
 		if (request.response['error']){
 			errorPara.innerText=request.response['message'];
@@ -197,6 +203,18 @@ function displayInfo(request){
 		}
 	}
 	else{
+		var exitButton = document.createElement('button');
+		exitButton.setAttribute('class', 'exitInfo');
+		exitButton.innerText='x';
+		exitButton.onclick=function(){
+			infoContainer.remove();
+			var bg = document.querySelector('.background');
+			bg.remove();
+			infoContainer = document.createElement('div');
+			infoContainer.setAttribute('class', 'moreInfo');
+			moreInfoDisplayed=false;
+		};
+		infoContainer.appendChild(exitButton);
 		var nameArtistBioContainer = document.createElement('div');
 		nameArtistBioContainer.setAttribute('class', 'nameArtistBio');
 		addListInfo(nameArtistBioContainer, results);
@@ -234,8 +252,8 @@ function loadInfo(n){
 	request.open('GET', requestURL);
 	request.responseType = 'json';
 	request.send();
-	clearDisplay(log);
-	log.appendChild(loadingPara);
+	//clearDisplay(log);
+	//log.appendChild(loadingPara);
 	request.onload=function(){
 		displayInfo(request);
 	};
