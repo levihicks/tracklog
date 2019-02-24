@@ -58,7 +58,7 @@ var test = false;
 var infoContainer = document.createElement('div');
 infoContainer.setAttribute('class', 'moreInfo');
 var loadingPara = document.createElement('p');
-loadingPara.innerText='Loading...';
+loadingPara.appendChild(LoadBoxes());
 function removeFromLog(albumEl){
 	for (var k = 0; k < added.length; k++){
 		if(added[k]['name'] == albumEl.children[2].querySelector('.album').textContent &&
@@ -170,14 +170,9 @@ function addArtistImage(request){
 				(infoContainer.children[0])?infoContainer.insertBefore(artistImageContainer, 
 					infoContainer.children[0]):infoContainer.appendChild(artistImageContainer);
 			}
-			//log.removeChild(loadingPara);
+			infoLoadingContainer.remove();
 			//showBackButton();
-			var background = document.createElement('div');
-			background.setAttribute('class', 'background');
-			background.setAttribute("width",window.innerHeight);
-			background.setAttribute("height",window.innerWidth);
-			var doc = document.querySelector('body');
-			doc.appendChild(background);
+			var doc= document.querySelector('body');
 			doc.appendChild(infoContainer);
 		};
 	}
@@ -240,6 +235,31 @@ function displayInfo(request){
 	}
 }
 
+var infoLoadingContainer = document.createElement('div');
+infoLoadingContainer.setAttribute('class', 'infoLoading');
+function LoadBoxes(){
+	var canvas = document.createElement('canvas');
+	canvas.height = canvas.width = 100;
+	canvas.setAttribute("class", "loadBoxes");
+	const loadctx = canvas.getContext('2d');
+	var loopCount = 0;
+	function loadBoxLoop(){
+	  //loadctx.fillStyle='#a6a6a6';
+	  //loadctx.fillRect(0,0,20,20);
+	  for (let i = 0; i < 3; i++){
+	    loadctx.fillStyle='green';
+	    if(Math.floor(loopCount/10)==i)
+	      loadctx.fillStyle='lightgreen';
+	    loadctx.fillRect(i*40, 40, 20, 20);
+	  }
+	  loopCount=(loopCount==29)?1:loopCount+=1;
+	  requestAnimationFrame(loadBoxLoop);
+	}
+
+	loadBoxLoop();
+	return canvas;
+}
+infoLoadingContainer.append(LoadBoxes());
 
 function loadInfo(n){
     var artist=replaceChars(n.children[2].firstChild.children[1].textContent);
@@ -253,7 +273,15 @@ function loadInfo(n){
 	request.responseType = 'json';
 	request.send();
 	//clearDisplay(log);
-	//log.appendChild(loadingPara);
+	infoContainer = document.createElement('div');
+	infoContainer.setAttribute('class', 'moreInfo');
+	var background = document.createElement('div');
+	background.setAttribute('class', 'background');
+	background.setAttribute("width",window.innerHeight);
+	background.setAttribute("height",window.innerWidth);
+	var doc = document.querySelector('body');
+	doc.appendChild(background);
+	doc.appendChild(infoLoadingContainer);
 	request.onload=function(){
 		displayInfo(request);
 	};

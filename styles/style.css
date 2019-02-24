@@ -78,7 +78,7 @@
 }
 
 .log p{
-	background-color:  #0d0d0d;
+	background: none;
 	color: green;
 }
 
@@ -324,7 +324,7 @@ select{
 	font-size: .75em;
 }
 
-.moreInfo{
+.moreInfo, .infoLoading{
   width: 600px;
 	height: 620px;
 	margin: 0 auto;
@@ -333,6 +333,23 @@ select{
 	left: 50%;
 	transform: translate(-50%,50%);
   overflow-y: auto;
+}
+
+.infoLoading{
+	height: 600px;
+	background: #21262b;
+	border-radius: 10px;
+	text-align: center;
+  display: inline-block;
+	
+}
+
+.infoLoading canvas{
+	display: block;
+  position: relative;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
 }
 
 .artistImage img {
