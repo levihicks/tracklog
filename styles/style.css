@@ -217,7 +217,7 @@ h1 {
 	text-align: center;
 	margin: 5px 20px;
 	color: green;
-	background-color: #1a1a1a;
+	background: none;
 	font-family: 'Roboto', sans-serif;
 	font-size: .8em;
 }
@@ -226,7 +226,7 @@ h1 {
 	font-style: italic;
  	padding: 15px;
 	width: 300px;
-	background: #222222;
+	background: none;
 	border-radius: 20px;
 	margin: 10px auto;
   	height: auto;
