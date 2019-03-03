@@ -7,6 +7,17 @@
   padding-top: 5px;
 }
 
+@media screen and (max-width: 550px) {
+	.log #list li{
+		margin: 0;
+		width: 100%;
+		padding: 5px 0;
+	}
+	.moreInfoLink{
+		margin-right: 5px;
+	}
+}
+
 .log #list li:first-child{
 	border-top: none;
 }
@@ -146,21 +157,21 @@
 
 html {
 	background: #1a1a1a;
-	background-image: url("../images/bg.png"), url("../images/bg.png");
+	/*background-image: url("../images/bg.png"), url("../images/bg.png");
 	background-position: left, right;
 	background-repeat: repeat-y;
   background-attachment: fixed;
-	background-size: 87px 180px;
+	background-size: 87px 180px;*/
 	height: 100%;
 }
 
 body {
 	position: relative;
 	background: transparent;
-  min-width: 600px;
+  
 	max-width: 960px;
-	width: 60%;
-  margin: auto;
+	/*! width: 60%; */
+  /*! margin: auto; */
 	height: 100%;
 	min-height: 620px;
 	font-size: 100%;
@@ -335,6 +346,8 @@ select{
   overflow-y: auto;
 }
 
+
+
 .infoLoading{
 	height: 600px;
 	background: #21262b;
@@ -466,7 +479,7 @@ select{
 
 .trackDuration{
 	position: absolute;
-	right: 30px;
+	right: 15px;
 }
 
 .trackTitle{
@@ -478,6 +491,44 @@ select{
 .albumInfoDivider{
 	display: inline;
 }
+
+@media screen and (max-width: 599px) {
+	.moreInfo, .infoLoading{
+		width: 100%;
+		position: fixed;
+	}
+	.moreInfo{
+		background-color: black;
+	}
+	.artAndInfo{
+		width: 90%;
+		text-align: center;
+		margin-top: 0;
+	}
+	.nameArtistBio{
+		width: 90%;
+	}
+	.moreInfo .albumArt {
+		display: block;
+		width: 90%;
+	}
+	.moreInfo ol{
+		width: 90%;
+		min-width: 295px;
+		margin-top: 0;
+	}
+	.artistImage{
+		display: none;
+	}
+	.trackTitle{
+		max-width: 295px;
+	}
+	
+	
+	
+	
+}
+
 .background{
 	position: fixed;
 	background-color:  rgba(10, 10, 10, 0.5);
