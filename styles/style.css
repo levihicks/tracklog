@@ -495,7 +495,12 @@ select{
 @media screen and (max-width: 599px) {
 	.moreInfo, .infoLoading{
 		width: 100%;
+		height: 100%;
 		position: fixed;
+		top: 0;
+		bottom: unset;
+		transform: none;
+		left: 0;
 	}
 	.moreInfo{
 		background-color: black;
@@ -507,15 +512,18 @@ select{
 	}
 	.nameArtistBio{
 		width: 90%;
+		max-height: none;
 	}
 	.moreInfo .albumArt {
 		display: block;
-		width: 90%;
+		width: 100%;
 	}
 	.moreInfo ol{
+		max-height: none;
 		width: 90%;
 		min-width: 295px;
 		margin-top: 0;
+		overflow-y: visible;
 	}
 	.artistImage{
 		display: none;
@@ -523,10 +531,10 @@ select{
 	.trackTitle{
 		max-width: 295px;
 	}
-	
-	
-	
-	
+	.exitInfo{
+		top: 0;
+		border-radius: 0;
+	}
 }
 
 .background{
