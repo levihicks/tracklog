@@ -8,11 +8,13 @@
 }
 
 @media screen and (max-width: 550px) {
-	
 	.log #list li{
 		margin: 0;
 		width: 100%;
 		padding: 5px 0;
+	}
+	.log #list li:first-child{
+		margin-top: 5px;
 	}
 	.moreInfoLink{
 		margin-right: 5px;
@@ -38,6 +40,15 @@
 	font-style: italic;
 }
 
+#list .album a{
+	color: green;
+	text-decoration: none;
+}
+
+#list .album a:hover{
+	color: white;
+}
+
 #list .artist{
 	display: inline-block;
 	border-left: 1px solid #4d4d4d;
@@ -57,7 +68,6 @@
 	border: none;
 	color: green;
 }
-
 
 #list .rightHalfDiv, #list .moreInfoLink{
   position: absolute;
@@ -83,13 +93,15 @@
 	flex-wrap: wrap;
 	justify-content: center;
   align-items: center;
+	margin-top: 10px;
 }
 
 .log #grid li{
 	width: 174px;
-	background: #262626;
+	background: none;
 	padding: 3px;
 	border-radius: 5px;
+	text-align: right;
 }
 
 .log p{
@@ -99,36 +111,39 @@
 
 .log  #grid li .albumInfo {
 	overflow: hidden;
-	margin-top: 5px;
+	margin-top: 10px;
   height: 45px;	
+	display: inline-block;
 	position: relative;
-}
-
- #grid  .styleDiv1{
-	 position: absolute;
-	top: 50%;
-	 right: 0;
-  transform: translateY(-50%);
+	width: 150px;
 }
 
 #grid .album, #grid .artist {
-	text-align: center;
+	text-align: left;
 	overflow: hidden;
 	width: 174px;
-	
 }
 
 #grid .album{
-  border-bottom: 1px solid #4d4d4d;
 	padding-bottom: 2px;
 	width: 174px;
 	white-space: nowrap;
   overflow: hidden;
 	text-overflow: ellipsis;
-	font-style: italic;
+}
+
+#grid .album a{
+	color: lightgreen;
+  font-size: 1.1em;
+	text-decoration: none;
+}
+
+#grid .album a:hover{
+	color: white;
 }
 
 #grid .artist{
+	font-size: .9em;
 	padding: 2px 0;
 	white-space: nowrap;
   overflow: hidden;
@@ -136,37 +151,48 @@
 }
 
  #grid .addButton {
-  position: relative;
-	width: 15px;
+  position: absolute;
+	width: 174px;
 	overflow: visible;
-  top: 16px;
-	margin-top: -16px;
+  height: 174px;
+}
+
+ #grid .addButton:hover  button {
+	 display: block;
 }
 
  #grid .addButton button {
 	background: #262626;
-	border-radius: 0px 0px 3px 0px;
+	height: 174px;
+	width: 174px;
 	opacity: .75;
-	color: green;
+	color: lightgreen;
 	padding: 0;
-	width: 15px;
+	font-size: 4em;
 	padding-right: 2px;
 	border: none;
+	display: none;
+}
+
+#grid .addButton button:active{
+	color: green;
 }
 
  #grid .albumArt img {
 	height: 174px;
 }
 
+#grid .rightHalfDiv{
+	margin-top: 7px;
+	position: relative;
+	vertical-align: top;
+	display: inline-block;
+}
+
 /*end grid style*/
 
 html {
 	background: #1a1a1a;
-	/*background-image: url("../images/bg.png"), url("../images/bg.png");
-	background-position: left, right;
-	background-repeat: repeat-y;
-  background-attachment: fixed;
-	background-size: 87px 180px;*/
 	height: 100%;
 }
 
@@ -331,11 +357,7 @@ select{
 }
 
 .moveUpButton, .moveDownButton{
-  display: inline;
-}
-
-.moveUpButton {
-	margin-right: 5px;
+  display: block;
 }
 
 .moveUpButton button, .moveDownButton button{
@@ -350,7 +372,6 @@ select{
 	color: #00b300;
 }
 
-
 .moreInfo, .infoLoading{
   width: 600px;
 	height: 620px;
@@ -362,15 +383,12 @@ select{
   overflow-y: auto;
 }
 
-
-
 .infoLoading{
 	height: 600px;
 	background: #21262b;
 	border-radius: 10px;
 	text-align: center;
   display: inline-block;
-	
 }
 
 .infoLoading canvas{
@@ -411,12 +429,10 @@ select{
 .moreInfo .albumArt, .moreInfo .albumArt img {
 	width: 200px;
 	height: 200px;
-	
 }
 
 .moreInfo .albumArt img {
 	border: 1px solid green;
-	
 }
 
 .moreInfo .albumArt, .artAndInfo,.artistImage{
@@ -529,6 +545,12 @@ select{
 	.nameArtistBio{
 		width: 90%;
 		max-height: none;
+	}
+	.nameArtistBio .album{
+		padding-top: 5px;
+	}
+	.nameArtistBio .artist{
+		padding-bottom: 5px;
 	}
 	.moreInfo .albumArt {
 		display: block;

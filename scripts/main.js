@@ -122,7 +122,7 @@ function replaceChars(string){
 function addSummary(parent, infoSource){
 	var summary = document.createElement('div');
 	summary.setAttribute('class','summary');
-	var summaryText=(infoSource['wiki'])?infoSource['wiki']['content']:'(No album summary available)';
+	var summaryText=(infoSource['wiki'])?infoSource['wiki']['content']:'';
 	summary.innerHTML=summaryText;
 	parent.appendChild(summary);
 }
@@ -318,7 +318,7 @@ function addAddButton(parent, searchResults){
 	parent.appendChild(addButtonDiv);
 }
 
-function addMoreInfoLink(parent){
+/*function addMoreInfoLink(parent){
 	var moreInfoLink = document.createElement('a');
     moreInfoLink.appendChild(document.createTextNode('[More Info]'));
     moreInfoLink.setAttribute('href', '#');
@@ -326,7 +326,7 @@ function addMoreInfoLink(parent){
 	moreInfoLink.setAttribute('onclick', 'loadInfo(this.parentNode'+
 								((logDisplayed)?'.parentNode':'')+');');    
     parent.appendChild(moreInfoLink);
-}
+}*/
 
 function addOrderDiv(parent){
 	var orderDiv = document.createElement('div');
@@ -343,8 +343,9 @@ function addOrderDiv(parent){
     moveUpButtonDiv.appendChild(moveUpButton);
     moveDownButtonDiv.appendChild(moveDownButton);
     
-    orderDiv.appendChild(moveDownButtonDiv);
+   
     orderDiv.appendChild(moveUpButtonDiv);
+     orderDiv.appendChild(moveDownButtonDiv);
     moveUpButton.onclick=function(){
     	swapUp(this.parentNode.parentNode.parentNode.parentNode);
     };
@@ -361,7 +362,7 @@ function createLogNode(albumEl){
 	addAddButton(el, false);
     addListImage(el, albumEl['pic']);
     addListInfoContainer(el, albumEl);
-    addMoreInfoLink(rightHalfDiv);
+    //addMoreInfoLink(rightHalfDiv);
     addOrderDiv(rightHalfDiv);
     el.appendChild(rightHalfDiv);
     logList.appendChild(el);
@@ -452,7 +453,7 @@ function createSearchNode(albumEl, searchResults){
 		searchResults['image'][2]['#text'] : "./images/defaultalbum.png");
 	addListImage(albumEl, albumIcon);
 	addListInfoContainer(albumEl, searchResults);
-	addMoreInfoLink(albumEl);
+	//addMoreInfoLink(albumEl);
 	logList.appendChild(albumEl);
 	
 }
@@ -469,7 +470,16 @@ function addListImage(parent, source){
 function addListInfo(parent, infoSource){
 	var albumNameContainer = document.createElement('div');
     albumNameContainer.setAttribute('class', 'album');
-    albumNameContainer.innerText = infoSource['name'];
+    if(!moreInfoDisplayed){
+	    var moreInfoLink = document.createElement('a');
+	    moreInfoLink.appendChild(document.createTextNode(infoSource['name']));
+	    moreInfoLink.setAttribute('href', '#');
+		moreInfoLink.setAttribute('onclick', 'loadInfo(this.parentNode.parentNode.parentNode.parentNode);');    
+	    albumNameContainer.appendChild(moreInfoLink);
+	}
+	else
+		albumNameContainer.innerText = infoSource['name'];
+
     albumNameContainer.setAttribute('title', infoSource['name']);
     var artistContainer = document.createElement('div');
     artistContainer.setAttribute('class', 'artist');
