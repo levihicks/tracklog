@@ -261,6 +261,16 @@ function LoadBoxes(){
 }
 infoLoadingContainer.append(LoadBoxes());
 
+function applyBackground(){
+	var background = document.createElement('div');
+	background.setAttribute('class', 'background');
+	background.setAttribute("width",window.innerHeight);
+	background.setAttribute("height",window.innerWidth);
+	var doc = document.querySelector('body');
+	doc.appendChild(background);
+	return background;
+}
+
 function loadInfo(n){
     var artist=replaceChars(n.children[2].firstChild.children[1].textContent);
     var album=replaceChars(n.children[2].firstChild.children[0].textContent);
@@ -275,12 +285,8 @@ function loadInfo(n){
 	//clearDisplay(log);
 	infoContainer = document.createElement('div');
 	infoContainer.setAttribute('class', 'moreInfo');
-	var background = document.createElement('div');
-	background.setAttribute('class', 'background');
-	background.setAttribute("width",window.innerHeight);
-	background.setAttribute("height",window.innerWidth);
+	applyBackground();
 	var doc = document.querySelector('body');
-	doc.appendChild(background);
 	doc.appendChild(infoLoadingContainer);
 	request.onload=function(){
 		displayInfo(request);
@@ -593,7 +599,36 @@ function showViewStyle(){
 	}
 }
 
+function displayTutorial(){
+	var bg = applyBackground();
+	var tutorialContainer = document.createElement('div');
+	tutorialContainer.setAttribute('class', 'tutorialContainer');
+	var tutorial = document.createElement('div');
+	tutorial.setAttribute('class', 'tutorial');
+	tutorial.innerHTML = '<h2>Welcome to Tracklog!</h2>'+
+						'<p>To add an album to your log, '+
+						'click the plus sign in list view '+
+						'or tap the album art in tile view. '+
+						'Click the album title to view more information '+
+						'about the album.</p>';
+	var okButton = document.createElement('button');
+	okButton.setAttribute('id', 'okButton');
+	okButton.innerText='Got it.';
 
+	okButton.onclick=function(){
+		tutorialContainer.remove();
+		bg.remove();
+		localStorage.setItem('firstTime', 'false');
+	}
+
+	tutorialContainer.appendChild(tutorial);
+	tutorialContainer.appendChild(okButton);
+	document.querySelector('body').appendChild(tutorialContainer);
+
+}
+
+if(localStorage.getItem('firstTime')==null)
+	displayTutorial();
 
 showViewStyle();
 
