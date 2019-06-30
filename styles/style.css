@@ -1,6 +1,6 @@
 /* variables */
 html{
-	--info-color: #262626;
+	--info-color: #333;
 }
 
 
@@ -202,7 +202,7 @@ html{
 /*end grid style*/
 
 html {
-	background: #1a1a1a;
+	background: linear-gradient(0deg, black,#020b02 ,#072107);
 	height: 100%;
 }
 
@@ -357,8 +357,8 @@ label, select{
 }
 
 select{
-	background: #1a1a1a;
-	border: 1px dotted lightgreen;
+	background: none;
+	border: 1px solid green;
 }
 
 .options{
@@ -391,7 +391,7 @@ select{
 	left: 50%;
 	transform: translate(-50%,50%);
   overflow-y: auto;
-	background: white;
+	background: linear-gradient(0deg, #d7ffd7, #fff);
 	border-radius: 10px;
 }
 
