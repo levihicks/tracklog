@@ -157,11 +157,6 @@ function createTrack(count, parent, data){
 	parent.appendChild(track);
 }
 
-function endInfoLoad(){
-	infoLoadingContainer.remove();
-	body.appendChild(infoContainer);
-}
-
 function addArtistImage(request){
 	var results = request.response['artist'];
 	if(results['image'][4]['#text']){
@@ -176,13 +171,14 @@ function addArtistImage(request){
 					infoContainer.children[0]):infoContainer.appendChild(artistImageContainer);
 			}
 			infoLoadingContainer.remove();
+			//showBackButton();
 			var doc= document.querySelector('body');
 			doc.appendChild(infoContainer);
 		};
 	}
 	else{
 		log.removeChild(loadingPara);
-		
+		showBackButton();
 		log.appendChild(infoContainer);
 	}
 	
@@ -225,17 +221,17 @@ function displayInfo(request){
 		infoContainer.appendChild(artAndInfoContainer);
 		addTrackList(infoContainer, results);
 		
-		// var requestURL2 = 'https://ws.audioscrobbler.com/2.0/?method=artist.getinfo'+
-		// 				  '&api_key=57ee3318536b23ee81d6b27e36997cde&artist='+
-  		//   			  results['artist']+'&format=json';
-  		// var request2 = new XMLHttpRequest();
-  		// request2.open('GET', requestURL2);
-		// request2.responseType = 'json';
-		// request2.send();
-		// request2.onload=function(){
-		// 	addArtistImage(request2);
-		// };
-		endInfoLoad()
+		var requestURL2 = 'https://ws.audioscrobbler.com/2.0/?method=artist.getinfo'+
+						  '&api_key=57ee3318536b23ee81d6b27e36997cde&artist='+
+    					  results['artist']+'&format=json';
+    	var request2 = new XMLHttpRequest();
+    	request2.open('GET', requestURL2);
+		request2.responseType = 'json';
+		request2.send();
+		request2.onload=function(){
+			addArtistImage(request2);
+		};
+		
 	}
 }
 
