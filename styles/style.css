@@ -1,3 +1,9 @@
+/* variables */
+html{
+	--info-color: #262626;
+}
+
+
 /*begin list style*/
 
 .log #list li {
@@ -7,7 +13,7 @@
   padding-top: 5px;
 }
 
-@media screen and (max-width: 550px) {
+@media screen and (max-width: 599px) {
 	.log #list li{
 		margin: 0;
 		width: 100%;
@@ -91,9 +97,13 @@
 #grid{
 	display: flex;
 	flex-wrap: wrap;
-	justify-content: center;
+	justify-content: left;
   align-items: center;
 	margin-top: 10px;
+}
+
+@media screen and (max-width: 599px){
+	#grid{justify-content: center;}
 }
 
 .log #grid li{
@@ -187,6 +197,8 @@
 	display: inline-block;
 }
 
+
+
 /*end grid style*/
 
 html {
@@ -206,7 +218,7 @@ body {
 	font-size: 100%;
 }
 
-@media screen and (max-width: 550px) {
+@media screen and (max-width: 599px) {
 	body{
 		width: 100%;
 		max-width: unset;
@@ -379,11 +391,13 @@ select{
 	left: 50%;
 	transform: translate(-50%,50%);
   overflow-y: auto;
+	background: white;
+	border-radius: 10px;
 }
 
 .infoLoading, .tutorialContainer{
 	height: 600px;
-	background: #21262b;
+	
 	border-radius: 10px;
 	text-align: center;
   display: inline-block;
@@ -446,57 +460,63 @@ select{
   border: none;
 	border-radius: 10px 0 10px 0;
 	position: absolute;
-  top: 10px;
+
 }
 
 .exitInfo:active{
 	background: #fba69d;
 }
 
-.moreInfo .albumArt, .moreInfo .albumArt img {
-	width: 200px;
+.moreInfo .albumArt img {
+  display: block;
+	margin: auto;	
 	height: 200px;
 }
 
-.moreInfo .albumArt img {
-	border: 1px solid green;
+.moreInfo .albumArt img{
+	border: 1px solid black;
+	padding: 2px;
 }
 
 .moreInfo .albumArt, .artAndInfo,.artistImage{
-	display: inline-block;
+	display: block;
+	margin: auto;
+	
 }
 
 .artAndInfo{
 	width: 560px;
-	margin: 0 10px;
-	margin-top: 20px;
 	padding: 10px;
-	background-color:rgba(0, 0, 0, 0.5);
 	border-radius: 15px;
 }
 
+.summary{
+ display: none;
+}
+
 .nameArtistBio{
-	display: inline-block;
+	display: block;
 	width: 350px;
   max-height: 200px;
-	color: white;
 	font-size: 13px;
 	line-height: 1.25;
-	color: lightgreen;
+	color: var(--info-color);
   vertical-align: top;
 	text-align: center;
 	margin-left: 5px;
+	
 	overflow: auto;
 	font-family: 'Roboto', sans-serif;
+	margin: auto;
+	margin-top: 5px;
 }
 
 .moreInfo .album{
-	font-style: italic;
+	font-weight: bold;
 }
 
 .moreInfo .artist{
-	font-weight: bold;
-	border-bottom: 1px dashed green;
+	border-bottom: 1px solid black;
 }
 
 .moreInfo ol{
@@ -510,8 +530,8 @@ select{
 }
 
 .moreInfo li{
-	color: lightgreen;
-	background-color:rgba(0, 0, 0, 0.5);
+	color: var(--info-color);
+	
 	padding: 0;
 	border: 0;
 	margin: 0;
@@ -520,7 +540,7 @@ select{
 	width: auto;
 	border-radius: 0;
 	text-align: left;
-	border-top: 1px dashed green;
+	border-top: 1px dashed gray;
   position: relative;
 }
 .moreInfo li:first-child{
@@ -567,9 +587,6 @@ select{
 		height: auto;
 		top: 50%;
 		transform: translateY(-50%);
-	}
-	.moreInfo{
-		background-color: black;
 	}
 	.artAndInfo{
 		width: 90%;
