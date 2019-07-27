@@ -197,12 +197,11 @@ html{
 	display: inline-block;
 }
 
-
-
 /*end grid style*/
 
 html {
 	background: linear-gradient(0deg, black,#020b02 ,#072107);
+	background-attachment: fixed;
 	height: 100%;
 }
 
