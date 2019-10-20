@@ -590,7 +590,7 @@ function clearDisplay(n){
 
 function showViewStyle(){
 	if(localStorage.getItem('viewStyle')==null){
-		listMode = 'list';
+		listMode = 'grid';
 		logList.setAttribute('id', listMode);
 	}
 	else{
