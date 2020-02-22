@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="100%" height="100%" viewBox="0 0 1030 304" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
+    <g transform="matrix(1,0,0,1,-25,-388)">
+        <g>
+            <g transform="matrix(14.7355,0,0,14.7355,-2821.74,-6359.06)">
+                <text x="217.436px" y="474.601px" style="font-family:'Nunito-ExtraBold', 'Nunito';font-weight:800;font-size:12px;fill:white;">tracklog</text>
+            </g>
+            <g transform="matrix(0.615618,0,0,0.615618,-159.149,222.6)">
+                <circle cx="398.335" cy="367.073" r="97.967" style="fill:white;"/>
+            </g>
+            <g transform="matrix(0.615618,0,0,0.615618,23.6466,274.315)">
+                <circle cx="398.335" cy="367.073" r="97.967" style="fill:white;"/>
+            </g>
+            <g transform="matrix(0.615618,0,0,0.615618,-107.44,405.446)">
+                <circle cx="398.335" cy="367.073" r="97.967" style="fill:white;"/>
+            </g>
+            <g transform="matrix(0.615618,0,0,0.615618,23.6466,405.446)">
+                <circle cx="398.335" cy="367.073" r="97.967" style="fill:white;"/>
+            </g>
+        </g>
+    </g>
+</svg>
